@@ -1,0 +1,467 @@
+<html>
+<head>
+<!--<meta http-equiv= "Content-Type" content= "text/html; charset= ISO-8859-1"> -->
+<meta http-equiv= "Content-Type" content= "text/html; charset= UTF-8">
+  
+<!--<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+<script type="text/javascript" charset="UTF-8" src="'phonegap.js"></script>-->
+
+<link href="jquery-mobile/jquery.mobile-1.4.5.css" rel="stylesheet" type="text/css"/>
+<script src="jquery-1.11.2.min.js" type="text/javascript"></script>
+<script src="jquery-mobile/jquery.mobile-1.4.5.min.js" type="text/javascript"></script>
+<link rel="stylesheet" href="css/misestilos.css" type="text/css">
+
+<!--<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript">
+//document.addEventListener("offline", function(){ alert("You're offline") }, false);
+//document.addEventListener("online", function(){ alert("You're online") }, false);
+</script>-->
+
+<!--<script src="js/codigo.js" type="text/javascript"></script>-->
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript" charset="utf-8" src="PushNotification.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript"> 
+//El registro al servicio de google lo hacemos automáticamente
+	 app.initialize();
+</script>
+
+</head>
+<body onload="rotar_imagen();">
+
+
+<div data-role="page" id="pag_1">
+
+
+	<div data-role="header" data-theme="b" data-position="fixed">
+		<h1>UT Chetumal</h1>
+	</div>
+       <div align="center"> 
+<script>
+	function rotar_imagen(){ 
+	var tiempo = 15000;//tiempo en milisegundos
+ 	var arrImagenes = ['img/img1.jpg','img/img2.jpg', 'img/img3.jpg', 'img/img4.jpg'];
+	_img = document.getElementById('rotativo'); 
+	//cargar la 1er imagen
+	_img.src = arrImagenes[0];
+	var i=1;
+	
+	setInterval(function(){
+		_img.src = arrImagenes[i];
+		i = (i == arrImagenes.length-1)? 0 : (i+1);
+	}, tiempo);
+}
+</script>
+
+  	<a><img class="popphoto" id="rotativo"/></a>
+   </div>  
+        
+<div class="ui-grid-b" >
+
+	<div class="ui-block-a">
+		<a href="#PageListaNoticias" class="ui-btn ui-btn-a btnmenu"><img id="imgmenu" src="img/noticias.png"><br/>Noticias</a>
+	</div>
+	<div class="ui-block-b">
+		<a href="#PageListaEventos" class="ui-btn ui-btn-a btnmenu"><img id="imgmenu" src="img/eventos.png"><br/>Eventos</a>
+	</div>
+    <div class="ui-block-c" >
+    	<a href="#PageListaConvocatorias" class="ui-btn ui-btn-a btnmenu" rel="external"><img id="imgmenu" src="img/convocatorias.png"><br/>Convocatorias</a>
+    </div>
+	<div class="ui-block-a">
+		<a href="#PageListaAvisos" class="ui-btn ui-btn-a btnmenu"><img id="imgmenu" src="img/avisos.png"><br/>Avisos</a>
+	</div>
+	<!--<div class="ui-block-a" >
+      	<a href="#PageIdentidad" class="ui-btn ui-btn-a btnmenu" rel="external"><img id="imgmenu" src="img/identidad.png" ><br/>Identidad</a>
+    </div>-->
+	<!--<div class="ui-block-c">
+		<a href="#pag_3" class="ui-btn ui-btn-a btnmenu"><img id="imgmenu" src="img/admisiones.png"><br/>Admisiones</a>
+	</div>
+    <div class="ui-block-a" >
+    	<a href="#pag_2" class="ui-btn ui-btn-a btnmenu" ><img id="imgmenu" src="img/galeria.png"><br/>Galería</a>
+    </div>-->
+	<div class="ui-block-b">
+		<a href="#PageListaDudas" class="ui-btn ui-btn-a btnmenu" rel="external"><img id="imgmenu" src="img/dudas.png"><br/>Preguntas frecuentes</a>
+	</div>
+	<div class="ui-block-c">
+		<a href="#PageListaCuentas" class="ui-btn ui-btn-a btnmenu" rel="external"><img id="imgmenu" src="img/cuentas.png"><br/>Cuentas</a>
+	</div>
+    <div class="ui-block-a" >
+    	<a href="#PageListaDirectorio" class="ui-btn ui-btn-a btnmenu" rel="external"><img id="imgmenu" src="img/directorio.png"><br/>Directorio</a>
+    </div>
+	<div class="ui-block-b">
+		<a href="#PageOferta" class="ui-btn ui-btn-a btnmenu" rel="external"><img id="imgmenu" src="img/ofertaAcademica.png"><br/>Oferta acad&eacute;mica</a>
+	</div>
+	
+	<!--<div class="ui-block-c">
+		<a href="#pag_3" class="ui-btn ui-btn-a btnmenu"><img id="imgmenu" src="img/calendario.png"><br/>Calendario escolar</a>
+	</div>-->
+    
+ </div>
+ <!--<br><div style="text-align:center;">
+ <a href="https://www.facebook.com/UTChetumal?fref=ts"><img style="width:2.5em; margin-right:.5em;" src="img/facebook.png"></a>
+ <a href="https://twitter.com/UTChetumal"><img style="width:2.5em; margin-left:.5em;" src="img/twitter.png"></a>
+ </div>-->
+
+</div><!-- /page one -->
+<!--------------------------------------------------Identidad---------------------------------------------->
+<div data-role="page" id="PageIdentidad" data-theme="a">
+
+	<div data-role="header" data-theme="b" data-position="fixed">
+		<h1>Identidad</h1>
+        <a href="#" class="btnAtras" data-rel="back" data-shadow="false" class="ui-btn ui-corner-all ui-btn-icon-left"><img src="jquery-mobile/images/icons-png/arrow-l-white.png"></a>
+	</div><!-- /header -->
+    <div id="DivIdentidad">
+    </div>
+    <div id="cargadorIdentidad">
+        <p>&nbsp;Cargando...</p>
+    </div>
+
+</div>
+<!--------------------------------------------------Oferta---------------------------------------------->
+<div data-role="page" id="PageOferta" data-theme="a">
+
+	<div data-role="header" data-theme="b" data-position="fixed">
+		<h1>Oferta Académica</h1>
+        <a href="#" class="btnAtras" data-rel="back" data-shadow="false" class="ui-btn ui-corner-all ui-btn-icon-left"><img src="jquery-mobile/images/icons-png/arrow-l-white.png"></a>
+	</div><!-- /header -->
+    
+		<div data-demo-html="true">
+				<ul data-role="listview" data-divider-theme="a">
+               
+                <li data-role="list-divider"><h2>Técnico Superior Universitario</h2></li>
+                <li><a class='show-page-loading-msg' rel='external' data-textonly='false' data-textvisible='false' data-msgtext='' id="tsu_dns" onClick='guardaIdOferta(this.id)' href='#PageInfoOferta'>TSU en Desarrollo de Negocios</a></li>
+                <li><a class='show-page-loading-msg' rel='external' data-textonly='false' data-textvisible='false' data-msgtext='' id="tsu_tics" onClick='guardaIdOferta(this.id)' href='#PageInfoOferta'>TSU en Tecnologías de la Información y Comunicación</a></li>
+                <li><a class='show-page-loading-msg' rel='external' data-textonly='false' data-textvisible='false' data-msgtext='' id="tsu_mecatronica" onClick='guardaIdOferta(this.id)' href='#PageInfoOferta'>TSU en Mecatrónica</a></li>
+                <li><a class='show-page-loading-msg' rel='external' data-textonly='false' data-textvisible='false' data-msgtext='' id="tsu_gastronomia" onClick='guardaIdOferta(this.id)' href='#PageInfoOferta'>TSU en Gastronomía</a></li>
+                
+					<!--<li><a href="http://sergiosolis.com/bacalar/apputchetumal/paginas/oferta/tsu_negocios.html" rel="external">TSU en Desarrollo de Negocios</a></li>
+					<li><a href="http://sergiosolis.com/bacalar/apputchetumal/paginas/oferta/tsu_tics.html">TSU en Tecnologías de la Información y Comunicación</a></li>
+                    <li><a href="http://sergiosolis.com/bacalar/apputchetumal/paginas/oferta/tsu_mecatronica.html">TSU en Mecatrónica</a></li>
+					<li><a href="http://sergiosolis.com/bacalar/apputchetumal/paginas/oferta/tsu_gastronomia.html">TSU en Gastronomía</a></li>-->
+					<li data-role="list-divider"><h2>Ingenierías y Licenciaturas</h2></li>
+                    
+                    <li><a class='show-page-loading-msg' rel='external' data-textonly='false' data-textvisible='false' data-msgtext='' id="ing_die" onClick='guardaIdOferta(this.id)' href='#PageInfoOferta'>Ingeniería en Desarrollo e Innovación Empresarial</a></li>
+                    <li><a class='show-page-loading-msg' rel='external' data-textonly='false' data-textvisible='false' data-msgtext='' id="ing_tics" onClick='guardaIdOferta(this.id)' href='#PageInfoOferta'>Ingeniería en Tecnologías de la Información y Comunicación</a></li>
+                    <li><a class='show-page-loading-msg' rel='external' data-textonly='false' data-textvisible='false' data-msgtext='' id="ing_mecatronica" onClick='guardaIdOferta(this.id)' href='#PageInfoOferta'>Ingeniería en Mecatrónica</a></li>
+                    <li><a class='show-page-loading-msg' rel='external' data-textonly='false' data-textvisible='false' data-msgtext='' id="lic_gastronomia" onClick='guardaIdOferta(this.id)' href='#PageInfoOferta'>Licenciatura en Gastronomía</a></li>
+                    
+					<!--<li><a href="http://sergiosolis.com/bacalar/apputchetumal/paginas/oferta/ing_negocios.html">Ingeniería en Desarrollo e Innovación Empresarial </a></li>
+					<li><a href="http://sergiosolis.com/bacalar/apputchetumal/paginas/oferta/ing_tics.html">Ingeniería en Tecnologías de la Información y Comunicación</a></li>
+                    <li><a href="http://sergiosolis.com/bacalar/apputchetumal/paginas/oferta/ing_mecatronica.html">Ingeniería en Mecatrónica</a></li>
+					<li><a href="http://sergiosolis.com/bacalar/apputchetumal/paginas/oferta/lic_gastronomia.html">Licenciatura en Gastronomía</a></li>
+				</ul>-->
+			</div>
+
+</div>
+<!----------------------------------------------Info Oferta Academica----------------------------------------->
+<div data-role="page" id="PageInfoOferta" data-theme="a">
+
+	<div data-role="header" data-theme="b" data-position="fixed">
+		<h1>Oferta Académica</h1>
+        <a href="#" class="btnAtras" data-rel="back" data-shadow="false" class="ui-btn ui-corner-all ui-btn-icon-left"><img src="jquery-mobile/images/icons-png/arrow-l-white.png"></a>
+	</div><!-- /header -->
+    	
+        <div data-role="header" data-theme="a" >
+		<h1 id="subtitulo"></h1>
+		</div>
+		<div id="DivInfoOferta">					                        				
+        </div>
+        <div id="cargadorInfoOferta">
+        	<p>&nbsp;Cargando...</p>
+   		</div>
+</div>
+<!----------------------------------------------Plan de estudio----------------------------------------->
+<div data-role="page" id="PagePlanEstudio" data-theme="a">
+
+	<div data-role="header" data-theme="b" data-position="fixed">
+		<h1>Plan de estudio</h1>
+        <a href="#" class="btnAtras" data-rel="back" data-shadow="false" class="ui-btn ui-corner-all ui-btn-icon-left"><img src="jquery-mobile/images/icons-png/arrow-l-white.png"></a>
+	</div><!-- /header -->
+		
+        <div data-role="header" data-theme="a" >
+		<h1 id="subtituloPlanEst"></h1>
+		</div>
+        
+        
+
+				<div id="collapsibleset" data-role="collapsibleset" data-theme="a" data-content-theme="a" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d">
+					<div data-role="collapsible">
+						<h3><div id="h3_1"></div></h3>
+						<div id="DivCuat_1"></div>					
+                    </div>
+                    
+					<div data-role="collapsible">
+						<h3><div id="h3_2"></div></h3>
+						<div id="DivCuat_2"></div>
+					</div>
+                    
+                    <div data-role="collapsible">
+						<h3><div id="h3_3"></div></h3>
+						<div id="DivCuat_3"></div>
+					</div>
+                    
+                    <div data-role="collapsible">
+						<h3><div id="h3_4"></div></h3>
+						<div id="DivCuat_4"></div>
+					</div>
+                    
+                    <div data-role="collapsible">
+						<h3><div id="h3_5"></div></h3>
+						<div id="DivCuat_5"></div>
+					</div>
+                    
+                    <div id="divSextoCuat" data-role="collapsible">
+						<h3><div id="h3_6"></div></h3>
+						<div id="DivCuat_6"></div>
+					</div>                    					
+				</div>
+        
+        <div id="cargadorPlanEstudio">
+        	<p>&nbsp;Cargando...</p>
+   		</div>
+</div>
+<!--------------------------------------------------Carreras---------------------------------------------->
+<div data-role="page" id="PageCarrera" data-theme="a">
+
+	<div data-role="header" data-theme="b" data-position="fixed">
+		<h1>Oferta Académica</h1>
+        <a href="#" class="btnAtras" data-rel="back" data-shadow="false" class="ui-btn ui-corner-all ui-btn-icon-left"><img src="jquery-mobile/images/icons-png/arrow-l-white.png"></a>
+	</div><!-- /header -->
+    
+    <div id="DivIdentidad">
+    </div>
+    <div id="cargadorIdentidad">
+        <p>&nbsp;Cargando...</p>
+    </div>
+
+</div>
+<!------------------------------------------------------Cuentas Bancarias------------------------------------------------>
+<div data-role="page" id="PageListaCuentas" data-theme="a">
+
+	<div data-role="header" data-theme="b" data-position="fixed">
+		<h1>Cuentas bancarias</h1>
+        <a href="#" class="btnAtras" data-rel="back" data-shadow="false" class="ui-btn ui-corner-all ui-btn-icon-left"><img src="jquery-mobile/images/icons-png/arrow-l-white.png"></a>
+	</div><!-- /header -->
+		<div id="DivInfoCuentas">					                        				
+        </div>
+        <div id="cargadorInfoCuentas">
+        	<p>&nbsp;Cargando...</p>
+   		</div>
+</div>
+<!------------------------------------------------------Directorio------------------------------------------------>
+<div data-role="page" id="PageListaDirectorio" data-theme="a">
+	<div data-role="header" data-theme="b" data-position="fixed">
+		<h1>Directorio</h1>
+        <a href="#" class="btnAtras" data-rel="back" data-shadow="false" class="ui-btn ui-corner-all ui-btn-icon-left"><img src="jquery-mobile/images/icons-png/arrow-l-white.png"></a>
+	</div><!-- /header -->
+    
+    <div role="main" class="ui-content"><!-- /contenido -->
+
+ <form>
+    <input id="filterTable-input" data-type="search">
+</form>
+
+<table data-role="table" id="temp-table" data-mode="reflow" class="ui-responsive table-stroke" data-filter="true" data-input="#filterTable-input">
+        <tbody id="DivInfoDirectorio">
+        </tbody>
+    </table>
+
+
+	<div id="cargadorInfoDirectorio">
+        	<p>&nbsp;Cargando...</p>
+   	</div>
+        
+	</div><!-- /content -->
+        
+</div>
+<!------------------------------------------------------dudas------------------------------------------------>
+<div data-role="page" id="PageListaDudas" data-theme="a">
+
+	<div data-role="header" data-theme="b" data-position="fixed">
+		<h1>Preguntas frecuentes</h1>
+        <a href="#" class="btnAtras" data-rel="back" data-shadow="false" class="ui-btn ui-corner-all ui-btn-icon-left"><img src="jquery-mobile/images/icons-png/arrow-l-white.png"></a>
+	</div><!-- /header -->
+    
+	    <div data-role="listview" data-inset="true">
+	    	<ul id="DivListaDudas">
+	    	</ul>
+	    </div>
+        <div id="cargadorListaDudas">
+        	&nbsp;Cargando...
+   		</div>
+        
+</div><!-- /page fin -->
+<!------------------------------------------------------Info Dudas------------------------------------------------>
+<div data-role="page" id="PageInfoDudas" data-theme="a">
+
+	<div data-role="header" data-theme="b" data-position="fixed">
+		<h1>Preguntas frecuentes</h1>
+        <a href="#" class="btnAtras" data-rel="back" data-shadow="false" class="ui-btn ui-corner-all ui-btn-icon-left"><img src="jquery-mobile/images/icons-png/arrow-l-white.png"></a>
+	</div><!-- /header -->
+		<div id="DivInfoDudas">					                        				
+        </div>
+        <div id="cargadorInfoDudas">
+        	<p>&nbsp;Cargando...</p>
+   		</div>
+</div>
+<!------------------------------------------------------Noticias------------------------------------------------>
+
+<div data-role="page" id="PageListaNoticias" data-theme="a">
+
+	<div data-role="header" data-theme="b" data-position="fixed">
+		<h1>Noticias</h1>
+        <a href="#" class="btnAtras" data-rel="back" data-shadow="false" class="ui-btn ui-corner-all ui-btn-icon-left"><img src="jquery-mobile/images/icons-png/arrow-l-white.png"></a>
+	</div><!-- /header -->
+    
+    
+	    <div data-role="listview" data-inset="true">
+	    	<ul id="DivListaNoticias">
+	    	</ul>
+	    </div>
+        <div id="cargadorListaNoticia">
+        	&nbsp;Cargando...
+   		</div>
+        
+
+    
+</div><!-- /page fin -->
+<!------------------------------------------------------Info Noticias------------------------------------------------>
+<div data-role="page" id="PagaInfoNoticia" data-theme="a">
+
+	<div data-role="header" data-theme="b" data-position="fixed">
+		<h1>Noticias</h1>
+        <a href="#" class="btnAtras" data-rel="back" data-shadow="false" class="ui-btn ui-corner-all ui-btn-icon-left"><img src="jquery-mobile/images/icons-png/arrow-l-white.png"></a>
+	</div><!-- /header -->
+		<div id="DivInfoNoticias">					                        				
+        </div>
+        <div id="cargadorInfoNoticia">
+        	<p>&nbsp;Cargando...</p>
+   		</div>
+</div>
+<!------------------------------------------------------Eventos------------------------------------------------>
+
+<div data-role="page" id="PageListaEventos" data-theme="a">
+
+	<div data-role="header" data-theme="b" data-position="fixed">
+		<h1>Eventos</h1>
+        <a href="#" class="btnAtras" data-rel="back" data-shadow="false" class="ui-btn ui-corner-all ui-btn-icon-left"><img src="jquery-mobile/images/icons-png/arrow-l-white.png"></a>
+	</div><!-- /header -->
+    
+	    <div data-role="listview" data-inset="true">
+	    	<ul id="DivListaEventos">
+	    	</ul>
+	    </div>
+        <div id="cargadorListaEventos">
+        	&nbsp;Cargando...
+   		</div>
+        
+</div><!-- /page fin -->
+<!------------------------------------------------------Info Eventos------------------------------------------------>
+<div data-role="page" id="PagaInfoEvento" data-theme="a">
+
+	<div data-role="header" data-theme="b" data-position="fixed">
+		<h1>Eventos</h1>
+        <a href="#" class="btnAtras" data-rel="back" data-shadow="false" class="ui-btn ui-corner-all ui-btn-icon-left"><img src="jquery-mobile/images/icons-png/arrow-l-white.png"></a>
+	</div><!-- /header -->
+		<div id="DivInfoEventos">					                        				
+        </div>
+        <div id="cargadorInfoEvento">
+        	<p>&nbsp;Cargando...</p>
+   		</div>
+</div>
+<!------------------------------------------------------Convocatorias------------------------------------------------>
+
+<div data-role="page" id="PageListaConvocatorias" data-theme="a">
+
+	<div data-role="header" data-theme="b" data-position="fixed">
+		<h1>Convocatorias</h1>
+        <a href="#" class="btnAtras" data-rel="back" data-shadow="false" class="ui-btn ui-corner-all ui-btn-icon-left"><img src="jquery-mobile/images/icons-png/arrow-l-white.png"></a>
+	</div><!-- /header -->
+    
+	    <div data-role="listview" data-inset="true">
+	    	<ul id="DivListaConvocatoria">
+	    	</ul>
+	    </div>
+        <div id="cargadorListaConvocatoria">
+        	&nbsp;Cargando...
+   		</div>
+        
+</div><!-- /page fin -->
+<!------------------------------------------------------Info Convocatoria------------------------------------------------>
+<div data-role="page" id="PagaInfoConvocatoria" data-theme="a">
+
+	<div data-role="header" data-theme="b" data-position="fixed">
+		<h1>Convocatorias</h1>
+        <a href="#" class="btnAtras" data-rel="back" data-shadow="false" class="ui-btn ui-corner-all ui-btn-icon-left"><img src="jquery-mobile/images/icons-png/arrow-l-white.png"></a>
+	</div><!-- /header -->
+		<div id="DivInfoConvocatoria">					                        				
+        </div>
+        <div id="cargadorInfoConvocatoria">
+        	<p>&nbsp;Cargando...</p>
+   		</div>
+</div>
+<!------------------------------------------------------Avisos------------------------------------------------>
+
+<div data-role="page" id="PageListaAvisos" data-theme="a">
+
+	<div data-role="header" data-theme="b" data-position="fixed">
+		<h1>Avisos</h1>
+        <a href="#" class="btnAtras" data-rel="back" data-shadow="false" class="ui-btn ui-corner-all ui-btn-icon-left"><img src="jquery-mobile/images/icons-png/arrow-l-white.png"></a>
+	</div><!-- /header -->
+    
+	    <div data-role="listview" data-inset="true">
+	    	<ul id="DivListaAvisos">
+	    	</ul>
+	    </div>
+        <div id="cargadorListaAvisos">
+        	&nbsp;Cargando...
+   		</div>
+        
+</div><!-- /page fin -->
+<!------------------------------------------------------Info Avisos------------------------------------------------>
+<div data-role="page" id="PagaInfoAvisos" data-theme="a">
+
+	<div data-role="header" data-theme="b" data-position="fixed">
+		<h1>Avisos</h1>
+        <a href="#" class="btnAtras" data-rel="back" data-shadow="false" class="ui-btn ui-corner-all ui-btn-icon-left"><img src="jquery-mobile/images/icons-png/arrow-l-white.png"></a>
+	</div><!-- /header -->
+		<div id="DivInfoAvisos">					                        				
+        </div>
+        <div id="cargadorInfoAvisos">
+        	<p>&nbsp;Cargando...</p>
+   		</div>
+</div>
+
+
+<!-- Start of second page: #two -->
+<div data-role="page" id="pag_3" data-theme="a">
+
+	<div data-role="header" data-theme="b" data-position="fixed">
+		<h1>Galería</h1>
+	<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-btn-icon-left"><img src="jquery-mobile/images/icons-png/arrow-l-white.png"></a>
+	</div><!-- /header -->
+	<div role="main" class="ui-content"><!-- /contenido -->
+
+	</div><!-- /content -->
+
+</div><!-- /page two -->
+
+
+<!-- Start of second page: #two -->
+<div data-role="page" id="noticias" data-theme="a">
+
+	<div data-role="header" data-theme="b" data-position="fixed">
+		<h1>Noticias</h1>
+        <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-btn-icon-left"><img src="jquery-mobile/images/icons-png/arrow-l-white.png"></a>Atrás</a>
+	</div><!-- /header -->
+	<div role="main" class="ui-content"><!-- /contenido -->
+    
+
+	</div><!-- /content -->
+
+</div><!-- /page two -->
+
+
+</body>
+</html>
+<script src="js/principal.js" type="text/javascript"></script>
