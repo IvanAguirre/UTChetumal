@@ -336,6 +336,7 @@ function traerPlanEstudio(clicked_id)
 //-----------------------------------------------Cuentas Bancarias----------------------------------
 function traerListaCuentas()
 {
+	checkConnection('#DivInfoCuentas', 'cargadorInfoCuentas');
     try
     {
         var strHtml = "";
@@ -754,3 +755,62 @@ function traerInfoAvisos(clicked_id)
         alert("Error de datos!!");
     }
 };
+//------------------------------Función para comprobar internet--------------------------------
+function checkConnection(idElemeto, idCargador) {
+	var networkState = navigator.connection.type;
+//	navigator.network.connection.type
+	var online = "";
+    var states = {};
+	/*states[Connection.UNKNOWN]  = '1'; //'Unknown connection';
+	states[Connection.ETHERNET] = '1'; //'Ethernet connection';
+	states[Connection.WIFI]     = '1'; //'WiFi connection';
+	states[Connection.CELL_2G]  = '1'; //'Cell 2G connection';
+	states[Connection.CELL_3G]  = '1'; //'Cell 3G connection';
+	states[Connection.CELL_4G]  = '1'; //'Cell 4G connection';
+	states[Connection.NONE]     = '0'; //'No network connection';*/
+	//online = states[networkState];
+	//alert("el estado es: " + networkState);
+	//alert("idElemento: " + idElemeto + " IdCargador: " + idCargador);
+	if (networkState == Connection.NONE)
+	{
+		alert('No hay conexión a internet');
+		//alert(idElemeto);
+		var mensaje = "";
+		mensaje += "No hay conexión a internet";
+		mensaje += "<br><a onClick='refreshPage(this.id)'  id='"+idElemeto+"' class='ui-btn ui-btn-b ui-btn-inline ui-icon-refresh ui-btn-icon-left'>Recargar</a>";
+		$(idElemeto).html(mensaje);
+		document.getElementById(idCargador).style.display = 'none';
+	} 	
+};
+
+function refreshPage(idElemento) {
+	//$("#talleres").load(pagina);
+	//window.location ="index.html";i
+   //location.reload();
+    //window.location.assign("index.html");
+	if(idElemento == "#DivInfoCuentas")
+	{
+		traerListaCuentas();
+	} 
+	else if(idElemento== "#mostrarTalleres")
+	{
+		traerTalleres();
+	}
+	else if(idElemento== "#info")
+	{
+		var idEvento = localStorage.getItem('IdEvento') || '<empty>';
+		//alert(idEvento);
+		traerInfoEvento(idEvento);
+	}
+	else if(idElemento == "#infoConocenos")
+	{
+		traerDatos("#infoConocenos");
+	}
+	else if(idElemento == "#infoContacto")
+	{
+		traerDatos("#infoContacto");
+	}
+		
+}
+
+//----
