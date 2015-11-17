@@ -153,7 +153,7 @@
 			</div>
 
 </div>
-<!----------------------------------------------Info Oferta Academica----------------------------------------->
+<!----------------------------------Info Oferta Academica (Info de la carrera)----------------------------------------->
 <div data-role="page" id="PageInfoOferta" data-theme="a">
 
 	<div data-role="header" data-theme="b" data-position="fixed">
@@ -161,61 +161,60 @@
         <a href="#" class="btnAtras" data-rel="back" data-shadow="false" class="ui-btn ui-corner-all ui-btn-icon-left"><img src="jquery-mobile/images/icons-png/arrow-l-white.png"></a>
 	</div><!-- /header -->
     	
-        <div data-role="header" data-theme="a" >
-		<h1 id="subtitulo"></h1>
+        <div id="DivContentInfoOferta">
+            <div data-role="header" data-theme="a" >
+                <h1 id="subtitulo"></h1>
+            </div>
+            <div id="DivInfoOferta">					                        				
+            </div> 
 		</div>
-		<div id="DivInfoOferta">					                        				
-        </div>
         <div id="cargadorInfoOferta">
-        	<p>&nbsp;Cargando...</p>
-   		</div>
+            <p>&nbsp;Cargando...</p>
+        </div>
+       
 </div>
-<!----------------------------------------------Plan de estudio----------------------------------------->
+<!---------------------------------Plan de estudio (lista de las materias)------------------------------------->
 <div data-role="page" id="PagePlanEstudio" data-theme="a">
 
 	<div data-role="header" data-theme="b" data-position="fixed">
 		<h1>Plan de estudio</h1>
         <a href="#" class="btnAtras" data-rel="back" data-shadow="false" class="ui-btn ui-corner-all ui-btn-icon-left"><img src="jquery-mobile/images/icons-png/arrow-l-white.png"></a>
 	</div><!-- /header -->
-		
-        <div data-role="header" data-theme="a" >
-		<h1 id="subtituloPlanEst"></h1>
-		</div>
-        
-        
 
-				<div id="collapsibleset" data-role="collapsibleset" data-theme="a" data-content-theme="a" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d">
-					<div data-role="collapsible">
-						<h3><div id="h3_1"></div></h3>
-						<div id="DivCuat_1"></div>					
-                    </div>
-                    
-					<div data-role="collapsible">
-						<h3><div id="h3_2"></div></h3>
-						<div id="DivCuat_2"></div>
-					</div>
-                    
-                    <div data-role="collapsible">
-						<h3><div id="h3_3"></div></h3>
-						<div id="DivCuat_3"></div>
-					</div>
-                    
-                    <div data-role="collapsible">
-						<h3><div id="h3_4"></div></h3>
-						<div id="DivCuat_4"></div>
-					</div>
-                    
-                    <div data-role="collapsible">
-						<h3><div id="h3_5"></div></h3>
-						<div id="DivCuat_5"></div>
-					</div>
-                    
-                    <div id="divSextoCuat" data-role="collapsible">
-						<h3><div id="h3_6"></div></h3>
-						<div id="DivCuat_6"></div>
-					</div>                    					
-				</div>
-        
+        <div data-role="header" data-theme="a" >
+			<h1 id="subtituloPlanEst"></h1>
+		</div>
+
+				
+        <div id="collapsibleset" data-role="collapsibleset" data-theme="a" data-content-theme="a" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d">
+            <div data-role="collapsible">
+                <h3><div id="h3_1"></div></h3>
+                <div id="DivCuat_1"></div>					
+            </div>
+            <div data-role="collapsible">
+                <h3><div id="h3_2"></div></h3>
+                <div id="DivCuat_2"></div>
+            </div>
+            <div data-role="collapsible">
+                <h3><div id="h3_3"></div></h3>
+                <div id="DivCuat_3"></div>
+            </div>
+            <div data-role="collapsible">
+                <h3><div id="h3_4"></div></h3>
+                <div id="DivCuat_4"></div>
+            </div>
+            <div data-role="collapsible">
+                <h3><div id="h3_5"></div></h3>
+                <div id="DivCuat_5"></div>
+            </div> 
+            <div id="divSextoCuat" data-role="collapsible">
+                <h3><div id="h3_6"></div></h3>
+                <div id="DivCuat_6"></div>
+            </div>                    					
+        </div>
+        <div id="todo">	
+        	<p>jdnen</p>
+   		</div>
         <div id="cargadorPlanEstudio">
         	<p>&nbsp;Cargando...</p>
    		</div>
@@ -274,7 +273,7 @@
 	</div><!-- /content -->
         
 </div>
-<!------------------------------------------------------dudas------------------------------------------------>
+<!-----------------------------------------dudas (preguntas frecuentes)------------------------------------->
 <div data-role="page" id="PageListaDudas" data-theme="a">
 
 	<div data-role="header" data-theme="b" data-position="fixed">

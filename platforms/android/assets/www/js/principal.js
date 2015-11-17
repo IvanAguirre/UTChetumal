@@ -39,40 +39,45 @@ $('#PageListaConvocatorias').on('pageshow', function() {
 $('#PageListaAvisos').on('pageshow', function() {
 	traerListaAvisos();
 });
-//------------------Info Oferta------------
+//------------------Info Oferta (informacion de la carrera)------------
 
 $('#PageInfoOferta').on('pageshow', function() {
 		var idOferta = localStorage.getItem('IdOferta') || '<empty>';
     	traerInfoOferta(idOferta);
 });
 
-function guardaIdOferta(id) {
-	
+function guardaIdOferta(id) {//se ejecuta al seleccionar alguna carrera
 	var idOferta = id;
 	localStorage.setItem("IdOferta", idOferta);
-	document.getElementById("DivInfoOferta").innerHTML="";
+	document.getElementById("DivInfoOferta").innerHTML="";//borra la info dentre del elemento
 	document.getElementById('cargadorInfoOferta').style.display = 'block';
 	document.getElementById('subtitulo').style.display = 'none';
+	//document.getElementById('DivContentInfoOferta').style.display = 'none';
 	
 	
+	//document.getElementById('todo').style.display = 'block';
+	document.getElementById("todo").innerHTML="";
+	document.getElementById('cargadorPlanEstudio').style.display = 'block';
 	document.getElementById('subtituloPlanEst').style.display = 'none';
 	document.getElementById('collapsibleset').style.display = 'none';
-	document.getElementById('cargadorPlanEstudio').style.display = 'block';
+	
 	//traerInfoEvento(id);
 }
-//------------------Info plan estudio------------
+//------------------Info plan estudio (lista de materias)------------
 
 $('#PagePlanEstudio').on('pageshow', function() {
 		var idPlan = localStorage.getItem('IdPlan') || '<empty>';
-    	traerPlanEstudio(idPlan);
+    	traerPlanEstudio(idPlan);		
 });
 
-function guardaIdPlanEstudio(id) {
-	
+function guardaIdPlanEstudio(id) {//Se ejecuta al seleccionar Plan de Estudio
 	var idPlan = id;
 	localStorage.setItem("IdPlan", idPlan);
 	document.getElementById("DivPlanEstudio").innerHTML="";
-	//document.getElementById('cargadorPlanEstudio').style.display = 'block';
+	//document.getElementById('DivContentInfoOferta').style.display = 'none';
+	//document.getElementById('todo').style.display = 'block';
+	
+	
 	
 	//traerInfoEvento(id);
 }
@@ -193,12 +198,10 @@ function traerIdentidad()
         alert("Error de datos!!");
     }
 };
-//-----------------------------------------------Oferta Academica----------------------------------
+//--------------------------------------------Oferta Academica (Info de la carrera)----------------------------------
 function traerInfoOferta(clicked_id)
 {
-	//alert(t);
-	//checkConnection(nombre, idCargador);
-	
+	checkConnection('DivInfoOferta', 'cargadorInfoOferta');
     try
     {
         var strHtml = "";
@@ -210,7 +213,8 @@ function traerInfoOferta(clicked_id)
                 url: urlDominio + "/apputchetumal/php/Consultar_pagina.php?identificador=" + clicked_id + "",
                 //data: $("#form").serialize(),
             }).done(function (resultado) {		
-			document.getElementById('subtitulo').style.display = 'block';				
+			document.getElementById('subtitulo').style.display = 'block';	
+			//document.getElementById('DivContentInfoOferta').style.display = 'block';	
             	var datosRecibidos = JSON.parse(resultado);				
 				var lista = "";
 				var listaTit = "";
@@ -237,11 +241,12 @@ function traerInfoOferta(clicked_id)
         alert("Error de datos!!");
     }
 };
-//-----------------------------------------------Plan de estudio----------------------------------
+//---------------------------------------Info Plan de estudio (lista de las materias)----------------------------------
 function traerPlanEstudio(clicked_id)
 {
 	//alert(t);
-	//checkConnection(nombre, idCargador);
+	checkConnection('todo', 'cargadorPlanEstudio');
+	
 	if(clicked_id == "plan_ing_dns" || clicked_id == "plan_ing_tics" || clicked_id == "plan_ing_meca" || clicked_id == "plan_ing_gastro"){
 		var esIng = true;
 		document.getElementById('divSextoCuat').style.display = 'none';
@@ -252,23 +257,25 @@ function traerPlanEstudio(clicked_id)
 		var col1 ="Primer cuatrimestre"; var col2 ="Segundo cuatrimestre"; var col3 ="Tercer cuatrimestre"; var col4 ="Cuarto cuatrimestre"; var col5 ="Quinto cuatrimestre"; var col6 ="Sexto cuatrimestre";
 	}
 	
-    try
-    {
-        var strHtml = "";
+	try
+	{
+		var strHtml = "";
 		$.ajax({
 				global: false,
 				dataType: "html",
 				async: false,
-                //type: "POST",
-                url: urlDominio + "/apputchetumal/php/consultar_plan_estudio.php?identificador=" + clicked_id + "",
-                //data: $("#form").serialize(),
-            }).done(function (resultado) {	
+				//type: "POST",
+				url: urlDominio + "/apputchetumal/php/consultar_plan_estudio.php?identificador=" + clicked_id + "",
+				//data: $("#form").serialize(),
+			}).done(function (resultado) {	
+				document.getElementById("todo").innerHTML="";
 				document.getElementById('subtituloPlanEst').style.display = 'block';	
-				document.getElementById('collapsibleset').style.display = 'block';			
-            	var datosRecibidos = JSON.parse(resultado);				
+				document.getElementById('collapsibleset').style.display = 'block';	
+						
+				var datosRecibidos = JSON.parse(resultado);				
 				var lista1 = ""; var lista2 = ""; var lista3 = ""; var lista4 = ""; var lista5 = ""; var lista6 = "";
 				var listaTit = "";
-                $.each( datosRecibidos, function( key, value ) {
+				$.each( datosRecibidos, function( key, value ) {
 						listaTit += value.nombrefull;
 						lista1 += "" + value.cuat1 + "";
 						lista2 += "" + value.cuat2 + "";
@@ -278,11 +285,11 @@ function traerPlanEstudio(clicked_id)
 						if(esIng == false){
 							lista6 += "" + value.cuat6 + "";	
 						}						
-                });
+				});
 				
 					//Titulo 
 					$("#subtituloPlanEst").html(listaTit);
-	                $("#subtituloPlanEst").listview().listview('refresh'); 
+					$("#subtituloPlanEst").listview().listview('refresh'); 
 					
 					//titulos colapsables
 					$("#h3_1").html(col1);
@@ -326,17 +333,18 @@ function traerPlanEstudio(clicked_id)
 					} else{
 						alert(t);
 					}*/  
-        });
-    }
-    catch(ex)
-    {
-        alert("Error de datos!!");
-    }
+		});
+	}
+	catch(ex)
+	{
+		alert("Error de datos!!");
+	}
+		
 };
 //-----------------------------------------------Cuentas Bancarias----------------------------------
 function traerListaCuentas()
 {
-	checkConnection('#DivInfoCuentas', 'cargadorInfoCuentas');
+	checkConnection('DivInfoCuentas', 'cargadorInfoCuentas');
     try
     {
         var strHtml = "";
@@ -369,6 +377,7 @@ function traerListaCuentas()
 //-----------------------------------------------Directorio----------------------------------
 function traerListaDirectorio()
 {
+	checkConnection('DivInfoDirectorio', 'cargadorInfoDirectorio');
     try
     {
         var strHtml = "";
@@ -403,6 +412,7 @@ function traerListaDirectorio()
 //-----------------------------------------------Dudas----------------------------------
 function traerListaDudas()
 {
+	checkConnection('DivListaDudas', 'cargadorListaDudas');
     try
     {
         var strHtml = "";
@@ -434,7 +444,7 @@ function traerListaDudas()
 //--------------------------------------------------------Info Dudas--------------------------------
 function traerInfoDudas(clicked_id)
 {
-	//checkConnection('#info', 'cargadorInfoEvento');	
+	checkConnection('DivInfoDudas', 'cargadorInfoDudas');	
     try
     {
         var strHtml = "";
@@ -774,11 +784,10 @@ function checkConnection(idElemeto, idCargador) {
 	if (networkState == Connection.NONE)
 	{
 		alert('No hay conexión a internet');
-		//alert(idElemeto);
 		var mensaje = "";
 		mensaje += "No hay conexión a internet";
 		mensaje += "<br><a onClick='refreshPage(this.id)'  id='"+idElemeto+"' class='ui-btn ui-btn-b ui-btn-inline ui-icon-refresh ui-btn-icon-left'>Recargar</a>";
-		$(idElemeto).html(mensaje);
+		$("#"+idElemeto).html(mensaje);
 		document.getElementById(idCargador).style.display = 'none';
 	} 	
 };
@@ -788,27 +797,36 @@ function refreshPage(idElemento) {
 	//window.location ="index.html";i
    //location.reload();
     //window.location.assign("index.html");
-	if(idElemento == "#DivInfoCuentas")
+	if(idElemento == "DivInfoCuentas")
 	{
 		traerListaCuentas();
 	} 
-	else if(idElemento== "#mostrarTalleres")
+	else if(idElemento== "DivInfoDirectorio")
 	{
-		traerTalleres();
+		traerListaDirectorio();
 	}
-	else if(idElemento== "#info")
+	else if(idElemento== "DivInfoOferta")
 	{
-		var idEvento = localStorage.getItem('IdEvento') || '<empty>';
-		//alert(idEvento);
-		traerInfoEvento(idEvento);
+		var idOferta = localStorage.getItem('IdOferta') || '<empty>';
+    	traerInfoOferta(idOferta);
 	}
-	else if(idElemento == "#infoConocenos")
+	else if(idElemento== "DivListaDudas")
 	{
-		traerDatos("#infoConocenos");
+		traerListaDudas()
 	}
-	else if(idElemento == "#infoContacto")
+	else if(idElemento== "DivInfoDudas")
 	{
-		traerDatos("#infoContacto");
+		var idDudas = localStorage.getItem('IdDudas') || '<empty>';
+    	traerInfoDudas(idDudas);
+	}
+	else if(idElemento== "todo")
+	{
+		var idPlan = localStorage.getItem('IdPlan') || '<empty>';
+    	traerPlanEstudio(idPlan);
+	}
+	else if(idElemento== "")
+	{
+		
 	}
 		
 }
