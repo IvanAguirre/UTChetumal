@@ -6,6 +6,7 @@ $( window ).load(function() {
 //------------variables globales---------
 var urlDominio = "http://www.agendasonidocaracol.mx/apputchetumal"; //http://sergiosolis.com/bacalar
 var nombreMes = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+var idDudasGlobal = ""; var idNotaGlobal = "";
 
 //------------------Identidad------------
 $('#PageIdentidad').on('pageshow', function() {
@@ -50,21 +51,22 @@ function guardaIdOferta(id) {//se ejecuta al seleccionar alguna carrera
 	var idOferta = id;
 	localStorage.setItem("IdOferta", idOferta);
 	document.getElementById("DivInfoOferta").innerHTML="";//borra la info dentre del elemento
-	document.getElementById('cargadorInfoOferta').style.display = 'block';
+	document.getElementById("DivBtnRec_InfoOfertAcadem").innerHTML="";
 	document.getElementById('subtitulo').style.display = 'none';
+	document.getElementById('cargadorInfoOferta').style.display = 'block';
 	//document.getElementById('DivContentInfoOferta').style.display = 'none';
 	
 	
 	//document.getElementById('todo').style.display = 'block';
-	document.getElementById("todo").innerHTML="";
+	document.getElementById("DivBtnRec_PlanEstudio").innerHTML="";
 	document.getElementById('cargadorPlanEstudio').style.display = 'block';
+	//u
 	document.getElementById('subtituloPlanEst').style.display = 'none';
 	document.getElementById('collapsibleset').style.display = 'none';
 	
 	//traerInfoEvento(id);
 }
 //------------------Info plan estudio (lista de materias)------------
-
 $('#PagePlanEstudio').on('pageshow', function() {
 		var idPlan = localStorage.getItem('IdPlan') || '<empty>';
     	traerPlanEstudio(idPlan);		
@@ -77,38 +79,47 @@ function guardaIdPlanEstudio(id) {//Se ejecuta al seleccionar Plan de Estudio
 	//document.getElementById('DivContentInfoOferta').style.display = 'none';
 	//document.getElementById('todo').style.display = 'block';
 	
-	
-	
 	//traerInfoEvento(id);
 }
 //------------------Info Dudas------------
 
 $('#PageInfoDudas').on('pageshow', function() {
-		var idDudas = localStorage.getItem('IdDudas') || '<empty>';
-    	traerInfoDudas(idDudas);
+	var idDudas = localStorage.getItem('IdDudas') || '<empty>';//Obtengo id guardado de localStorage
+	if(idDudasGlobal != idDudas || $('#DivInfoDudas').is(':empty')){//Si id es diferenta a id guardado o esta vacio entra
+		idDudasGlobal = idDudas;	
+		traerInfoDudas(idDudas);
+	}
 });
 
 function guardaIdDudas(id) {
-	
 	var idDudas = id;
-	localStorage.setItem("IdDudas", idDudas);
-	document.getElementById("DivInfoDudas").innerHTML="";
-	document.getElementById('cargadorInfoDudas').style.display = 'block';
+	localStorage.setItem("IdDudas", idDudas);//Guardo id en localStorage
+	if(idDudasGlobal != idDudas || $('#DivInfoDudas').is(':empty')){
+		//$("#DivBtnRec_InfoDudas").empty();//vacía div de boton cargar internet
+		document.getElementById("DivBtnRec_InfoDudas").innerHTML="";//limpia div de boton cargar internet
+		document.getElementById("DivInfoDudas").innerHTML="";//limpia info para nueva info
+		document.getElementById('cargadorInfoDudas').style.display = 'block';//**
+	}
 	//traerInfoEvento(id);
 }
 //------------------Info noticias------------
 
 $('#PagaInfoNoticia').on('pageshow', function() {
-		var idNota = localStorage.getItem('IdNota') || '<empty>';
-    	traerInfoNoticias(idNota);
+	var idNota = localStorage.getItem('IdNota') || '<empty>';
+	if(idNotaGlobal != idNota || $('#DivInfoNoticias').is(':empty')){//Si id es diferenta a id guardado o esta vacio entra
+		traerInfoNoticias(idNota);
+		idNotaGlobal = idNota;
+	}
 });
 
 function guardaIdNota(id) {
-	
 	var idNota = id;
 	localStorage.setItem("IdNota", idNota);
-	document.getElementById("DivInfoNoticias").innerHTML="";
-	document.getElementById('cargadorInfoNoticia').style.display = 'block';
+	if(idNotaGlobal != idNota || $('#DivInfoNoticias').is(':empty')){
+		document.getElementById("DivBtnRec_InfoNoticias").innerHTML="";//limpia div de boton cargar internet
+		document.getElementById("DivInfoNoticias").innerHTML="";
+		document.getElementById('cargadorInfoNoticia').style.display = 'block';
+	}
 	//traerInfoEvento(id);
 }
 //------------------Info Eventos------------
@@ -198,10 +209,10 @@ function traerIdentidad()
         alert("Error de datos!!");
     }
 };
-//--------------------------------------------Oferta Academica (Info de la carrera)----------------------------------
+//-------------------------------------------Oferta Academica (Info de la carrera)----------------------------------
 function traerInfoOferta(clicked_id)
 {
-	checkConnection('DivInfoOferta', 'cargadorInfoOferta');
+	checkConnection('DivInfoOferta', 'cargadorInfoOferta', 'DivBtnRec_InfoOfertAcadem');
     try
     {
         var strHtml = "";
@@ -245,7 +256,7 @@ function traerInfoOferta(clicked_id)
 function traerPlanEstudio(clicked_id)
 {
 	//alert(t);
-	checkConnection('todo', 'cargadorPlanEstudio');
+	checkConnection('subtituloPlanEst', 'cargadorPlanEstudio', 'DivBtnRec_PlanEstudio');
 	
 	if(clicked_id == "plan_ing_dns" || clicked_id == "plan_ing_tics" || clicked_id == "plan_ing_meca" || clicked_id == "plan_ing_gastro"){
 		var esIng = true;
@@ -268,7 +279,7 @@ function traerPlanEstudio(clicked_id)
 				url: urlDominio + "/apputchetumal/php/consultar_plan_estudio.php?identificador=" + clicked_id + "",
 				//data: $("#form").serialize(),
 			}).done(function (resultado) {	
-				document.getElementById("todo").innerHTML="";
+				document.getElementById("DivBtnRec_PlanEstudio").innerHTML="";
 				document.getElementById('subtituloPlanEst').style.display = 'block';	
 				document.getElementById('collapsibleset').style.display = 'block';	
 						
@@ -344,7 +355,7 @@ function traerPlanEstudio(clicked_id)
 //-----------------------------------------------Cuentas Bancarias----------------------------------
 function traerListaCuentas()
 {
-	checkConnection('DivInfoCuentas', 'cargadorInfoCuentas');
+	checkConnection('DivInfoCuentas', 'cargadorInfoCuentas', 'DivBtnRec_Cuentas');
     try
     {
         var strHtml = "";
@@ -366,6 +377,7 @@ function traerListaCuentas()
                 });
                 $("#DivInfoCuentas").html(lista);
                 $("#DivInfoCuentas").listview().listview('refresh');
+				$("#DivBtnRec_Cuentas").empty();//vacía div de boton cargar internet
 				document.getElementById('cargadorInfoCuentas').style.display = 'none';
         });
     }
@@ -377,7 +389,7 @@ function traerListaCuentas()
 //-----------------------------------------------Directorio----------------------------------
 function traerListaDirectorio()
 {
-	checkConnection('DivInfoDirectorio', 'cargadorInfoDirectorio');
+	checkConnection('DivInfoDirectorio', 'cargadorInfoDirectorio', 'DivBtnRec_Directorio');
     try
     {
         var strHtml = "";
@@ -401,6 +413,7 @@ function traerListaDirectorio()
                 });
                 $("#DivInfoDirectorio").html(lista);
                 $("#DivInfoDirectorio").listview().listview('refresh');
+				$("#DivBtnRec_Directorio").empty();//vacía div de boton cargar internet
 				document.getElementById('cargadorInfoDirectorio').style.display = 'none';
         });
     }
@@ -409,10 +422,10 @@ function traerListaDirectorio()
         alert("Error de datos!!");
     }
 };
-//-----------------------------------------------Dudas----------------------------------
+//-----------------------------------------------Lista Dudas----------------------------------
 function traerListaDudas()
 {
-	checkConnection('DivListaDudas', 'cargadorListaDudas');
+	checkConnection('DivListaDudas', 'cargadorListaDudas', 'DivBtnRec_ListaDudas');
     try
     {
         var strHtml = "";
@@ -433,6 +446,7 @@ function traerListaDudas()
                 });
                 $("#DivListaDudas").html(lista);
                 $("#DivListaDudas").listview().listview('refresh');
+				$("#DivBtnRec_ListaDudas").empty();//vacía div de boton cargar internet
 				document.getElementById('cargadorListaDudas').style.display = 'none';
         });
     }
@@ -444,7 +458,7 @@ function traerListaDudas()
 //--------------------------------------------------------Info Dudas--------------------------------
 function traerInfoDudas(clicked_id)
 {
-	checkConnection('DivInfoDudas', 'cargadorInfoDudas');	
+	checkConnection('DivInfoDudas', 'cargadorInfoDudas', 'DivBtnRec_InfoDudas');	
     try
     {
         var strHtml = "";
@@ -474,9 +488,10 @@ function traerInfoDudas(clicked_id)
         alert("Error de datos!!");
     }
 };
-//-----------------------------------------------Noticias----------------------------------
+//-----------------------------------------------Lista Noticias----------------------------------
 function traerListaNoticias()
 {
+	checkConnection('DivListaNoticias', 'cargadorListaNoticia', 'DivBtnRec_ListaNoticias');
     try
     {
         var strHtml = "";
@@ -507,6 +522,7 @@ function traerListaNoticias()
                 });
                 $("#DivListaNoticias").html(lista);
                 $("#DivListaNoticias").listview().listview('refresh');
+				$("#DivBtnRec_ListaNoticias").empty();//vacía div de boton cargar internet
 				document.getElementById('cargadorListaNoticia').style.display = 'none';
         });
     }
@@ -518,7 +534,7 @@ function traerListaNoticias()
 //--------------------------------------------------------Info Noticias--------------------------------
 function traerInfoNoticias(clicked_id)
 {
-	//checkConnection('#info', 'cargadorInfoEvento');	
+	checkConnection('DivInfoNoticias', 'cargadorInfoNoticia', 'DivBtnRec_InfoNoticias');	
     try
     {
         var strHtml = "";
@@ -766,7 +782,8 @@ function traerInfoAvisos(clicked_id)
     }
 };
 //------------------------------Función para comprobar internet--------------------------------
-function checkConnection(idElemeto, idCargador) {
+function checkConnection(idDivElemeto, idCargador, DivBotonRecargar) {
+	//alert("idDivElemeto: "+ idDivElemeto + " idCargador: " + idCargador + " DivBotonRecargar: " + DivBotonRecargar);
 	var networkState = navigator.connection.type;
 //	navigator.network.connection.type
 	var online = "";
@@ -780,53 +797,64 @@ function checkConnection(idElemeto, idCargador) {
 	states[Connection.NONE]     = '0'; //'No network connection';*/
 	//online = states[networkState];
 	//alert("el estado es: " + networkState);
-	//alert("idElemento: " + idElemeto + " IdCargador: " + idCargador);
-	if (networkState == Connection.NONE)
+	//alert("idDivElemeto: " + idDivElemeto + " IdCargador: " + idCargador);
+	if (networkState == Connection.NONE)//si no hay internet
 	{
 		alert('No hay conexión a internet');
-		var mensaje = "";
-		mensaje += "No hay conexión a internet";
-		mensaje += "<br><a onClick='refreshPage(this.id)'  id='"+idElemeto+"' class='ui-btn ui-btn-b ui-btn-inline ui-icon-refresh ui-btn-icon-left'>Recargar</a>";
-		$("#"+idElemeto).html(mensaje);
+		if ($('#'+idDivElemeto).is(':empty')){ 	//si el div esta vacio o no tiene info, mostramos boton de recargar
+			alert("vacio");	
+			var mensaje = "";
+			mensaje += "No hay conexión a internet";
+			mensaje += "<br><a onClick='refreshPage(this.id)'  id='"+DivBotonRecargar+"' class='ui-btn ui-btn-b ui-btn-inline ui-icon-refresh ui-btn-icon-left'>Recargar</a>";
+			$("#"+DivBotonRecargar).html(mensaje);
+		} else{
+			alert("no vacio");
+		}
+
 		document.getElementById(idCargador).style.display = 'none';
 	} 	
 };
 
-function refreshPage(idElemento) {
+function refreshPage(DivBotonRecargar) {
 	//$("#talleres").load(pagina);
 	//window.location ="index.html";i
    //location.reload();
     //window.location.assign("index.html");
-	if(idElemento == "DivInfoCuentas")
+	if(DivBotonRecargar == "DivBtnRec_Cuentas")
 	{
 		traerListaCuentas();
 	} 
-	else if(idElemento== "DivInfoDirectorio")
+	else if(DivBotonRecargar== "DivBtnRec_Directorio")
 	{
 		traerListaDirectorio();
 	}
-	else if(idElemento== "DivInfoOferta")
+	else if(DivBotonRecargar== "DivBtnRec_InfoOfertAcadem")//Oferta
 	{
 		var idOferta = localStorage.getItem('IdOferta') || '<empty>';
     	traerInfoOferta(idOferta);
 	}
-	else if(idElemento== "DivListaDudas")
+	else if(DivBotonRecargar== "DivBtnRec_PlanEstudio")
+	{	
+		var idPlan = localStorage.getItem('IdPlan') || '<empty>';
+		traerPlanEstudio(idPlan);	
+	}
+	else if(DivBotonRecargar== "DivBtnRec_ListaDudas")//Dudas
 	{
 		traerListaDudas()
 	}
-	else if(idElemento== "DivInfoDudas")
+	else if(DivBotonRecargar== "DivBtnRec_InfoDudas")
 	{
 		var idDudas = localStorage.getItem('IdDudas') || '<empty>';
     	traerInfoDudas(idDudas);
 	}
-	else if(idElemento== "todo")
+	else if(DivBotonRecargar== "DivBtnRec_ListaNoticias")//Noticias
 	{
-		var idPlan = localStorage.getItem('IdPlan') || '<empty>';
-    	traerPlanEstudio(idPlan);
+		traerListaNoticias();
 	}
-	else if(idElemento== "")
+	else if(DivBotonRecargar== "DivBtnRec_InfoNoticias")
 	{
-		
+		var idNota = localStorage.getItem('IdNota') || '<empty>';
+    	traerInfoNoticias(idNota);
 	}
 		
 }
