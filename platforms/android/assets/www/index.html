@@ -242,7 +242,7 @@
 		<h1>Cuentas bancarias</h1>
         <a href="#" class="btnAtras" data-rel="back" data-shadow="false" class="ui-btn ui-corner-all ui-btn-icon-left"><img src="jquery-mobile/images/icons-png/arrow-l-white.png"></a>
 	</div><!-- /header -->
-		<div id="DivInfoCuentas"></div>
+		<ul data-role="listview" id="DivInfoCuentas"></ul>
         <div id="DivBtnRec_Cuentas">	
    		</div>
         <div id="cargadorInfoCuentas">
@@ -258,14 +258,20 @@
     
     <div role="main" class="ui-content"><!-- /contenido -->
 
- <form>
-    <input id="filterTable-input" data-type="search">
-</form>
 
-<table data-role="table" id="temp-table" data-mode="reflow" class="ui-responsive table-stroke" data-filter="true" data-input="#filterTable-input">
-        <tbody id="DivInfoDirectorio">
+<!--<table data-role="table" id="temp-table" data-mode="reflow" class="ui-responsive table-stroke" data-filter="true" data-input="#filterTable-input">
+		<tbody id="">
+        	<ul data-role="listview"></ul>
         </tbody>
-    </table>
+    </table>-->
+
+    <form class="ui-filterable">
+        <input id="filter-directorio" data-type="search">
+    </form>
+    <div style="margin-top: 10px; margin-bottom: 10px;">&nbsp;</div>
+    
+    <ul data-role="listview" data-filter="true" data-input="#filter-directorio" id="DivInfoDirectorio">
+    </ul>	
 
 	<div id="DivBtnRec_Directorio">	
    	</div>
@@ -348,9 +354,9 @@
 	</div><!-- /header -->
     
 	    <div data-role="listview" data-inset="true">
-	    	<ul id="DivListaEventos">
-	    	</ul>
+	    	<ul id="DivListaEventos"></ul>
 	    </div>
+        <div id="DivBtnRec_ListaEventos"></div>
         <div id="cargadorListaEventos">
         	&nbsp;Cargando...
    		</div>
@@ -363,8 +369,8 @@
 		<h1>Eventos</h1>
         <a href="#" class="btnAtras" data-rel="back" data-shadow="false" class="ui-btn ui-corner-all ui-btn-icon-left"><img src="jquery-mobile/images/icons-png/arrow-l-white.png"></a>
 	</div><!-- /header -->
-		<div id="DivInfoEventos">					                        				
-        </div>
+		<div id="DivInfoEventos"></div>
+        <div id="DivBtnRec_InfoEventos"></div>
         <div id="cargadorInfoEvento">
         	<p>&nbsp;Cargando...</p>
    		</div>
@@ -379,9 +385,9 @@
 	</div><!-- /header -->
     
 	    <div data-role="listview" data-inset="true">
-	    	<ul id="DivListaConvocatoria">
-	    	</ul>
+	    	<ul id="DivListaConvocatoria"></ul>
 	    </div>
+        <div id="DivBtnRec_ListaConvocatoria"></div>
         <div id="cargadorListaConvocatoria">
         	&nbsp;Cargando...
    		</div>
@@ -394,8 +400,8 @@
 		<h1>Convocatorias</h1>
         <a href="#" class="btnAtras" data-rel="back" data-shadow="false" class="ui-btn ui-corner-all ui-btn-icon-left"><img src="jquery-mobile/images/icons-png/arrow-l-white.png"></a>
 	</div><!-- /header -->
-		<div id="DivInfoConvocatoria">					                        				
-        </div>
+		<div id="DivInfoConvocatoria"></div>
+        <div id="DivBtnRec_InfoConvocatoria"></div>
         <div id="cargadorInfoConvocatoria">
         	<p>&nbsp;Cargando...</p>
    		</div>
@@ -410,9 +416,9 @@
 	</div><!-- /header -->
     
 	    <div data-role="listview" data-inset="true">
-	    	<ul id="DivListaAvisos">
-	    	</ul>
+	    	<ul id="DivListaAvisos"></ul>
 	    </div>
+        <div id="DivBtnRec_ListaAvisos"></div>
         <div id="cargadorListaAvisos">
         	&nbsp;Cargando...
    		</div>
@@ -425,8 +431,8 @@
 		<h1>Avisos</h1>
         <a href="#" class="btnAtras" data-rel="back" data-shadow="false" class="ui-btn ui-corner-all ui-btn-icon-left"><img src="jquery-mobile/images/icons-png/arrow-l-white.png"></a>
 	</div><!-- /header -->
-		<div id="DivInfoAvisos">					                        				
-        </div>
+		<div id="DivInfoAvisos"></div>
+        <div id="DivBtnRec_InfoAvisos"></div>
         <div id="cargadorInfoAvisos">
         	<p>&nbsp;Cargando...</p>
    		</div>

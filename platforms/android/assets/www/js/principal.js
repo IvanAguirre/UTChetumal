@@ -6,7 +6,7 @@ $( window ).load(function() {
 //------------variables globales---------
 var urlDominio = "http://www.agendasonidocaracol.mx/apputchetumal"; //http://sergiosolis.com/bacalar
 var nombreMes = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
-var idDudasGlobal = ""; var idNotaGlobal = "";
+var idDudasGlobal = ""; var idNotaGlobal = ""; var idEventoaGlobal = "";  var idConvGlobal = "";  var idAvisoGlobal = ""; 
 
 //------------------Identidad------------
 $('#PageIdentidad').on('pageshow', function() {
@@ -125,41 +125,60 @@ function guardaIdNota(id) {
 //------------------Info Eventos------------
 
 $('#PagaInfoEvento').on('pageshow', function() {
-		var idEvento = localStorage.getItem('IdEvento') || '<empty>';
+	var idEvento = localStorage.getItem('IdEvento') || '<empty>';
+	if(idEventoaGlobal != idEvento || $('#DivInfoEventos').is(':empty')){//Si id es dif a id guardado o esta vacio entra
     	traerInfoEventos(idEvento);
+		idEventoaGlobal = idEvento
+	}
 });
 
 function guardaIdEvento(id) {
 	var idEvento = id;
 	localStorage.setItem("IdEvento", idEvento);
-	document.getElementById("DivInfoEventos").innerHTML="";
-	document.getElementById('cargadorInfoEvento').style.display = 'block';
+	if(idEventoaGlobal != idEvento || $('#DivInfoEventos').is(':empty')){
+		document.getElementById("DivBtnRec_InfoEventos").innerHTML="";//limpia div de boton cargar internet
+		document.getElementById("DivInfoEventos").innerHTML="";
+		document.getElementById('cargadorInfoEvento').style.display = 'block';
+	}
 }
 //------------------Info Convocatorias------------
 
 $('#PagaInfoConvocatoria').on('pageshow', function() {
-		var idConvocatoria = localStorage.getItem('IdConvocatoria') || '<empty>';
-    	traerInfoConvocatorias(idConvocatoria);
+	var idConvocatoria = localStorage.getItem('IdConvocatoria') || '<empty>';
+	if(idConvGlobal != idConvocatoria || $('#DivListaConvocatoria').is(':empty')){//Si id es dif a id guardado o esta vacio entra
+		traerInfoConvocatorias(idConvocatoria);
+		idConvGlobal = idConvocatoria;
+	}
+		
 });
 
 function guardaIdConvocatoria(id) {
 	var idConvocatoria = id;
 	localStorage.setItem("IdConvocatoria", idConvocatoria);
-	document.getElementById("DivInfoConvocatoria").innerHTML="";
-	document.getElementById('cargadorInfoConvocatoria').style.display = 'block';
+	if(idConvGlobal != idConvocatoria || $('#DivInfoConvocatoria').is(':empty')){
+		document.getElementById("DivBtnRec_InfoConvocatoria").innerHTML="";//limpia div de boton cargar internet
+		document.getElementById("DivInfoConvocatoria").innerHTML="";
+		document.getElementById('cargadorInfoConvocatoria').style.display = 'block';
+	}
 }
 //------------------Info Avisos------------
 
 $('#PagaInfoAvisos').on('pageshow', function() {
-		var idAviso = localStorage.getItem('IdAviso') || '<empty>';
-    	traerInfoAvisos(idAviso);
+	var idAviso = localStorage.getItem('IdAviso') || '<empty>';
+	if(idAvisoGlobal != idAviso || $('#DivListaAvisos').is(':empty')){//Si id es dif a id guardado o esta vacio entra
+		traerInfoAvisos(idAviso);
+		idAvisoGlobal = idAviso;
+	}
 });
 
 function guardaIdAviso(id) {
 	var idAviso = id;
 	localStorage.setItem("IdAviso", idAviso);
-	document.getElementById("DivInfoAvisos").innerHTML="";
-	document.getElementById('cargadorInfoAvisos').style.display = 'block';
+	if(idAvisoGlobal != idAviso || $('#DivInfoConvocatoria').is(':empty')){
+		document.getElementById("DivBtnRec_InfoAvisos").innerHTML="";//limpia div de boton cargar internet
+		document.getElementById("DivInfoAvisos").innerHTML="";
+		document.getElementById('cargadorInfoAvisos').style.display = 'block';
+	}
 }
 
 /*var t=0; 
@@ -371,7 +390,7 @@ function traerListaCuentas()
 				var lista = "";
                 $.each( datosRecibidos, function( key, value ) {		
 						lista += "<li>";
-                        lista += "<h2 '>" + value.nombreBanco + "</h2>";						
+                        lista += "<h2>" + value.nombreBanco + "</h2>";						
 						lista += "" + value.numero  + "";
                         lista += "</li>";
                 });
@@ -404,12 +423,12 @@ function traerListaDirectorio()
             	var datosRecibidos = JSON.parse(resultado);				
 				var lista = "";
                 $.each( datosRecibidos, function( key, value ) {		
-						lista += "<tr><td>";
-                        lista += "" + value.cargo + "<br>";						
+						lista += "<li><label>";
+                        lista += "<b>" + value.cargo + "</b><br>";						
 						lista += "" + value.nombre  + "<br>";
 						lista += "<a href='mailto:" + value.correo  + "'>" + value.correo  + "</a><br>";
 						lista += "<a href='tel:" + value.telefono  + "'>" + value.telefono_mostrar  + "</a><br>";
-                        lista += "</td></tr>";
+                        lista += "</label></li>";
                 });
                 $("#DivInfoDirectorio").html(lista);
                 $("#DivInfoDirectorio").listview().listview('refresh');
@@ -558,6 +577,7 @@ function traerInfoNoticias(clicked_id)
                 });
                 $("#DivInfoNoticias").html(lista);
                 $("#DivInfoNoticias").listview().listview('refresh');
+				$("#DivBtnRec_InfoNoticias").empty();//vacía div de boton cargar internet
 				document.getElementById('cargadorInfoNoticia').style.display = 'none';
         });
     }
@@ -569,6 +589,7 @@ function traerInfoNoticias(clicked_id)
 //-----------------------------------------------Eventos------------------------------------
 function traerListaEventos()
 {
+	checkConnection('DivListaEventos', 'cargadorListaEventos', 'DivBtnRec_ListaEventos');
     try
     {
         var strHtml = "";
@@ -599,6 +620,7 @@ function traerListaEventos()
                 });
                 $("#DivListaEventos").html(lista);
                 $("#DivListaEventos").listview().listview('refresh');
+				$("#DivBtnRec_ListaEventos").empty();//vacía div de boton cargar internet
 				document.getElementById('cargadorListaEventos').style.display = 'none';
         });
     }
@@ -610,7 +632,7 @@ function traerListaEventos()
 //--------------------------------------------------------Info Evento--------------------------------
 function traerInfoEventos(clicked_id)
 {
-	//checkConnection('#info', 'cargadorInfoEvento');	
+	checkConnection('DivInfoEventos', 'cargadorInfoEvento', 'DivBtnRec_InfoEventos');	
     try
     {
         var strHtml = "";
@@ -641,6 +663,7 @@ function traerInfoEventos(clicked_id)
                 });
                 $("#DivInfoEventos").html(lista);
                 $("#DivInfoEventos").listview().listview('refresh');
+				$("#DivBtnRec_InfoEventos").empty();//vacía div de boton cargar internet
 				document.getElementById('cargadorInfoEvento').style.display = 'none';
         });
     }
@@ -652,6 +675,7 @@ function traerInfoEventos(clicked_id)
 //-----------------------------------------------Convocatoria----------------------------------
 function traerListaConvocatorias()
 {
+	checkConnection('DivListaConvocatoria', 'cargadorListaConvocatoria', 'DivBtnRec_ListaConvocatoria');
     try
     {
         var strHtml = "";
@@ -673,6 +697,7 @@ function traerListaConvocatorias()
                 });
                 $("#DivListaConvocatoria").html(lista);
                 $("#DivListaConvocatoria").listview().listview('refresh');
+				$("#DivBtnRec_ListaConvocatoria").empty();//vacía div de boton cargar internet
 				document.getElementById('cargadorListaConvocatoria').style.display = 'none';
         });
     }
@@ -684,7 +709,7 @@ function traerListaConvocatorias()
 //--------------------------------------------------------Info Convocatoria--------------------------------
 function traerInfoConvocatorias(clicked_id)
 {
-	//checkConnection('#info', 'cargadorInfoEvento');	
+	checkConnection('DivInfoConvocatoria', 'cargadorInfoConvocatoria', 'DivBtnRec_InfoConvocatoria');	
     try
     {
         var strHtml = "";
@@ -707,6 +732,7 @@ function traerInfoConvocatorias(clicked_id)
                 });
                 $("#DivInfoConvocatoria").html(lista);
                 $("#DivInfoConvocatoria").listview().listview('refresh');
+				$("#DivBtnRec_InfoConvocatoria").empty();//vacía div de boton cargar internet
 				document.getElementById('cargadorInfoConvocatoria').style.display = 'none';
         });
     }
@@ -718,6 +744,7 @@ function traerInfoConvocatorias(clicked_id)
 //-----------------------------------------------Avisos----------------------------------
 function traerListaAvisos()
 {
+	checkConnection('DivListaAvisos', 'cargadorListaAvisos', 'DivBtnRec_ListaAvisos');
     try
     {
         var strHtml = "";
@@ -739,6 +766,7 @@ function traerListaAvisos()
                 });
                 $("#DivListaAvisos").html(lista);
                 $("#DivListaAvisos").listview().listview('refresh');
+				$("#DivBtnRec_ListaAvisos").empty();//vacía div de boton cargar internet
 				document.getElementById('cargadorListaAvisos').style.display = 'none';
         });
     }
@@ -750,7 +778,7 @@ function traerListaAvisos()
 //--------------------------------------------------------Info Aviso--------------------------------
 function traerInfoAvisos(clicked_id)
 {
-	//checkConnection('#info', 'cargadorInfoEvento');	
+	heckConnection('DivListaAvisos', 'cargadorInfoAvisos', 'DivBtnRec_InfoAvisos');	
     try
     {
         var strHtml = "";
@@ -773,6 +801,7 @@ function traerInfoAvisos(clicked_id)
                 });
                 $("#DivInfoAvisos").html(lista);
                 $("#DivInfoAvisos").listview().listview('refresh');
+				$("#DivBtnRec_InfoAvisos").empty();//vacía div de boton cargar internet
 				document.getElementById('cargadorInfoAvisos').style.display = 'none';
         });
     }
@@ -840,7 +869,7 @@ function refreshPage(DivBotonRecargar) {
 	}
 	else if(DivBotonRecargar== "DivBtnRec_ListaDudas")//Dudas
 	{
-		traerListaDudas()
+		traerListaDudas();
 	}
 	else if(DivBotonRecargar== "DivBtnRec_InfoDudas")
 	{
@@ -855,6 +884,33 @@ function refreshPage(DivBotonRecargar) {
 	{
 		var idNota = localStorage.getItem('IdNota') || '<empty>';
     	traerInfoNoticias(idNota);
+	}
+	else if(DivBotonRecargar== "DivBtnRec_ListaEventos")//Eventos
+	{
+		traerListaEventos();
+	}
+	else if(DivBotonRecargar== "DivBtnRec_InfoEventos")
+	{
+		var idEvento = localStorage.getItem('IdEvento') || '<empty>';
+    	traerInfoEventos(idEvento);
+	}
+	else if(DivBotonRecargar== "DivBtnRec_ListaEventos")//Convocatorias
+	{
+		traerListaConvocatorias();
+	}
+	else if(DivBotonRecargar== "DivBtnRec_InfoEventos")
+	{
+		var idConvocatoria = localStorage.getItem('IdConvocatoria') || '<empty>';
+		traerInfoConvocatorias(idConvocatoria);
+	}
+	else if(DivBotonRecargar== "DivBtnRec_ListaEventos")//Avisos
+	{
+		traerListaAvisos();
+	}
+	else if(DivBotonRecargar== "DivBtnRec_InfoEventos")
+	{
+		var idAviso = localStorage.getItem('IdAviso') || '<empty>';
+		traerInfoAvisos(idAviso);
 	}
 		
 }
