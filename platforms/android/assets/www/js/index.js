@@ -138,7 +138,7 @@ if(window.XMLHttpRequest)
 	}
 } */
 // Pedimos el archivo "registro.php" 
-ajax.open("POST","http://www.agendasonidocaracol.mx/apputchetumal/admin/PhonegapPushNotifications/registro.php",true)
+ajax.open("POST","http://apps.utchetumal.edu.mx/admin/PhonegapPushNotifications/registro.php",true)
 ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded")
 ajax.send("&regId=" + id_registro)
 

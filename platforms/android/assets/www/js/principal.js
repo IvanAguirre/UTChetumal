@@ -4,7 +4,7 @@ $( window ).load(function() {
 });
 
 //------------variables globales---------
-var urlDominio = "http://www.agendasonidocaracol.mx/apputchetumal"; //http://sergiosolis.com/bacalar
+var urlDominio = "http://www.agendasonidocaracol.mx/apputchetumal"; // http://www.agendasonidocaracol.mx/apputchetumal //http://sergiosolis.com/bacalar 
 var nombreMes = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
 var idDudasGlobal = ""; var idNotaGlobal = ""; var idEventoaGlobal = "";  var idConvGlobal = "";  var idAvisoGlobal = ""; 
 
@@ -831,13 +831,13 @@ function checkConnection(idDivElemeto, idCargador, DivBotonRecargar) {
 	{
 		alert('No hay conexión a internet');
 		if ($('#'+idDivElemeto).is(':empty')){ 	//si el div esta vacio o no tiene info, mostramos boton de recargar
-			alert("vacio");	
+			//--->alert("vacio");	
 			var mensaje = "";
 			mensaje += "No hay conexión a internet";
 			mensaje += "<br><a onClick='refreshPage(this.id)'  id='"+DivBotonRecargar+"' class='ui-btn ui-btn-b ui-btn-inline ui-icon-refresh ui-btn-icon-left'>Recargar</a>";
 			$("#"+DivBotonRecargar).html(mensaje);
 		} else{
-			alert("no vacio");
+			//--->alert("no vacio");
 		}
 
 		document.getElementById(idCargador).style.display = 'none';
