@@ -7,6 +7,7 @@ $( window ).load(function() {
 var urlDominio = "http://www.agendasonidocaracol.mx/apputchetumal"; // http://www.agendasonidocaracol.mx/apputchetumal //http://sergiosolis.com/bacalar 
 var nombreMes = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
 var idDudasGlobal = ""; var idNotaGlobal = ""; var idEventoaGlobal = "";  var idConvGlobal = "";  var idAvisoGlobal = ""; 
+var ConnectionDelay;
 
 //------------------Identidad------------
 $('#PageIdentidad').on('pageshow', function() {
@@ -38,7 +39,7 @@ $('#PageListaConvocatorias').on('pageshow', function() {
 });
 //------------------lista Avisos------------
 $('#PageListaAvisos').on('pageshow', function() {
-	traerListaAvisos();
+	traerListaAvisos();	
 });
 //------------------Info Oferta (informacion de la carrera)------------
 
@@ -606,16 +607,35 @@ function traerListaEventos()
                 $.each( datosRecibidos, function( key, value ) {	
 						lista += "<li><a class='show-page-loading-msg' rel='external' data-textonly='false' data-textvisible='false' data-msgtext='' id='" + value.IdEvento + "' onClick='guardaIdEvento(this.id)' href='#PagaInfoEvento'>";
                         lista += "<h2 style='font-size:.9em'>" + value.Denominacion + "</h2>";						
-						lista += "<p><b>Fecha: &nbsp;&nbsp;</b>" + value.fecha_publicacion + "";
-						if(value.fecha_vencimiento == "00-00-0000")
+						
+						if(value.DiaFin != "")
+						{
+							if(value.MesInicio == value.MesFin)//si los meses son iguales
+							{
+								if(value.DiaInicio == value.DiaFin)//si los dias son iguales se cancela uno
+								{
+									lista += "<p>" + value.DiaInicio + value.MesInicio + "";
+								}else{
+									lista += "<p>" + value.DiaInicio + " a " + value.DiaFin + value.MesInicio + "";
+								}
+							} else {
+								lista += "<p>" + value.DiaInicio + value.MesInicio + " a " + value.DiaFin + value.MesFin + "";
+							}
+						} else {
+							lista += "<p>" + value.DiaInicio + value.MesInicio + "";
+						}
+						
+						if(value.fecha_hora != 0)//si hay HORA la muestro
                         {
-                            lista +="</p>";
+                             lista += "&nbsp;&nbsp;-&nbsp;" + value.fecha_hora  + "";
                         }
-                        else
+						lista +="</p>";
+						if(value.lugar != "")// si hay LUGAR lo muestro
                         {
-                            lista += "&nbsp;&nbsp;al&nbsp;&nbsp;" + value.fecha_vencimiento  + "</p>";
+                             lista += "<p>Lugar: " + value.lugar + "</p>";
                         }
-						lista += "<p><b>Lugar: &nbsp;&nbsp;</b>" + value.lugar + "</p>";
+						
+						
                         lista += "</li>";
                 });
                 $("#DivListaEventos").html(lista);
@@ -649,16 +669,16 @@ function traerInfoEventos(clicked_id)
                 $.each( datosRecibidos, function( key, value ) {
 						lista += "<div role='main' class='ui-content'>";							
 						lista += "<h2>" + value.Denominacion + "</h2>"	
-						lista += "<p><b>Fecha: </b>" + value.FechaInicio + "";
+						/*lista += "<p><b>Fecha: </b>" + value.FechaInicio + "";
                         
 						if(value.FechaFin != "00-00-0000"){
 							lista += "&nbsp;&nbsp;al&nbsp;&nbsp;" + value.FechaFin + "";
 						}
 						lista += "<br>";
-                        lista += "<b>Lugar:</b> " + value.lugar + "</p>";
+                        lista += "<b>Lugar:</b> " + value.lugar + "</p>";*/
 									
 						lista += "" + value.Contenido + "";
-						lista += "<p style='font-size: .8em;color:#999'>Publicado el: " + value.FechaPublicacion  + " </p>";						
+						//lista += "<p style='font-size: .8em;color:#999'>Publicado el: " + value.FechaPublicacion  + " </p>";						
 						lista += "</div>";
                 });
                 $("#DivInfoEventos").html(lista);
@@ -692,7 +712,7 @@ function traerListaConvocatorias()
                 $.each( datosRecibidos, function( key, value ) {		
 						lista += "<li><a class='show-page-loading-msg' rel='external' data-textonly='false' data-textvisible='false' data-msgtext='' id='" + value.IdPublicacion + "' onClick='guardaIdConvocatoria(this.id)' href='#PagaInfoConvocatoria'>";	
                         lista += "<h2>" + value.Encabezado + "</h2>";						
-						lista += "<p>Publicado el: &nbsp;&nbsp;" + value.fecha_publicacion + "";
+						lista += "<p>Publicado el " + value.FechaPublicacion + "";
                         lista += "</li>";
                 });
                 $("#DivListaConvocatoria").html(lista);
@@ -724,10 +744,11 @@ function traerInfoConvocatorias(clicked_id)
             	var datosRecibidos = JSON.parse(resultado);				
 				var lista = "";
                 $.each( datosRecibidos, function( key, value ) {
+					alert("hfsihf");
 						lista += "<div role='main' class='ui-content'>";							
-						lista += "<h2>" + value.Encabezado + "</h2>"//borrar					
+						lista += "<h2>" + value.Encabezado + "</h2>"					
 						lista += "" + value.Contenido + "";	
-						lista += "<p style='font-size: .8em;color:#999'>Publicado el: " + value.FechaPublicacion  + " </p>";						
+						//lista += "<p style='font-size: .8em;color:#999'>Publicado el: " + value.FechaPublicacion  + " </p>";						
 						lista += "</div>";
                 });
                 $("#DivInfoConvocatoria").html(lista);
@@ -744,25 +765,36 @@ function traerInfoConvocatorias(clicked_id)
 //-----------------------------------------------Avisos----------------------------------
 function traerListaAvisos()
 {
-	checkConnection('DivListaAvisos', 'cargadorListaAvisos', 'DivBtnRec_ListaAvisos');
+	 
+	//setTimeout('return false',3000);
+	//checkConnectionDelay();
+	//checkConnection('DivListaAvisos', 'cargadorListaAvisos', 'DivBtnRec_ListaAvisos');
     try
     {
         var strHtml = "";
 		$.ajax({
 				global: false,
 				dataType: "html",
-				async: false,
+				async: true,				
                 //type: "POST",
                 url: urlDominio + "/apputchetumal/php/consultar_avisos.php",
-                //data: $("#form").serialize(),
-            }).done(function (resultado) {						
+                error:  function(){
+					checkConnectionDelay('DivListaAvisos', 'cargadorListaAvisos', 'DivBtnRec_ListaAvisos')
+				},
+				success: function(){
+					//alert("todo biein");
+				},
+				timeout: 15000 // sets timeout to 3 seconds
+            }).done(function (resultado) {	
+				//stopConnectionDelay();				
             	var datosRecibidos = JSON.parse(resultado);				
 				var lista = "";
-                $.each( datosRecibidos, function( key, value ) {		
+                $.each( datosRecibidos, function( key, value ) {	
 						lista += "<li><a class='show-page-loading-msg' rel='external' data-textonly='false' data-textvisible='false' data-msgtext='' id='" + value.IdPublicacion + "' onClick='guardaIdAviso(this.id)' href='#PagaInfoAvisos'>";						
                         lista += "<h2>" + value.Encabezado + "</h2>";						
-						lista += "<p>Publicado el: &nbsp;&nbsp;" + value.fecha_publicacion + "";
+						lista += "<p>Publicado el " + value.FechaPublicacion + "";
                         lista += "</li>";
+						
                 });
                 $("#DivListaAvisos").html(lista);
                 $("#DivListaAvisos").listview().listview('refresh');
@@ -774,11 +806,17 @@ function traerListaAvisos()
     {
         alert("Error de datos!!");
     }
+	//return true;
+};
+
+
+function saludo(){
+alert("Saludos");
 };
 //--------------------------------------------------------Info Aviso--------------------------------
 function traerInfoAvisos(clicked_id)
 {
-	heckConnection('DivListaAvisos', 'cargadorInfoAvisos', 'DivBtnRec_InfoAvisos');	
+	checkConnection('DivListaAvisos', 'cargadorInfoAvisos', 'DivBtnRec_InfoAvisos');	
     try
     {
         var strHtml = "";
@@ -796,7 +834,7 @@ function traerInfoAvisos(clicked_id)
 						lista += "<div role='main' class='ui-content'>";							
 						lista += "<h2>" + value.Encabezado + "</h2>"//borrar					
 						lista += "" + value.Contenido + "";	
-						lista += "<p style='font-size: .8em;color:#999'>Publicado el: " + value.FechaPublicacion  + " </p>";						
+						//lista += "<p style='font-size: .8em;color:#999'>Publicado el: " + value.FechaPublicacion  + " </p>";						
 						lista += "</div>";
                 });
                 $("#DivInfoAvisos").html(lista);
@@ -829,7 +867,7 @@ function checkConnection(idDivElemeto, idCargador, DivBotonRecargar) {
 	//alert("idDivElemeto: " + idDivElemeto + " IdCargador: " + idCargador);
 	if (networkState == Connection.NONE)//si no hay internet
 	{
-		alert('No hay conexión a internet');
+		//alert('No hay conexión a internet');
 		if ($('#'+idDivElemeto).is(':empty')){ 	//si el div esta vacio o no tiene info, mostramos boton de recargar
 			//--->alert("vacio");	
 			var mensaje = "";
@@ -844,7 +882,29 @@ function checkConnection(idDivElemeto, idCargador, DivBotonRecargar) {
 	} 	
 };
 
-function refreshPage(DivBotonRecargar) {
+							//DivListaAvisos', 'cargadorListaAvisos', 'DivBtnRec_ListaAvisos
+function checkConnectionDelay(idDivElemeto, idCargador, DivBotonRecargar){
+	alert("Hay problemas de conexión");
+	if ($('#'+idDivElemeto).is(':empty')){ 	//si el div esta vacio o no tiene info, mostramos boton de recargar
+			//--->alert("vacio");	
+			var mensaje = "";
+			mensaje += "Hay problemas de conexión";
+			mensaje += "<br><a onClick='refreshPage(this.id)'  id='"+DivBotonRecargar+"' class='ui-btn ui-btn-b ui-btn-inline ui-icon-refresh ui-btn-icon-left'>Recargar</a>";
+			$("#"+DivBotonRecargar).html(mensaje);//interpolamos el mensaje en el div del botonRec
+		} else{
+			//--->alert("no vacio");
+		}
+
+		document.getElementById(idCargador).style.display = 'none';
+	//ConnectionDelay = setTimeout(function(){ alert("Esto está tardando mucho, posiblemente hay un problema de conexión."); }, 15000);
+};
+function stopConnectionDelay() {
+    clearTimeout(ConnectionDelay);
+}
+
+
+function refreshPage(DivBotonRecargar) //Funcion para recargar paguina 
+	{
 	//$("#talleres").load(pagina);
 	//window.location ="index.html";i
    //location.reload();
@@ -902,17 +962,18 @@ function refreshPage(DivBotonRecargar) {
 	{
 		var idConvocatoria = localStorage.getItem('IdConvocatoria') || '<empty>';
 		traerInfoConvocatorias(idConvocatoria);
-	}
-	else if(DivBotonRecargar== "DivBtnRec_ListaEventos")//Avisos
+	}							
+	else if(DivBotonRecargar== "DivBtnRec_ListaAvisos")//Avisos
 	{
 		traerListaAvisos();
 	}
-	else if(DivBotonRecargar== "DivBtnRec_InfoEventos")
+	else if(DivBotonRecargar== "DivBtnRec_InfoAvisos")
 	{
 		var idAviso = localStorage.getItem('IdAviso') || '<empty>';
 		traerInfoAvisos(idAviso);
 	}
 		
 }
+
 
 //----
