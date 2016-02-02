@@ -206,6 +206,10 @@ function traerIdentidad()
                 //type: "POST",
                 url: urlDominio + "/apputchetumal/php/Consultar_pagina.php?identificador=" + nombrePag + "",
                 //data: $("#form").serialize(),
+				error:  function(){
+					//checkConnectionDelay()
+				},
+				timeout: 15000,
             }).done(function (resultado) {						
             	var datosRecibidos = JSON.parse(resultado);				
 				var lista = "";
@@ -232,7 +236,7 @@ function traerIdentidad()
 //-------------------------------------------Oferta Academica (Info de la carrera)----------------------------------
 function traerInfoOferta(clicked_id)
 {
-	checkConnection('DivInfoOferta', 'cargadorInfoOferta', 'DivBtnRec_InfoOfertAcadem');
+	//checkConnection('DivInfoOferta', 'cargadorInfoOferta', 'DivBtnRec_InfoOfertAcadem');
     try
     {
         var strHtml = "";
@@ -243,6 +247,10 @@ function traerInfoOferta(clicked_id)
                 //type: "POST",
                 url: urlDominio + "/apputchetumal/php/Consultar_pagina.php?identificador=" + clicked_id + "",
                 //data: $("#form").serialize(),
+				error:  function(){
+					checkConnectionDelay('DivInfoOferta', 'cargadorInfoOferta', 'DivBtnRec_InfoOfertAcadem')
+				},
+				timeout: 15000,
             }).done(function (resultado) {		
 			document.getElementById('subtitulo').style.display = 'block';	
 			//document.getElementById('DivContentInfoOferta').style.display = 'block';	
@@ -276,7 +284,7 @@ function traerInfoOferta(clicked_id)
 function traerPlanEstudio(clicked_id)
 {
 	//alert(t);
-	checkConnection('subtituloPlanEst', 'cargadorPlanEstudio', 'DivBtnRec_PlanEstudio');
+	//checkConnection('subtituloPlanEst', 'cargadorPlanEstudio', 'DivBtnRec_PlanEstudio');
 	
 	if(clicked_id == "plan_ing_dns" || clicked_id == "plan_ing_tics" || clicked_id == "plan_ing_meca" || clicked_id == "plan_ing_gastro"){
 		var esIng = true;
@@ -298,6 +306,10 @@ function traerPlanEstudio(clicked_id)
 				//type: "POST",
 				url: urlDominio + "/apputchetumal/php/consultar_plan_estudio.php?identificador=" + clicked_id + "",
 				//data: $("#form").serialize(),
+				error:  function(){
+					checkConnectionDelay('subtituloPlanEst', 'cargadorPlanEstudio', 'DivBtnRec_PlanEstudio')
+				},
+				timeout: 15000,
 			}).done(function (resultado) {	
 				document.getElementById("DivBtnRec_PlanEstudio").innerHTML="";
 				document.getElementById('subtituloPlanEst').style.display = 'block';	
@@ -375,7 +387,7 @@ function traerPlanEstudio(clicked_id)
 //-----------------------------------------------Cuentas Bancarias----------------------------------
 function traerListaCuentas()
 {
-	checkConnection('DivInfoCuentas', 'cargadorInfoCuentas', 'DivBtnRec_Cuentas');
+	//checkConnection('DivInfoCuentas', 'cargadorInfoCuentas', 'DivBtnRec_Cuentas');
     try
     {
         var strHtml = "";
@@ -385,6 +397,10 @@ function traerListaCuentas()
 				async: false,
                 //type: "POST",
                 url: urlDominio + "/apputchetumal/php/consultar_cuentas.php",
+				error:  function(){
+					checkConnectionDelay('DivInfoCuentas', 'cargadorInfoCuentas', 'DivBtnRec_Cuentas')
+				},
+				timeout: 15000,
                 //data: $("#form").serialize(),
             }).done(function (resultado) {						
             	var datosRecibidos = JSON.parse(resultado);				
@@ -409,7 +425,7 @@ function traerListaCuentas()
 //-----------------------------------------------Directorio----------------------------------
 function traerListaDirectorio()
 {
-	checkConnection('DivInfoDirectorio', 'cargadorInfoDirectorio', 'DivBtnRec_Directorio');
+	//checkConnection('DivInfoDirectorio', 'cargadorInfoDirectorio', 'DivBtnRec_Directorio');
     try
     {
         var strHtml = "";
@@ -420,6 +436,10 @@ function traerListaDirectorio()
                 //type: "POST",
                 url: urlDominio + "/apputchetumal/php/consultar_directorio.php",
                 //data: $("#form").serialize(),
+				error:  function(){
+					checkConnectionDelay('DivInfoDirectorio', 'cargadorInfoDirectorio', 'DivBtnRec_Directorio')
+				},
+				timeout: 15000,
             }).done(function (resultado) {						
             	var datosRecibidos = JSON.parse(resultado);				
 				var lista = "";
@@ -445,7 +465,7 @@ function traerListaDirectorio()
 //-----------------------------------------------Lista Dudas----------------------------------
 function traerListaDudas()
 {
-	checkConnection('DivListaDudas', 'cargadorListaDudas', 'DivBtnRec_ListaDudas');
+	//checkConnection('DivListaDudas', 'cargadorListaDudas', 'DivBtnRec_ListaDudas');
     try
     {
         var strHtml = "";
@@ -456,6 +476,10 @@ function traerListaDudas()
                 //type: "POST",
                 url: urlDominio + "/apputchetumal/php/consultar_dudas.php",
                 //data: $("#form").serialize(),
+				error:  function(){
+					checkConnectionDelay('DivListaDudas', 'cargadorListaDudas', 'DivBtnRec_ListaDudas')
+				},
+				timeout: 15000,
             }).done(function (resultado) {						
             	var datosRecibidos = JSON.parse(resultado);				
 				var lista = "";
@@ -478,7 +502,7 @@ function traerListaDudas()
 //--------------------------------------------------------Info Dudas--------------------------------
 function traerInfoDudas(clicked_id)
 {
-	checkConnection('DivInfoDudas', 'cargadorInfoDudas', 'DivBtnRec_InfoDudas');	
+	//checkConnection('DivInfoDudas', 'cargadorInfoDudas', 'DivBtnRec_InfoDudas');	
     try
     {
         var strHtml = "";
@@ -489,6 +513,10 @@ function traerInfoDudas(clicked_id)
                 //type: "POST",
                 url: urlDominio + "/apputchetumal/php/consultar_dudas_info.php?Id=" + clicked_id + "",
                 //data: $("#form").serialize(),
+				error:  function(){
+					checkConnectionDelay('DivInfoDudas', 'cargadorInfoDudas', 'DivBtnRec_InfoDudas')
+				},
+				timeout: 15000,
             }).done(function (resultado) {						
             	var datosRecibidos = JSON.parse(resultado);				
 				var lista = "";
@@ -511,7 +539,7 @@ function traerInfoDudas(clicked_id)
 //-----------------------------------------------Lista Noticias----------------------------------
 function traerListaNoticias()
 {
-	checkConnection('DivListaNoticias', 'cargadorListaNoticia', 'DivBtnRec_ListaNoticias');
+	//checkConnection('DivListaNoticias', 'cargadorListaNoticia', 'DivBtnRec_ListaNoticias');
     try
     {
         var strHtml = "";
@@ -522,6 +550,10 @@ function traerListaNoticias()
                 //type: "POST",
                 url: urlDominio + "/apputchetumal/php/consultar_noticias.php",
                 //data: $("#form").serialize(),
+				error:  function(){
+					checkConnectionDelay('DivListaNoticias', 'cargadorListaNoticia', 'DivBtnRec_ListaNoticias')
+				},
+				timeout: 15000,
             }).done(function (resultado) {						
             	var datosRecibidos = JSON.parse(resultado);				
 				var lista = "";
@@ -565,6 +597,10 @@ function traerInfoNoticias(clicked_id)
                 //type: "POST",
                 url: urlDominio + "/apputchetumal/php/consultar_noticias_info.php?Id=" + clicked_id + "",
                 //data: $("#form").serialize(),
+				error:  function(){
+					checkConnectionDelay('DivInfoNoticias', 'cargadorInfoNoticia', 'DivBtnRec_InfoNoticias')
+				},
+				timeout: 15000,
             }).done(function (resultado) {						
             	var datosRecibidos = JSON.parse(resultado);				
 				var lista = "";
@@ -590,7 +626,7 @@ function traerInfoNoticias(clicked_id)
 //-----------------------------------------------Eventos------------------------------------
 function traerListaEventos()
 {
-	checkConnection('DivListaEventos', 'cargadorListaEventos', 'DivBtnRec_ListaEventos');
+	//checkConnection('DivListaEventos', 'cargadorListaEventos', 'DivBtnRec_ListaEventos');
     try
     {
         var strHtml = "";
@@ -601,6 +637,10 @@ function traerListaEventos()
                 //type: "POST",
                 url: urlDominio + "/apputchetumal/php/consultar_eventos.php",
                 //data: $("#form").serialize(),
+				error:  function(){
+					checkConnectionDelay('DivListaEventos', 'cargadorListaEventos', 'DivBtnRec_ListaEventos')
+				},
+				timeout: 15000,
             }).done(function (resultado) {						
             	var datosRecibidos = JSON.parse(resultado);				
 				var lista = "";
@@ -652,7 +692,7 @@ function traerListaEventos()
 //--------------------------------------------------------Info Evento--------------------------------
 function traerInfoEventos(clicked_id)
 {
-	checkConnection('DivInfoEventos', 'cargadorInfoEvento', 'DivBtnRec_InfoEventos');	
+	//checkConnection('DivInfoEventos', 'cargadorInfoEvento', 'DivBtnRec_InfoEventos');	
     try
     {
         var strHtml = "";
@@ -663,6 +703,10 @@ function traerInfoEventos(clicked_id)
                 //type: "POST",
                 url: urlDominio + "/apputchetumal/php/consultar_eventos_info.php?Id=" + clicked_id + "",
                 //data: $("#form").serialize(),
+				error:  function(){
+					checkConnectionDelay('DivInfoEventos', 'cargadorInfoEvento', 'DivBtnRec_InfoEventos')
+				},
+				timeout: 15000,
             }).done(function (resultado) {						
             	var datosRecibidos = JSON.parse(resultado);				
 				var lista = "";
@@ -695,7 +739,7 @@ function traerInfoEventos(clicked_id)
 //-----------------------------------------------Convocatoria----------------------------------
 function traerListaConvocatorias()
 {
-	checkConnection('DivListaConvocatoria', 'cargadorListaConvocatoria', 'DivBtnRec_ListaConvocatoria');
+	//checkConnection('DivListaConvocatoria', 'cargadorListaConvocatoria', 'DivBtnRec_ListaConvocatoria');
     try
     {
         var strHtml = "";
@@ -706,6 +750,10 @@ function traerListaConvocatorias()
                 //type: "POST",
                 url: urlDominio + "/apputchetumal/php/consultar_convocatorias.php",
                 //data: $("#form").serialize(),
+				error:  function(){
+					checkConnectionDelay('DivListaConvocatoria', 'cargadorListaConvocatoria', 'DivBtnRec_ListaConvocatoria')
+				},
+				timeout: 15000,
             }).done(function (resultado) {						
             	var datosRecibidos = JSON.parse(resultado);				
 				var lista = "";
@@ -729,7 +777,7 @@ function traerListaConvocatorias()
 //--------------------------------------------------------Info Convocatoria--------------------------------
 function traerInfoConvocatorias(clicked_id)
 {
-	checkConnection('DivInfoConvocatoria', 'cargadorInfoConvocatoria', 'DivBtnRec_InfoConvocatoria');	
+	//checkConnection('DivInfoConvocatoria', 'cargadorInfoConvocatoria', 'DivBtnRec_InfoConvocatoria');	
     try
     {
         var strHtml = "";
@@ -740,6 +788,10 @@ function traerInfoConvocatorias(clicked_id)
                 //type: "POST",
                 url: urlDominio + "/apputchetumal/php/consultar_convocatoria_info.php?Id=" + clicked_id + "",
                 //data: $("#form").serialize(),
+				error:  function(){
+					checkConnectionDelay('DivInfoConvocatoria', 'cargadorInfoConvocatoria', 'DivBtnRec_InfoConvocatoria')
+				},
+				timeout: 15000,
             }).done(function (resultado) {						
             	var datosRecibidos = JSON.parse(resultado);				
 				var lista = "";
@@ -781,10 +833,10 @@ function traerListaAvisos()
                 error:  function(){
 					checkConnectionDelay('DivListaAvisos', 'cargadorListaAvisos', 'DivBtnRec_ListaAvisos')
 				},
+				timeout: 15000,
 				success: function(){
-					//alert("todo biein");
+					//alert("todo bien");
 				},
-				timeout: 15000 // sets timeout to 3 seconds
             }).done(function (resultado) {	
 				//stopConnectionDelay();				
             	var datosRecibidos = JSON.parse(resultado);				
@@ -816,7 +868,7 @@ alert("Saludos");
 //--------------------------------------------------------Info Aviso--------------------------------
 function traerInfoAvisos(clicked_id)
 {
-	checkConnection('DivListaAvisos', 'cargadorInfoAvisos', 'DivBtnRec_InfoAvisos');	
+	//checkConnection('DivListaAvisos', 'cargadorInfoAvisos', 'DivBtnRec_InfoAvisos');	
     try
     {
         var strHtml = "";
@@ -827,6 +879,10 @@ function traerInfoAvisos(clicked_id)
                 //type: "POST",
                 url: urlDominio + "/apputchetumal/php/consultar_avisos_info.php?Id=" + clicked_id + "",
                 //data: $("#form").serialize(),
+				error:  function(){
+					checkConnectionDelay('DivListaAvisos', 'cargadorInfoAvisos', 'DivBtnRec_InfoAvisos')
+				},
+				timeout: 15000,
             }).done(function (resultado) {						
             	var datosRecibidos = JSON.parse(resultado);				
 				var lista = "";
@@ -882,6 +938,8 @@ function checkConnection(idDivElemeto, idCargador, DivBotonRecargar) {
 	} 	
 };
 
+//--------------------------------Funcion para mandar mensaje de fallo en conexion-----------------
+
 							//DivListaAvisos', 'cargadorListaAvisos', 'DivBtnRec_ListaAvisos
 function checkConnectionDelay(idDivElemeto, idCargador, DivBotonRecargar){
 	alert("Hay problemas de conexión");
@@ -890,9 +948,9 @@ function checkConnectionDelay(idDivElemeto, idCargador, DivBotonRecargar){
 			var mensaje = "";
 			mensaje += "Hay problemas de conexión";
 			mensaje += "<br><a onClick='refreshPage(this.id)'  id='"+DivBotonRecargar+"' class='ui-btn ui-btn-b ui-btn-inline ui-icon-refresh ui-btn-icon-left'>Recargar</a>";
-			$("#"+DivBotonRecargar).html(mensaje);//interpolamos el mensaje en el div del botonRec
+			$("#"+DivBotonRecargar).html(mensaje);//interpolamos el mensaje en el div DivBtnRec_x
 		} else{
-			//--->alert("no vacio");
+			alert("no paso");//--->alert("no vacio");
 		}
 
 		document.getElementById(idCargador).style.display = 'none';
@@ -903,7 +961,8 @@ function stopConnectionDelay() {
 }
 
 
-function refreshPage(DivBotonRecargar) //Funcion para recargar paguina 
+//-------------------------------Funcion para llamar funcion al cargar paguina------
+function refreshPage(DivBotonRecargar)  
 	{
 	//$("#talleres").load(pagina);
 	//window.location ="index.html";i

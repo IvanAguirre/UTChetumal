@@ -82,13 +82,44 @@ var app = {
             break;
  
             case 'message':
-              // NOTIFICACION!!!
-			 var x = e.message;
+				
+              // NOTIFICACION!!
+			  var x = e.message;
+			  if (typeof x !== 'undefined'){	
+			  	switch(e.payload.title) {
+					case 'Aviso':
+						$.mobile.pageContainer.pagecontainer("change", "#PageListaAvisos", {  });
+						break;
+					case 'Evento':
+						$.mobile.pageContainer.pagecontainer("change", "#PageListaEventos", {  });
+						break;
+					case 'Convocatoria':
+						$.mobile.pageContainer.pagecontainer("change", "#PageListaConvocatorias", {  });
+						break;
+					case 'Noticia':
+						$.mobile.pageContainer.pagecontainer("change", "#PageListaNoticias", {  });
+						break;
+					default:
+						//default code block
+				}
+							  
+			  alert(x); 
+			  }
+			  	
+				/*if(e.payload.title=='Aviso'){
+					$.mobile.pageContainer.pagecontainer("change", "#PageListaAvisos", {  });
+					alert(x); 
+				}
+				}else{
+					
+				}*/
+			 
+			 /* var x = e.message;
 			  if (typeof x !== 'undefined'){
 				 
               	alert(x);
 	
-			  }
+			  }*/
             break;
  
             case 'error':
