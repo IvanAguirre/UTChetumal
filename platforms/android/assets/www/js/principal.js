@@ -384,6 +384,13 @@ function traerPlanEstudio(clicked_id)
 	}
 		
 };
+$( "#popupPanel" ).on({
+    popupbeforeposition: function() {
+        var h = $( window ).height();
+ 
+        $( "#popupPanel" ).css( "height", h );
+    }
+});
 //-----------------------------------------------Cuentas Bancarias----------------------------------
 function traerListaCuentas()
 {
@@ -817,7 +824,10 @@ function traerInfoConvocatorias(clicked_id)
 //-----------------------------------------------Avisos----------------------------------
 function traerListaAvisos()
 {
-	 
+				/*$("#popupAvisos #popupTitle").html("jkbhiuh");
+				$("#popupAvisos #popContent").html("kjdgkjfng");
+				$( "#popupAvisos" ).popup("open");
+				$( '#popupLogin' ).popup( 'reposition', 'positionTo: window' );*/
 	//setTimeout('return false',3000);
 	//checkConnectionDelay();
 	//checkConnection('DivListaAvisos', 'cargadorListaAvisos', 'DivBtnRec_ListaAvisos');

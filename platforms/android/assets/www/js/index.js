@@ -85,10 +85,13 @@ var app = {
 				
               // NOTIFICACION!!
 			  var x = e.message;
+			  var title = e.tetle
+			  var popupDiv;
 			  if (typeof x !== 'undefined'){	
-			  	switch(e.payload.title) {
+			  	switch(e.payload.title) {//e.payload.title
 					case 'Aviso':
 						$.mobile.pageContainer.pagecontainer("change", "#PageListaAvisos", {  });
+						popupDiv = "#popupAvisos";
 						break;
 					case 'Evento':
 						$.mobile.pageContainer.pagecontainer("change", "#PageListaEventos", {  });
@@ -102,8 +105,14 @@ var app = {
 					default:
 						//default code block
 				}
-							  
-			  alert(x); 
+				$("#popupAvisos #popupTitle").html(title);
+				$("#popupAvisos #popContent").html(x);
+				
+				$('#PageListaAvisos').on('pageshow', function() {
+					$( "#popupAvisos" ).popup( "open");	
+				});
+				
+				
 			  }
 			  	
 				/*if(e.payload.title=='Aviso'){

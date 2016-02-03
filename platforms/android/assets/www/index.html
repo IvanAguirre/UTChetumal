@@ -242,12 +242,12 @@
 		<h1>Cuentas bancarias</h1>
         <a href="#" class="btnAtras" data-rel="back" data-shadow="false" class="ui-btn ui-corner-all ui-btn-icon-left"><img src="jquery-mobile/images/icons-png/arrow-l-white.png"></a>
 	</div><!-- /header -->
-		<ul data-role="listview" id="DivInfoCuentas"></ul>
-        <div id="DivBtnRec_Cuentas">	
-   		</div>
-        <div id="cargadorInfoCuentas">
-        	<p>&nbsp;Cargando...</p>
-   		</div>
+    <ul data-role="listview" id="DivInfoCuentas"></ul>
+    <div id="DivBtnRec_Cuentas">	
+    </div>
+    <div id="cargadorInfoCuentas">
+        <p>&nbsp;Cargando...</p>
+    </div>     
 </div>
 <!------------------------------------------------------Directorio------------------------------------------------>
 <div data-role="page" id="PageListaDirectorio" data-theme="a">
@@ -418,6 +418,14 @@
         <div id="cargadorListaAvisos">
         	&nbsp;Cargando...
    		</div>
+        
+        <div data-role="popup" id="popupAvisos" class="ui-corner-all" data-overlay-theme="b" style="max-width:400px;" data-transition="pop">
+            <div style="padding:0px 20px 5px 20px;">
+                <h3 id="popupTitle">Aviso</h3>
+                <p id="popContent">This action cannot be undone rkjbg oirjgo roijg org orij.</p>
+                <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-b" data-rel="back">Aceptar</a>		
+            </div>
+        </div>
         
 </div><!-- /page fin -->
 <!------------------------------------------------------Info Avisos------------------------------------------------>
