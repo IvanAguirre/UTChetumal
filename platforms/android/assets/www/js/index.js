@@ -16,6 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
 var app = {
     // Application Constructor
     initialize: function() {
@@ -85,32 +86,57 @@ var app = {
 				
               // NOTIFICACION!!
 			  var x = e.message;
-			  var title = e.tetle
-			  var popupDiv;
+			  var title = e.payload.title;
+			  var popupDiv; var pagina;
 			  if (typeof x !== 'undefined'){	
-			  	switch(e.payload.title) {//e.payload.title
+			  	switch(title) {//e.title
 					case 'Aviso':
 						$.mobile.pageContainer.pagecontainer("change", "#PageListaAvisos", {  });
-						popupDiv = "#popupAvisos";
+						popupDiv = "popupAvisos"; 
+						pagina = "PageListaAvisos";
 						break;
 					case 'Evento':
 						$.mobile.pageContainer.pagecontainer("change", "#PageListaEventos", {  });
+						popupDiv = "popupEventos";
+						pagina = "PageListaEventos";
 						break;
 					case 'Convocatoria':
 						$.mobile.pageContainer.pagecontainer("change", "#PageListaConvocatorias", {  });
+						popupDiv = "popupConvocatorias";
+						pagina = "PageListaConvocatorias";
 						break;
 					case 'Noticia':
 						$.mobile.pageContainer.pagecontainer("change", "#PageListaNoticias", {  });
+						popupDiv = "popupNoticias";
+						pagina = "PageListaNoticias";
 						break;
 					default:
+					$.mobile.pageContainer.pagecontainer("change", "#pag_1", {  });
+						popupDiv = "popupIndex";
+						pagina = "pag_1";
 						//default code block
 				}
-				$("#popupAvisos #popupTitle").html(title);
-				$("#popupAvisos #popContent").html(x);
+				document.getElementById(popupDiv).innerHTML="<div style='padding:0px 20px 5px 20px;'><h3 id='popupTitle'>" + title + "</h3><p id='popContent'>" + x + "</p><a href='#' class='ui-btn ui-corner-all ui-shadow ui-btn-b' data-rel='back'>Aceptar</a></div>";
+				/*$("#popupAvisos #popupTitle").html(title);
+				$("#popupAvisos #popContent").html(x);*/
+
+				$( "#" + popupDiv ).popup("open");//abre popup				
+
+				/*$('#' + pagina).on('pageshow', function() {//cuando la paguina es show
+					if(!$('#popupAvisos').is(':empty')){  //si no esta vacio hay mensaje
+						alert("no esta vacio");
+						$( "#popupAvisos" ).popup( "open");//abre popup
+						$( "#popupAvisos" ).bind({
+							popupafterclose: function(event, ui) { 
+								document.getElementById("popupAvisos").innerHTML="";//Vacia DivPopup
+							}
+						});
+					}else{
+						alert("esta vacio");
+					};
+				});*/
+
 				
-				$('#PageListaAvisos').on('pageshow', function() {
-					$( "#popupAvisos" ).popup( "open");	
-				});
 				
 				
 			  }

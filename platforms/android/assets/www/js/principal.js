@@ -7,7 +7,7 @@ $( window ).load(function() {
 var urlDominio = "http://www.agendasonidocaracol.mx/apputchetumal"; // http://www.agendasonidocaracol.mx/apputchetumal //http://sergiosolis.com/bacalar 
 var nombreMes = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
 var idDudasGlobal = ""; var idNotaGlobal = ""; var idEventoaGlobal = "";  var idConvGlobal = "";  var idAvisoGlobal = ""; 
-var ConnectionDelay;
+var ConnectionDelay; var pagCargada;
 
 //------------------Identidad------------
 $('#PageIdentidad').on('pageshow', function() {
@@ -28,18 +28,26 @@ $('#PageListaDirectorio').on('pageshow', function() {
 //------------------lista noticias------------
 $('#PageListaNoticias').on('pageshow', function() {
 	traerListaNoticias();
+	repositionPopup('popupNoticias');
 });
 //------------------lista Eventos------------
 $('#PageListaEventos').on('pageshow', function() {
 	traerListaEventos();
+	repositionPopup('popupEventos');
 });
 //------------------lista Convocatorias------------
 $('#PageListaConvocatorias').on('pageshow', function() {
 	traerListaConvocatorias();
+	repositionPopup('popupConvocatorias');
 });
 //------------------lista Avisos------------
 $('#PageListaAvisos').on('pageshow', function() {
-	traerListaAvisos();	
+	traerListaAvisos();
+	repositionPopup('popupAvisos');
+});
+//------------------Inicio------------
+$('#pag_1').on('pageshow', function() {
+	repositionPopup('popupIndex');
 });
 //------------------Info Oferta (informacion de la carrera)------------
 
@@ -54,13 +62,13 @@ function guardaIdOferta(id) {//se ejecuta al seleccionar alguna carrera
 	document.getElementById("DivInfoOferta").innerHTML="";//borra la info dentre del elemento
 	document.getElementById("DivBtnRec_InfoOfertAcadem").innerHTML="";
 	document.getElementById('subtitulo').style.display = 'none';
-	document.getElementById('cargadorInfoOferta').style.display = 'block';
+	//document.getElementById('cargadorInfoOferta').style.display = 'block';
 	//document.getElementById('DivContentInfoOferta').style.display = 'none';
 	
 	
 	//document.getElementById('todo').style.display = 'block';
 	document.getElementById("DivBtnRec_PlanEstudio").innerHTML="";
-	document.getElementById('cargadorPlanEstudio').style.display = 'block';
+	//document.getElementById('cargadorPlanEstudio').style.display = 'block';
 	//u
 	document.getElementById('subtituloPlanEst').style.display = 'none';
 	document.getElementById('collapsibleset').style.display = 'none';
@@ -99,7 +107,7 @@ function guardaIdDudas(id) {
 		//$("#DivBtnRec_InfoDudas").empty();//vacía div de boton cargar internet
 		document.getElementById("DivBtnRec_InfoDudas").innerHTML="";//limpia div de boton cargar internet
 		document.getElementById("DivInfoDudas").innerHTML="";//limpia info para nueva info
-		document.getElementById('cargadorInfoDudas').style.display = 'block';//**
+		//document.getElementById('cargadorInfoDudas').style.display = 'block';//**
 	}
 	//traerInfoEvento(id);
 }
@@ -119,7 +127,7 @@ function guardaIdNota(id) {
 	if(idNotaGlobal != idNota || $('#DivInfoNoticias').is(':empty')){
 		document.getElementById("DivBtnRec_InfoNoticias").innerHTML="";//limpia div de boton cargar internet
 		document.getElementById("DivInfoNoticias").innerHTML="";
-		document.getElementById('cargadorInfoNoticia').style.display = 'block';
+		//document.getElementById('cargadorInfoNoticia').style.display = 'block';
 	}
 	//traerInfoEvento(id);
 }
@@ -128,7 +136,7 @@ function guardaIdNota(id) {
 $('#PagaInfoEvento').on('pageshow', function() {
 	var idEvento = localStorage.getItem('IdEvento') || '<empty>';
 	if(idEventoaGlobal != idEvento || $('#DivInfoEventos').is(':empty')){//Si id es dif a id guardado o esta vacio entra
-    	traerInfoEventos(idEvento);
+		traerInfoEventos(idEvento);
 		idEventoaGlobal = idEvento
 	}
 });
@@ -139,27 +147,26 @@ function guardaIdEvento(id) {
 	if(idEventoaGlobal != idEvento || $('#DivInfoEventos').is(':empty')){
 		document.getElementById("DivBtnRec_InfoEventos").innerHTML="";//limpia div de boton cargar internet
 		document.getElementById("DivInfoEventos").innerHTML="";
-		document.getElementById('cargadorInfoEvento').style.display = 'block';
+		//document.getElementById('cargadorInfoEvento').style.display = 'block';
 	}
 }
 //------------------Info Convocatorias------------
 
 $('#PagaInfoConvocatoria').on('pageshow', function() {
 	var idConvocatoria = localStorage.getItem('IdConvocatoria') || '<empty>';
-	if(idConvGlobal != idConvocatoria || $('#DivListaConvocatoria').is(':empty')){//Si id es dif a id guardado o esta vacio entra
+	if(idConvGlobal != idConvocatoria || $('#DivInfoConvocatoria').is(':empty')){//Si id es dif a id guardado o esta vacio entra
 		traerInfoConvocatorias(idConvocatoria);
 		idConvGlobal = idConvocatoria;
 	}
-		
 });
 
-function guardaIdConvocatoria(id) {
+function guardaIdConvocatoria(id) {		
 	var idConvocatoria = id;
 	localStorage.setItem("IdConvocatoria", idConvocatoria);
 	if(idConvGlobal != idConvocatoria || $('#DivInfoConvocatoria').is(':empty')){
 		document.getElementById("DivBtnRec_InfoConvocatoria").innerHTML="";//limpia div de boton cargar internet
 		document.getElementById("DivInfoConvocatoria").innerHTML="";
-		document.getElementById('cargadorInfoConvocatoria').style.display = 'block';
+		//document.getElementById('cargadorInfoConvocatoria').style.display = 'block';
 	}
 }
 //------------------Info Avisos------------
@@ -175,10 +182,10 @@ $('#PagaInfoAvisos').on('pageshow', function() {
 function guardaIdAviso(id) {
 	var idAviso = id;
 	localStorage.setItem("IdAviso", idAviso);
-	if(idAvisoGlobal != idAviso || $('#DivInfoConvocatoria').is(':empty')){
+	if(idAvisoGlobal != idAviso || $('#DivListaAvisos').is(':empty')){
 		document.getElementById("DivBtnRec_InfoAvisos").innerHTML="";//limpia div de boton cargar internet
 		document.getElementById("DivInfoAvisos").innerHTML="";
-		document.getElementById('cargadorInfoAvisos').style.display = 'block';
+		//document.getElementById('cargadorInfoAvisos').style.display = 'block';
 	}
 }
 
@@ -200,9 +207,11 @@ function traerIdentidad()
     {
         var strHtml = "";
 		$.ajax({
+				beforeSend: function() {$.mobile.loading( 'show'); }, //Show spinner
+	            complete: function() {  $.mobile.loading( 'hide'); }, //Hide spinner
 				global: false,
 				dataType: "html",
-				async: false,
+				async: true,
                 //type: "POST",
                 url: urlDominio + "/apputchetumal/php/Consultar_pagina.php?identificador=" + nombrePag + "",
                 //data: $("#form").serialize(),
@@ -220,7 +229,7 @@ function traerIdentidad()
                 });
 					$("#DivIdentidad").html(lista);
 	                $("#DivIdentidad").listview().listview('refresh');  
-					document.getElementById('cargadorIdentidad').style.display = 'none';
+					//document.getElementById('cargadorIdentidad').style.display = 'none';
 					/*if ($('#DivIdentidad').is(':empty')){ 	
 					alert("vacio");		
 					} else{
@@ -241,9 +250,11 @@ function traerInfoOferta(clicked_id)
     {
         var strHtml = "";
 		$.ajax({
+				beforeSend: function() {$.mobile.loading( 'show'); }, //Show spinner
+	            complete: function() {  $.mobile.loading( 'hide'); }, //Hide spinner
 				global: false,
 				dataType: "html",
-				async: false,
+				async: true,
                 //type: "POST",
                 url: urlDominio + "/apputchetumal/php/Consultar_pagina.php?identificador=" + clicked_id + "",
                 //data: $("#form").serialize(),
@@ -267,7 +278,7 @@ function traerInfoOferta(clicked_id)
 	                $("#subtitulo").listview().listview('refresh'); 
 					$("#DivInfoOferta").html(lista);
 	                $("#DivInfoOferta").listview().listview('refresh');  
-					document.getElementById('cargadorInfoOferta').style.display = 'none';
+					//document.getElementById('cargadorInfoOferta').style.display = 'none';
 					/*if ($('#DivIdentidad').is(':empty')){ 	
 					alert("vacio");		
 					} else{
@@ -300,9 +311,11 @@ function traerPlanEstudio(clicked_id)
 	{
 		var strHtml = "";
 		$.ajax({
+				beforeSend: function() {$.mobile.loading( 'show'); }, //Show spinner
+	            complete: function() {  $.mobile.loading( 'hide'); }, //Hide spinner
 				global: false,
 				dataType: "html",
-				async: false,
+				async: true,
 				//type: "POST",
 				url: urlDominio + "/apputchetumal/php/consultar_plan_estudio.php?identificador=" + clicked_id + "",
 				//data: $("#form").serialize(),
@@ -369,7 +382,7 @@ function traerPlanEstudio(clicked_id)
 						$("#DivCuat_6").listview().listview('refresh'); 
 					}
 					
-					document.getElementById('cargadorPlanEstudio').style.display = 'none';
+					//document.getElementById('cargadorPlanEstudio').style.display = 'none';
 					
 					/*if ($('#DivIdentidad').is(':empty')){ 	
 					alert("vacio");		
@@ -399,9 +412,11 @@ function traerListaCuentas()
     {
         var strHtml = "";
 		$.ajax({
+				beforeSend: function() {$.mobile.loading( 'show'); }, //Show spinner
+	            complete: function() {  $.mobile.loading( 'hide'); }, //Hide spinner
 				global: false,
 				dataType: "html",
-				async: false,
+				async: true,
                 //type: "POST",
                 url: urlDominio + "/apputchetumal/php/consultar_cuentas.php",
 				error:  function(){
@@ -421,7 +436,7 @@ function traerListaCuentas()
                 $("#DivInfoCuentas").html(lista);
                 $("#DivInfoCuentas").listview().listview('refresh');
 				$("#DivBtnRec_Cuentas").empty();//vacía div de boton cargar internet
-				document.getElementById('cargadorInfoCuentas').style.display = 'none';
+				//document.getElementById('cargadorInfoCuentas').style.display = 'none';
         });
     }
     catch(ex)
@@ -437,9 +452,11 @@ function traerListaDirectorio()
     {
         var strHtml = "";
 		$.ajax({
+				beforeSend: function() {$.mobile.loading( 'show'); }, //Show spinner
+	            complete: function() {  $.mobile.loading( 'hide'); }, //Hide spinner
 				global: false,
 				dataType: "html",
-				async: false,
+				async: true,
                 //type: "POST",
                 url: urlDominio + "/apputchetumal/php/consultar_directorio.php",
                 //data: $("#form").serialize(),
@@ -461,7 +478,7 @@ function traerListaDirectorio()
                 $("#DivInfoDirectorio").html(lista);
                 $("#DivInfoDirectorio").listview().listview('refresh');
 				$("#DivBtnRec_Directorio").empty();//vacía div de boton cargar internet
-				document.getElementById('cargadorInfoDirectorio').style.display = 'none';
+				//document.getElementById('cargadorInfoDirectorio').style.display = 'none';
         });
     }
     catch(ex)
@@ -477,9 +494,11 @@ function traerListaDudas()
     {
         var strHtml = "";
 		$.ajax({
+				beforeSend: function() {$.mobile.loading( 'show'); }, //Show spinner
+	            complete: function() {  $.mobile.loading( 'hide'); }, //Hide spinner
 				global: false,
 				dataType: "html",
-				async: false,
+				async: true,
                 //type: "POST",
                 url: urlDominio + "/apputchetumal/php/consultar_dudas.php",
                 //data: $("#form").serialize(),
@@ -498,7 +517,7 @@ function traerListaDudas()
                 $("#DivListaDudas").html(lista);
                 $("#DivListaDudas").listview().listview('refresh');
 				$("#DivBtnRec_ListaDudas").empty();//vacía div de boton cargar internet
-				document.getElementById('cargadorListaDudas').style.display = 'none';
+				//document.getElementById('cargadorListaDudas').style.display = 'none';
         });
     }
     catch(ex)
@@ -514,9 +533,11 @@ function traerInfoDudas(clicked_id)
     {
         var strHtml = "";
 		$.ajax({
+				beforeSend: function() {$.mobile.loading( 'show'); }, //Show spinner
+	            complete: function() {  $.mobile.loading( 'hide'); }, //Hide spinner
 				global: false,
 				dataType: "html",
-				async: false,
+				async: true,
                 //type: "POST",
                 url: urlDominio + "/apputchetumal/php/consultar_dudas_info.php?Id=" + clicked_id + "",
                 //data: $("#form").serialize(),
@@ -535,7 +556,7 @@ function traerInfoDudas(clicked_id)
                 });
                 $("#DivInfoDudas").html(lista);
                 $("#DivInfoDudas").listview().listview('refresh');
-				document.getElementById('cargadorInfoDudas').style.display = 'none';
+				//document.getElementById('cargadorInfoDudas').style.display = 'none';
         });
     }
     catch(ex)
@@ -551,9 +572,11 @@ function traerListaNoticias()
     {
         var strHtml = "";
 		$.ajax({
+				beforeSend: function() {$.mobile.loading( 'show'); }, //Show spinner
+	            complete: function() {  $.mobile.loading( 'hide'); }, //Hide spinner
 				global: false,
 				dataType: "html",
-				async: false,
+				async: true,
                 //type: "POST",
                 url: urlDominio + "/apputchetumal/php/consultar_noticias.php",
                 //data: $("#form").serialize(),
@@ -582,7 +605,7 @@ function traerListaNoticias()
                 $("#DivListaNoticias").html(lista);
                 $("#DivListaNoticias").listview().listview('refresh');
 				$("#DivBtnRec_ListaNoticias").empty();//vacía div de boton cargar internet
-				document.getElementById('cargadorListaNoticia').style.display = 'none';
+				//document.getElementById('cargadorListaNoticia').style.display = 'none';
         });
     }
     catch(ex)
@@ -593,14 +616,16 @@ function traerListaNoticias()
 //--------------------------------------------------------Info Noticias--------------------------------
 function traerInfoNoticias(clicked_id)
 {
-	checkConnection('DivInfoNoticias', 'cargadorInfoNoticia', 'DivBtnRec_InfoNoticias');	
+	//checkConnection('DivInfoNoticias', 'cargadorInfoNoticia', 'DivBtnRec_InfoNoticias');	
     try
     {
         var strHtml = "";
 		$.ajax({
+				beforeSend: function() {$.mobile.loading( 'show'); }, //Show spinner
+	            complete: function() {  $.mobile.loading( 'hide'); }, //Hide spinner
 				global: false,
 				dataType: "html",
-				async: false,
+				async: true,
                 //type: "POST",
                 url: urlDominio + "/apputchetumal/php/consultar_noticias_info.php?Id=" + clicked_id + "",
                 //data: $("#form").serialize(),
@@ -622,7 +647,7 @@ function traerInfoNoticias(clicked_id)
                 $("#DivInfoNoticias").html(lista);
                 $("#DivInfoNoticias").listview().listview('refresh');
 				$("#DivBtnRec_InfoNoticias").empty();//vacía div de boton cargar internet
-				document.getElementById('cargadorInfoNoticia').style.display = 'none';
+				//document.getElementById('cargadorInfoNoticia').style.display = 'none';
         });
     }
     catch(ex)
@@ -630,7 +655,7 @@ function traerInfoNoticias(clicked_id)
         alert("Error de datos!!");
     }
 };
-//-----------------------------------------------Eventos------------------------------------
+//-----------------------------------------------lista Eventos------------------------------------
 function traerListaEventos()
 {
 	//checkConnection('DivListaEventos', 'cargadorListaEventos', 'DivBtnRec_ListaEventos');
@@ -638,9 +663,11 @@ function traerListaEventos()
     {
         var strHtml = "";
 		$.ajax({
+				beforeSend: function() {$.mobile.loading( 'show'); }, //Show spinner
+	            complete: function() {  $.mobile.loading( 'hide'); }, //Hide spinner
 				global: false,
 				dataType: "html",
-				async: false,
+				async: true,
                 //type: "POST",
                 url: urlDominio + "/apputchetumal/php/consultar_eventos.php",
                 //data: $("#form").serialize(),
@@ -688,7 +715,7 @@ function traerListaEventos()
                 $("#DivListaEventos").html(lista);
                 $("#DivListaEventos").listview().listview('refresh');
 				$("#DivBtnRec_ListaEventos").empty();//vacía div de boton cargar internet
-				document.getElementById('cargadorListaEventos').style.display = 'none';
+				//document.getElementById('cargadorListaEventos').style.display = 'none';
         });
     }
     catch(ex)
@@ -704,9 +731,11 @@ function traerInfoEventos(clicked_id)
     {
         var strHtml = "";
 		$.ajax({
+				beforeSend: function() {$.mobile.loading( 'show'); }, //Show spinner
+	            complete: function() {  $.mobile.loading( 'hide'); }, //Hide spinner
 				global: false,
 				dataType: "html",
-				async: false,
+				async: true,
                 //type: "POST",
                 url: urlDominio + "/apputchetumal/php/consultar_eventos_info.php?Id=" + clicked_id + "",
                 //data: $("#form").serialize(),
@@ -735,7 +764,7 @@ function traerInfoEventos(clicked_id)
                 $("#DivInfoEventos").html(lista);
                 $("#DivInfoEventos").listview().listview('refresh');
 				$("#DivBtnRec_InfoEventos").empty();//vacía div de boton cargar internet
-				document.getElementById('cargadorInfoEvento').style.display = 'none';
+				//document.getElementById('cargadorInfoEvento').style.display = 'none';
         });
     }
     catch(ex)
@@ -751,9 +780,11 @@ function traerListaConvocatorias()
     {
         var strHtml = "";
 		$.ajax({
+				beforeSend: function() {$.mobile.loading( 'show'); }, //Show spinner
+	            complete: function() {  $.mobile.loading( 'hide'); }, //Hide spinner
 				global: false,
 				dataType: "html",
-				async: false,
+				async: true,
                 //type: "POST",
                 url: urlDominio + "/apputchetumal/php/consultar_convocatorias.php",
                 //data: $("#form").serialize(),
@@ -773,7 +804,7 @@ function traerListaConvocatorias()
                 $("#DivListaConvocatoria").html(lista);
                 $("#DivListaConvocatoria").listview().listview('refresh');
 				$("#DivBtnRec_ListaConvocatoria").empty();//vacía div de boton cargar internet
-				document.getElementById('cargadorListaConvocatoria').style.display = 'none';
+				//document.getElementById('cargadorListaConvocatoria').style.display = 'none';
         });
     }
     catch(ex)
@@ -789,9 +820,11 @@ function traerInfoConvocatorias(clicked_id)
     {
         var strHtml = "";
 		$.ajax({
+				beforeSend: function() {$.mobile.loading( 'show'); }, //Show spinner
+	            complete: function() {  $.mobile.loading( 'hide'); }, //Hide spinner
 				global: false,
 				dataType: "html",
-				async: false,
+				async: true,
                 //type: "POST",
                 url: urlDominio + "/apputchetumal/php/consultar_convocatoria_info.php?Id=" + clicked_id + "",
                 //data: $("#form").serialize(),
@@ -803,7 +836,6 @@ function traerInfoConvocatorias(clicked_id)
             	var datosRecibidos = JSON.parse(resultado);				
 				var lista = "";
                 $.each( datosRecibidos, function( key, value ) {
-					alert("hfsihf");
 						lista += "<div role='main' class='ui-content'>";							
 						lista += "<h2>" + value.Encabezado + "</h2>"					
 						lista += "" + value.Contenido + "";	
@@ -813,7 +845,7 @@ function traerInfoConvocatorias(clicked_id)
                 $("#DivInfoConvocatoria").html(lista);
                 $("#DivInfoConvocatoria").listview().listview('refresh');
 				$("#DivBtnRec_InfoConvocatoria").empty();//vacía div de boton cargar internet
-				document.getElementById('cargadorInfoConvocatoria').style.display = 'none';
+				//document.getElementById('cargadorInfoConvocatoria').style.display = 'none';
         });
     }
     catch(ex)
@@ -824,17 +856,12 @@ function traerInfoConvocatorias(clicked_id)
 //-----------------------------------------------Avisos----------------------------------
 function traerListaAvisos()
 {
-				/*$("#popupAvisos #popupTitle").html("jkbhiuh");
-				$("#popupAvisos #popContent").html("kjdgkjfng");
-				$( "#popupAvisos" ).popup("open");
-				$( '#popupLogin' ).popup( 'reposition', 'positionTo: window' );*/
-	//setTimeout('return false',3000);
-	//checkConnectionDelay();
-	//checkConnection('DivListaAvisos', 'cargadorListaAvisos', 'DivBtnRec_ListaAvisos');
     try
     {
         var strHtml = "";
 		$.ajax({
+				beforeSend: function() {$.mobile.loading( 'show'); }, //Show spinner
+	            complete: function() {  $.mobile.loading( 'hide'); }, //Hide spinner
 				global: false,
 				dataType: "html",
 				async: true,				
@@ -861,7 +888,7 @@ function traerListaAvisos()
                 $("#DivListaAvisos").html(lista);
                 $("#DivListaAvisos").listview().listview('refresh');
 				$("#DivBtnRec_ListaAvisos").empty();//vacía div de boton cargar internet
-				document.getElementById('cargadorListaAvisos').style.display = 'none';
+				//document.getElementById('cargadorListaAvisos').style.display = 'none';
         });
     }
     catch(ex)
@@ -883,9 +910,11 @@ function traerInfoAvisos(clicked_id)
     {
         var strHtml = "";
 		$.ajax({
+				beforeSend: function() {$.mobile.loading( 'show'); }, //Show spinner
+	            complete: function() {  $.mobile.loading( 'hide'); }, //Hide spinner
 				global: false,
 				dataType: "html",
-				async: false,
+				async: true,
                 //type: "POST",
                 url: urlDominio + "/apputchetumal/php/consultar_avisos_info.php?Id=" + clicked_id + "",
                 //data: $("#form").serialize(),
@@ -906,7 +935,7 @@ function traerInfoAvisos(clicked_id)
                 $("#DivInfoAvisos").html(lista);
                 $("#DivInfoAvisos").listview().listview('refresh');
 				$("#DivBtnRec_InfoAvisos").empty();//vacía div de boton cargar internet
-				document.getElementById('cargadorInfoAvisos').style.display = 'none';
+				//document.getElementById('cargadorInfoAvisos').style.display = 'none';
         });
     }
     catch(ex)
@@ -944,7 +973,7 @@ function checkConnection(idDivElemeto, idCargador, DivBotonRecargar) {
 			//--->alert("no vacio");
 		}
 
-		document.getElementById(idCargador).style.display = 'none';
+		//document.getElementById(idCargador).style.display = 'none';
 	} 	
 };
 
@@ -960,10 +989,10 @@ function checkConnectionDelay(idDivElemeto, idCargador, DivBotonRecargar){
 			mensaje += "<br><a onClick='refreshPage(this.id)'  id='"+DivBotonRecargar+"' class='ui-btn ui-btn-b ui-btn-inline ui-icon-refresh ui-btn-icon-left'>Recargar</a>";
 			$("#"+DivBotonRecargar).html(mensaje);//interpolamos el mensaje en el div DivBtnRec_x
 		} else{
-			alert("no paso");//--->alert("no vacio");
+			//alert("no vacio");
 		}
 
-		document.getElementById(idCargador).style.display = 'none';
+		//document.getElementById(idCargador).style.display = 'none';
 	//ConnectionDelay = setTimeout(function(){ alert("Esto está tardando mucho, posiblemente hay un problema de conexión."); }, 15000);
 };
 function stopConnectionDelay() {
@@ -1043,6 +1072,12 @@ function refreshPage(DivBotonRecargar)
 	}
 		
 }
-
-
+//--------------------------------Función para reposicionar Popup
+function repositionPopup(DivPopup){
+	$('#' + DivPopup).popup({
+		afteropen: function (event, ui){
+			$('#' + DivPopup).popup('reposition', 'positionTo: window');
+		}
+	});
+};
 //----
