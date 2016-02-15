@@ -36,7 +36,7 @@
 	</div>
        <div align="center"> 
 <script>
-	function rotar_imagen(){ 
+/*	function rotar_imagen(){ 
 	var tiempo = 15000;//tiempo en milisegundos
  	var arrImagenes = ['img/img1.jpg','img/img2.jpg', 'img/img3.jpg', 'img/img4.jpg'];
 	_img = document.getElementById('rotativo'); 
@@ -48,11 +48,21 @@
 		_img.src = arrImagenes[i];
 		i = (i == arrImagenes.length-1)? 0 : (i+1);
 	}, tiempo);
+}*/
+
+function openImg() {
+	window.open('http://agendasonidocaracol.mx/apputchetumal/archivos/baners/banner.jpg', '_blank', 'location=no,toolbar=yes');
 }
 </script>
 
-  	<a><img class="popphoto" id="rotativo"/></a>
+  	<!--<a><img class="popphoto" id="rotativo"/></a><br/>-->
+    
+    <a href="#" onClick="openImg()"><img src="img/banner.jpg" alt="Banner"></a>
+    
    </div>  
+   
+   	
+                
         
 <div class="ui-grid-b" >
 

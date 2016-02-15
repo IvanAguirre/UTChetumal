@@ -120,8 +120,8 @@ public class GCMIntentService extends GCMBaseIntentService {
 		if (msgcnt != null) {
 			mBuilder.setNumber(Integer.parseInt(msgcnt));
 		}
-		
-		int notId = 0;
+
+		int notId =  (int) (Math.random()*999+1);//0
 		
 		try {
 			notId = Integer.parseInt(extras.getString("notId"));
