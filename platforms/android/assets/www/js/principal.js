@@ -1,7 +1,7 @@
-$( window ).load(function() {
+/*$( window ).load(function() {
 	//document.addEventListener('deviceready', ini, false);
   ini();
-});
+});*/
 
 //------------variables globales---------
 var urlDominio = "http://www.agendasonidocaracol.mx/apputchetumal"; // http://www.agendasonidocaracol.mx/apputchetumal //http://sergiosolis.com/bacalar 
@@ -408,14 +408,6 @@ $( "#popupPanel" ).on({
 //-----------------------------------------------Cuentas Bancarias----------------------------------
 function traerListaCuentas()
 {
-	   
-        navigator.notification.confirm(
-            'You are the winner!', // message
-             onConfirm,            // callback to invoke with index of button pressed
-            'Game Over',           // title
-            ['Restart','Exit']         // buttonLabels
-        );
-    
 	//checkConnection('DivInfoCuentas', 'cargadorInfoCuentas', 'DivBtnRec_Cuentas');
     try
     {

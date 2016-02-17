@@ -193,11 +193,11 @@ div.ui-mobile-viewport {
 	min-height: 1.1em;
 	text-align: center;
 	display: block;
-	margin: 0 30%;
+	margin: 0 1em;
 	padding: .7em 0;
 	text-overflow: ellipsis;
 	overflow: hidden;
-	white-space: nowrap;
+	white-space:normal;
 	outline: 0 !important;
 }
 .ui-footer .ui-title {
@@ -1370,7 +1370,7 @@ li.ui-block-e {
 }
 .ui-header-fixed .ui-btn-left,
 .ui-header-fixed .ui-btn-right {
-	margin-top: 1px;
+	margin-top:;/** ------------------------------margen superior de 1px del boton regresar-----*/
 }
 .ui-header-fixed.ui-fixed-hidden .ui-btn-left,
 .ui-header-fixed.ui-fixed-hidden .ui-btn-right {
@@ -1845,6 +1845,7 @@ fieldset.ui-controlgroup {
 }
 .ui-popup-truncate {
 	height: 1px;
+
 	width: 1px;
 	margin: -1px;
 	overflow: hidden;
@@ -2292,6 +2293,8 @@ fieldset.ui-controlgroup {
 	position: relative;
 	overflow: visible;
 }
+
+<!--Desbordamiento listas--------------------------------------------------------------->
 .ui-listview > .ui-li-static,
 .ui-listview > .ui-li-divider,
 .ui-listview > li > a.ui-btn {
@@ -2301,7 +2304,7 @@ fieldset.ui-controlgroup {
 	text-align: left;
 	text-overflow: ellipsis;
 	overflow: hidden;
-	white-space: nowrap;
+	white-space:normal;
 }
 .ui-listview > li > .ui-btn:focus {
 	z-index: 1;
@@ -2441,6 +2444,7 @@ fieldset.ui-controlgroup {
 	max-height: 1em;
 	max-width: 1em;
 }
+
 .ui-listview > li h1,
 .ui-listview > li h2,
 .ui-listview > li h3,
@@ -2453,7 +2457,7 @@ fieldset.ui-controlgroup {
 	margin: .45em 0;
 	text-overflow: ellipsis;
 	overflow: hidden;
-	white-space: nowrap;
+	white-space: normal;
 }
 .ui-listview > li p {
 	font-size: .75em;
@@ -2803,7 +2807,7 @@ div.ui-rangeslider label {
 }
 .ui-input-text,
 .ui-input-search {
-	margin: .5em 0;
+	margin: -1em 0;
 	border-width: 1px;
 	border-style: solid;
 }
@@ -3147,6 +3151,7 @@ html .ui-popup .ui-field-contain > label + .ui-flipswitch {
 	.ui-table-reflow th { 
 		text-align: left;
 		display: block;
+
 	}
 	/* Add a fair amount of top margin to visually separate each row when stacked */  
 	.ui-table-reflow tbody th {
