@@ -404,9 +404,18 @@ $( "#popupPanel" ).on({
         $( "#popupPanel" ).css( "height", h );
     }
 });
+
 //-----------------------------------------------Cuentas Bancarias----------------------------------
 function traerListaCuentas()
 {
+	   
+        navigator.notification.confirm(
+            'You are the winner!', // message
+             onConfirm,            // callback to invoke with index of button pressed
+            'Game Over',           // title
+            ['Restart','Exit']         // buttonLabels
+        );
+    
 	//checkConnection('DivInfoCuentas', 'cargadorInfoCuentas', 'DivBtnRec_Cuentas');
     try
     {
@@ -981,7 +990,14 @@ function checkConnection(idDivElemeto, idCargador, DivBotonRecargar) {
 
 							//DivListaAvisos', 'cargadorListaAvisos', 'DivBtnRec_ListaAvisos
 function checkConnectionDelay(idDivElemeto, idCargador, DivBotonRecargar){
-	alert("Hay problemas de conexión");
+	//alert("Hay problemas de conexión");
+	navigator.notification.alert(
+		'Hay problemas de conexión', // message
+		 onConfirm,            // callback to invoke with index of button pressed
+		'Sin conexión'       // title
+		      // buttonLabels
+	);
+	function onConfirm(buttonIndex) {}
 	if ($('#'+idDivElemeto).is(':empty')){ 	//si el div esta vacio o no tiene info, mostramos boton de recargar
 			//--->alert("vacio");	
 			var mensaje = "";

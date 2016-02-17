@@ -87,54 +87,50 @@ var app = {
               // NOTIFICACION!!
 			  var x = e.message;
 			  var title = e.payload.title;
-			  var popupDiv; var pagina;
+			  //var popupDiv; var pagina;
 			  if (typeof x !== 'undefined'){	
 			  	switch(title) {//e.title
 					case 'Aviso':
 						$.mobile.pageContainer.pagecontainer("change", "#PageListaAvisos", {  });
-						popupDiv = "popupAvisos"; 
-						pagina = "PageListaAvisos";
+						//popupDiv = "popupAvisos"; 
+						//pagina = "PageListaAvisos";
 						break;
 					case 'Evento':
 						$.mobile.pageContainer.pagecontainer("change", "#PageListaEventos", {  });
-						popupDiv = "popupEventos";
-						pagina = "PageListaEventos";
+						//popupDiv = "popupEventos";
+						//pagina = "PageListaEventos";
 						break;
 					case 'Convocatoria':
 						$.mobile.pageContainer.pagecontainer("change", "#PageListaConvocatorias", {  });
-						popupDiv = "popupConvocatorias";
-						pagina = "PageListaConvocatorias";
+						//popupDiv = "popupConvocatorias";
+						//pagina = "PageListaConvocatorias";
 						break;
 					case 'Noticia':
 						$.mobile.pageContainer.pagecontainer("change", "#PageListaNoticias", {  });
-						popupDiv = "popupNoticias";
-						pagina = "PageListaNoticias";
+						//popupDiv = "popupNoticias";
+						//pagina = "PageListaNoticias";
 						break;
 					default:
 					$.mobile.pageContainer.pagecontainer("change", "#pag_1", {  });
-						popupDiv = "popupIndex";
-						pagina = "pag_1";
+						//popupDiv = "popupIndex";
+						//pagina = "pag_1";
 						//default code block
 				}
-				document.getElementById(popupDiv).innerHTML="<div style='padding:0px 20px 5px 20px;'><h3 id='popupTitle'>" + title + "</h3><p id='popContent'>" + x + "</p><a href='#' class='ui-btn ui-corner-all ui-shadow ui-btn-b' data-rel='back'>Aceptar</a></div>";
+				
+				navigator.notification.alert(
+					x, 					// message
+					onConfirm,         	// callback to invoke with index of button pressed
+					title,           	// title
+					'OK'        		// buttonLabels
+				);
+				function onConfirm(buttonIndex) {
+				}
+				
+				//document.getElementById(popupDiv).innerHTML="<div style='padding:0px 20px 5px 20px;'><h3 id='popupTitle'>" + title + "</h3><p id='popContent'>" + x + "</p><a href='#' class='ui-btn ui-corner-all ui-shadow ui-btn-b' data-rel='back'>Aceptar</a></div>";
 				/*$("#popupAvisos #popupTitle").html(title);
 				$("#popupAvisos #popContent").html(x);*/
 
-				$( "#" + popupDiv ).popup("open");//abre popup				
-
-				/*$('#' + pagina).on('pageshow', function() {//cuando la paguina es show
-					if(!$('#popupAvisos').is(':empty')){  //si no esta vacio hay mensaje
-						alert("no esta vacio");
-						$( "#popupAvisos" ).popup( "open");//abre popup
-						$( "#popupAvisos" ).bind({
-							popupafterclose: function(event, ui) { 
-								document.getElementById("popupAvisos").innerHTML="";//Vacia DivPopup
-							}
-						});
-					}else{
-						alert("esta vacio");
-					};
-				});*/
+				//$( "#" + popupDiv ).popup("open");//abre popup				
 
 				
 				
