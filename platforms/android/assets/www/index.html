@@ -27,7 +27,6 @@
 //El registro al servicio de google lo hacemos automáticamente
 	 app.initialize();
 </script>
-
 </head>
 <body> <!--onload="rotar_imagen();"-->
 
@@ -36,7 +35,8 @@
 	<div data-role="header" data-theme="b" data-position="fixed">
 		<h1>UT Chetumal</h1>
 	</div>
-       <div align="center"> 
+       
+       <div id="banner" align="center"> 
 <script>
 /*	function rotar_imagen(){ 
 	var tiempo = 15000;//tiempo en milisegundos
@@ -52,24 +52,17 @@
 	}, tiempo);
 }*/
 
-  
-
-
-
 function openImg() {
-	window.open('http://agendasonidocaracol.mx/apputchetumal/archivos/baners/banner.jpg', '_blank', 'location=no,toolbar=yes');
+	window.open( urlDominio + '/archivos/baners/banner.jpg', '_blank', 'location=no,toolbar=yes');
 }
 </script>
 
   	<!--<a><img class="popphoto" id="rotativo"/></a><br/>-->
-    
-    <a href="#" onClick="openImg()"><img src="img/banner.jpg" alt="Banner"></a>
-    
+   
+    <a href="#" onClick="openImg()"><img src="img/banner.jpg" alt="Banner"></a> 
    </div>  
    
-   	
-                
-        
+      
 <div class="ui-grid-b" >
 
 	<div class="ui-block-a">

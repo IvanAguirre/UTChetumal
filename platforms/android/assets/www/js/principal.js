@@ -588,6 +588,7 @@ function traerListaNoticias()
             }).done(function (resultado) {						
             	var datosRecibidos = JSON.parse(resultado);				
 				var lista = "";
+				var fechaMayuscula;
                 $.each( datosRecibidos, function( key, value ) {		
 						lista += "<li><a class='show-page-loading-msg' rel='external' data-textonly='false' data-textvisible='false' data-msgtext='' id='" + value.IdNota + "' onClick='guardaIdNota(this.id)' href='#PagaInfoNoticia'>";
 						
@@ -597,10 +598,12 @@ function traerListaNoticias()
                         }
                         else
                         {
-                            lista += "<img style='position:absolute;top:0;bottom:0;margin:auto;' src='http://sergiosolis.com/bacalar/noticias/img/" + value.IdNota + "/full.jpg'>";
+                            lista += "<img style='position:absolute;top:0;bottom:0;margin:auto;' src='" + urlDominio + "/noticias/img/" + value.IdNota + "/full.jpg'>";
                         }
-                        lista += "<h2 style='font-size:.8em'>" + value.Titulo + "</h2>";						
-						lista += "<p>Publicado el: " + value.fecha_publicacion  + "</p>";
+                        lista += "<h2 style='font-size:.8em'>" + value.Titulo + "</h2>";	
+						fechaMayuscula = value.fecha_publicacion;
+						fechaMayuscula = fechaMayuscula[0].toUpperCase() + fechaMayuscula.slice(1);				
+						lista += "<p style='color:#666;'>" + fechaMayuscula  + "</p>";
                         lista += "</li>";
                 });
                 $("#DivListaNoticias").html(lista);
@@ -637,10 +640,13 @@ function traerInfoNoticias(clicked_id)
             }).done(function (resultado) {						
             	var datosRecibidos = JSON.parse(resultado);				
 				var lista = "";
+				var fechaMayuscula;
                 $.each( datosRecibidos, function( key, value ) {
 						lista += "<div role='main' class='ui-content'>";							
-						lista += "<h2>" + value.Titulo + "</h2>"//borrar
-						lista += "<p style='font-size: .8em;color:#999'>Publicado el: " + value.FechaPublicacion  + " </p>";					
+						lista += "<h2>" + value.Titulo + "</h2>";
+						fechaMayuscula = value.FechaPublicacion;
+						fechaMayuscula = fechaMayuscula[0].toUpperCase() + fechaMayuscula.slice(1);	
+						lista += "<p style='font-size: .8em;color:#666'>" + fechaMayuscula  + " </p>";					
 						lista += "" + value.Contenido + "";	
 												
 						lista += "</div>";
@@ -679,9 +685,13 @@ function traerListaEventos()
             }).done(function (resultado) {						
             	var datosRecibidos = JSON.parse(resultado);				
 				var lista = "";
+				var DiaInicio;
                 $.each( datosRecibidos, function( key, value ) {	
 						lista += "<li><a class='show-page-loading-msg' rel='external' data-textonly='false' data-textvisible='false' data-msgtext='' id='" + value.IdEvento + "' onClick='guardaIdEvento(this.id)' href='#PagaInfoEvento'>";
                         lista += "<h2 style='font-size:.9em'>" + value.Denominacion + "</h2>";						
+						
+						DiaInicio = value.DiaInicio;
+						DiaInicio = DiaInicio[0].toUpperCase() + DiaInicio.slice(1);		
 						
 						if(value.DiaFin != "")
 						{
@@ -689,15 +699,15 @@ function traerListaEventos()
 							{
 								if(value.DiaInicio == value.DiaFin)//si los dias son iguales se cancela uno
 								{
-									lista += "<p>" + value.DiaInicio + value.MesInicio + "";
+									lista += "<p>" + DiaInicio + value.MesInicio + "";
 								}else{
-									lista += "<p>" + value.DiaInicio + " a " + value.DiaFin + value.MesInicio + "";
+									lista += "<p>" + DiaInicio + " a " + value.DiaFin + value.MesInicio + "";
 								}
 							} else {
-								lista += "<p>" + value.DiaInicio + value.MesInicio + " a " + value.DiaFin + value.MesFin + "";
+								lista += "<p>" + DiaInicio + value.MesInicio + " a " + value.DiaFin + value.MesFin + "";
 							}
 						} else {
-							lista += "<p>" + value.DiaInicio + value.MesInicio + "";
+							lista += "<p>" + DiaInicio + value.MesInicio + "";
 						}
 						
 						if(value.fecha_hora != 0)//si hay HORA la muestro
@@ -799,7 +809,7 @@ function traerListaConvocatorias()
                 $.each( datosRecibidos, function( key, value ) {		
 						lista += "<li><a class='show-page-loading-msg' rel='external' data-textonly='false' data-textvisible='false' data-msgtext='' id='" + value.IdPublicacion + "' onClick='guardaIdConvocatoria(this.id)' href='#PagaInfoConvocatoria'>";	
                         lista += "<h2>" + value.Encabezado + "</h2>";						
-						lista += "<p>Publicado el " + value.FechaPublicacion + "";
+						lista += "<p style='color:#666'>Publicado el " + value.FechaPublicacion + "";
                         lista += "</li>";
                 });
                 $("#DivListaConvocatoria").html(lista);
@@ -882,7 +892,7 @@ function traerListaAvisos()
                 $.each( datosRecibidos, function( key, value ) {	
 						lista += "<li><a class='show-page-loading-msg' rel='external' data-textonly='false' data-textvisible='false' data-msgtext='' id='" + value.IdPublicacion + "' onClick='guardaIdAviso(this.id)' href='#PagaInfoAvisos'>";						
                         lista += "<h2>" + value.Encabezado + "</h2>";						
-						lista += "<p>Publicado el " + value.FechaPublicacion + "";
+						lista += "<p style='color:#666'>Publicado el " + value.FechaPublicacion + "";
                         lista += "</li>";
 						
                 });

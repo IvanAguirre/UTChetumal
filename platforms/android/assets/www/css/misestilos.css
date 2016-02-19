@@ -1,3 +1,4 @@
+
 .imgAjustable {
 height: auto;
 max-width: 100%;
@@ -31,6 +32,7 @@ max-width: 100%;
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
+	border-style: none;
 }
 .btnAtras{
     position: absolute;
