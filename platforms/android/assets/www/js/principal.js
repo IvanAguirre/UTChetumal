@@ -209,14 +209,10 @@ var i = setInterval(" contar() ",1);*/
 //-----------------------------------------------items no vistos ----------------------------------
 function traerItemsNoVistos(NumNoticiasNoVistas, NumAvisosNoVistos, NumEventosNoVistos, NumConvNoVistos)
 {
-	//alert(NumNoticiasNoVistas + " - " + NumAvisosNoVistos);
-	//checkConnection('DivInfoDudas', 'cargadorInfoDudas', 'DivBtnRec_InfoDudas');	
     try
     {
         var strHtml = "";
 		$.ajax({
-				beforeSend: function() {$.mobile.loading( 'show'); }, //Show spinner
-	            complete: function() {  $.mobile.loading( 'hide'); }, //Hide spinner
 				global: false,
 				dataType: "html",
 				async: true,
