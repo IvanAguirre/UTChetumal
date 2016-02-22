@@ -1,7 +1,18 @@
-/*$( window ).load(function() {
+$( window ).load(function() {
 	//document.addEventListener('deviceready', ini, false);
   ini();
-});*/
+});
+function ini()
+{	
+	//localStorage.clear();
+	
+	var NumNoticiasNoVistas = localStorage.getItem('ultimoIdNoticias') || 0;//Extráe ultimo id guardado
+	var NumAvisosNoVistos = localStorage.getItem('ultimoIdAvisos') || 0;//Extráe ultimo id guardado
+	var NumEventosNoVistos = localStorage.getItem('ultimoIdEventos') || 0;//Extráe ultimo id guardado
+	var NumConvNoVistos = localStorage.getItem('ultimoIdConv') || 0;//Extráe ultimo id guardado
+	traerItemsNoVistos(NumNoticiasNoVistas, NumAvisosNoVistos, NumEventosNoVistos, NumConvNoVistos);		
+				
+}
 
 //------------variables globales---------
 var urlDominio = "http://www.agendasonidocaracol.mx/apputchetumal"; // http://www.agendasonidocaracol.mx/apputchetumal //http://sergiosolis.com/bacalar 
@@ -195,7 +206,90 @@ function contar()
 	t++; 
 } 
 var i = setInterval(" contar() ",1);*/
-
+//-----------------------------------------------items no vistos ----------------------------------
+function traerItemsNoVistos(NumNoticiasNoVistas, NumAvisosNoVistos, NumEventosNoVistos, NumConvNoVistos)
+{
+	//alert(NumNoticiasNoVistas + " - " + NumAvisosNoVistos);
+	//checkConnection('DivInfoDudas', 'cargadorInfoDudas', 'DivBtnRec_InfoDudas');	
+    try
+    {
+        var strHtml = "";
+		$.ajax({
+				beforeSend: function() {$.mobile.loading( 'show'); }, //Show spinner
+	            complete: function() {  $.mobile.loading( 'hide'); }, //Hide spinner
+				global: false,
+				dataType: "html",
+				async: true,
+                //type: "POST",
+                url: urlDominio + "/apputchetumal/php/contRegistrosNuevos.php?idNota=" + NumNoticiasNoVistas + "&idAviso=" + NumAvisosNoVistos  + "&idEvento=" + NumEventosNoVistos + "&idConv=" + NumConvNoVistos + "", 
+                //data: $("#form").serialize(),
+				error:  function(){
+					//checkConnectionDelay('DivInfoDudas', 'cargadorInfoDudas', 'DivBtnRec_InfoDudas')
+					
+					var a = localStorage.getItem('NumNoticiasNoVistas') || '<empty>';//Extráe
+					var b = localStorage.getItem('NumAvisosNoVistos') || '<empty>';//Extráe
+					var c = localStorage.getItem('NumEventosNoVistos') || '<empty>';//Extráe
+					var d = localStorage.getItem('NumConvNoVistos') || '<empty>';//Extráe
+					fijarNumItemsNoVistos(a, b, c, d);
+					
+					navigator.notification.alert('Hay problemas de conexión', null,	'Sin conexión', 'OK');
+									
+				},
+				timeout: 15000,
+            }).done(function (resultado) {						
+            	
+				var datosRecibidos = JSON.parse(resultado);	
+				//alert(datosRecibidos);
+				var a = datosRecibidos[0];
+				var b = datosRecibidos[1];
+				var c = datosRecibidos[2];
+				var d = datosRecibidos[3];
+				
+				fijarNumItemsNoVistos(a, b, c, d);
+       		});
+    }
+    catch(ex)
+    {
+        alert("Error de datos!!");
+    }
+	
+};
+//-----------------------------------fijar numero items no vistos a la etiqueta SPAN----------------
+function fijarNumItemsNoVistos(a, b, c, d){
+		if(a > 0){
+			if(a > 9){
+				$("#NumNoticiasNoVistas").append("(+9)");//Coloca numero items no vistos en span
+			}else{
+				$("#NumNoticiasNoVistas").append("(" + a + ")");//Coloca numero items no vistos en span
+			}
+			localStorage.setItem("NumNoticiasNoVistas", a);//Guarda el numero
+		}
+		if(b > 0){
+			if(b > 9){
+				$("#NumAvisosNoVistos").append("(+9)");//Coloca numero items no vistos en span
+			}else{
+				$("#NumAvisosNoVistos").append("(" + b + ")");//Coloca numero items no vistos en span					
+			}
+			localStorage.setItem("NumAvisosNoVistos", b);//Guarda el numero
+		}   
+		if(c > 0){
+			if(c > 9){
+				$("#NumEventosNoVistos").append("(+9)");//Coloca numero items no vistos en span
+			}else{
+				$("#NumEventosNoVistos").append("(" + c + ")");//Coloca numero items no vistos en span					
+			}
+			localStorage.setItem("NumEventosNoVistos", c);//Guarda el numero
+		} 
+		if(d > 0){
+			if(d > 9){
+				$("#NumConvNoVistas").append("(+9)");//Coloca numero items no vistos en span
+			}else{
+				$("#NumConvNoVistas").append("(" + d + ")");//Coloca numero items no vistos en span					
+			}
+			localStorage.setItem("NumConvNoVistos", d);//Guarda el numero
+		}    
+	
+}
 //-----------------------------------------------Identidad----------------------------------
 function traerIdentidad()
 {
@@ -589,6 +683,8 @@ function traerListaNoticias()
             	var datosRecibidos = JSON.parse(resultado);				
 				var lista = "";
 				var fechaMayuscula;
+				var ultimoId;
+				ultimoId = datosRecibidos[0].IdNota;//Guarda el id mayor 
                 $.each( datosRecibidos, function( key, value ) {		
 						lista += "<li><a class='show-page-loading-msg' rel='external' data-textonly='false' data-textvisible='false' data-msgtext='' id='" + value.IdNota + "' onClick='guardaIdNota(this.id)' href='#PagaInfoNoticia'>";
 						
@@ -609,6 +705,10 @@ function traerListaNoticias()
                 $("#DivListaNoticias").html(lista);
                 $("#DivListaNoticias").listview().listview('refresh');
 				$("#DivBtnRec_ListaNoticias").empty();//vacía div de boton cargar internet
+				
+				localStorage.setItem("ultimoIdNoticias", ultimoId);//Guarda ultimo id
+				localStorage.setItem("NumNoticiasNoVistas", 0);//Items no vistos ahora es 0
+				$("#NumNoticiasNoVistas").remove();//Vacía Span
 				//document.getElementById('cargadorListaNoticia').style.display = 'none';
         });
     }
@@ -686,7 +786,11 @@ function traerListaEventos()
             	var datosRecibidos = JSON.parse(resultado);				
 				var lista = "";
 				var DiaInicio;
+				var	ultimoId = 0;
                 $.each( datosRecibidos, function( key, value ) {	
+						if(ultimoId < value.IdEvento){
+							ultimoId = value.IdEvento;//Guarda el id mayor 
+						}
 						lista += "<li><a class='show-page-loading-msg' rel='external' data-textonly='false' data-textvisible='false' data-msgtext='' id='" + value.IdEvento + "' onClick='guardaIdEvento(this.id)' href='#PagaInfoEvento'>";
                         lista += "<h2 style='font-size:.9em'>" + value.Denominacion + "</h2>";						
 						
@@ -726,6 +830,10 @@ function traerListaEventos()
                 $("#DivListaEventos").html(lista);
                 $("#DivListaEventos").listview().listview('refresh');
 				$("#DivBtnRec_ListaEventos").empty();//vacía div de boton cargar internet
+				
+				localStorage.setItem("ultimoIdEventos", ultimoId);//Guarda ultimo id
+				localStorage.setItem("NumEventosNoVistos", 0);//Items no vistos ahora es 0
+				$("#NumEventosNoVistos").remove();//Vacía Span
 				//document.getElementById('cargadorListaEventos').style.display = 'none';
         });
     }
@@ -806,7 +914,11 @@ function traerListaConvocatorias()
             }).done(function (resultado) {						
             	var datosRecibidos = JSON.parse(resultado);				
 				var lista = "";
-                $.each( datosRecibidos, function( key, value ) {		
+				var	ultimoId = 0;
+                $.each( datosRecibidos, function( key, value ) {
+						if(ultimoId < value.IdPublicacion){
+							ultimoId = value.IdPublicacion;//Guarda el id mayor 
+						}		
 						lista += "<li><a class='show-page-loading-msg' rel='external' data-textonly='false' data-textvisible='false' data-msgtext='' id='" + value.IdPublicacion + "' onClick='guardaIdConvocatoria(this.id)' href='#PagaInfoConvocatoria'>";	
                         lista += "<h2>" + value.Encabezado + "</h2>";						
 						lista += "<p style='color:#666'>Publicado el " + value.FechaPublicacion + "";
@@ -815,6 +927,10 @@ function traerListaConvocatorias()
                 $("#DivListaConvocatoria").html(lista);
                 $("#DivListaConvocatoria").listview().listview('refresh');
 				$("#DivBtnRec_ListaConvocatoria").empty();//vacía div de boton cargar internet
+				
+				localStorage.setItem("ultimoIdConv", ultimoId);//Guarda ultimo id
+				localStorage.setItem("NumConvNoVistos", 0);//Items no vistos ahora es 0
+				$("#NumConvNoVistas").remove();//Vacía Span
 				//document.getElementById('cargadorListaConvocatoria').style.display = 'none';
         });
     }
@@ -889,7 +1005,11 @@ function traerListaAvisos()
 				//stopConnectionDelay();				
             	var datosRecibidos = JSON.parse(resultado);				
 				var lista = "";
-                $.each( datosRecibidos, function( key, value ) {	
+				var	ultimoId = 0;
+                $.each( datosRecibidos, function( key, value ) {
+						if(ultimoId < value.IdPublicacion){
+							ultimoId = value.IdPublicacion;//Guarda el id mayor 
+						}
 						lista += "<li><a class='show-page-loading-msg' rel='external' data-textonly='false' data-textvisible='false' data-msgtext='' id='" + value.IdPublicacion + "' onClick='guardaIdAviso(this.id)' href='#PagaInfoAvisos'>";						
                         lista += "<h2>" + value.Encabezado + "</h2>";						
 						lista += "<p style='color:#666'>Publicado el " + value.FechaPublicacion + "";
@@ -899,6 +1019,10 @@ function traerListaAvisos()
                 $("#DivListaAvisos").html(lista);
                 $("#DivListaAvisos").listview().listview('refresh');
 				$("#DivBtnRec_ListaAvisos").empty();//vacía div de boton cargar internet
+				
+				localStorage.setItem("ultimoIdAvisos", ultimoId);//Guarda ultimo id
+				localStorage.setItem("NumAvisosNoVistos", 0);//Items no vistos ahora es 0
+				$("#NumAvisosNoVistos").remove();//Vacía Span
 				//document.getElementById('cargadorListaAvisos').style.display = 'none';
         });
     }
@@ -1000,6 +1124,7 @@ function checkConnectionDelay(idDivElemeto, idCargador, DivBotonRecargar){
 		      // buttonLabels
 	);
 	function onConfirm(buttonIndex) {}
+	
 	if ($('#'+idDivElemeto).is(':empty')){ 	//si el div esta vacio o no tiene info, mostramos boton de recargar
 			//--->alert("vacio");	
 			var mensaje = "";
