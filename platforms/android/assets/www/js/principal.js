@@ -679,25 +679,26 @@ function traerListaNoticias()
             	var datosRecibidos = JSON.parse(resultado);				
 				var lista = "";
 				var fechaMayuscula;
-				var ultimoId;
-				ultimoId = datosRecibidos[0].IdNota;//Guarda el id mayor 
-                $.each( datosRecibidos, function( key, value ) {		
-						lista += "<li><a class='show-page-loading-msg' rel='external' data-textonly='false' data-textvisible='false' data-msgtext='' id='" + value.IdNota + "' onClick='guardaIdNota(this.id)' href='#PagaInfoNoticia'>";
-						
-						if(value.NumImg == "" || value.NumImg == 0)
-                        {
-                            lista += "<img src='../img/nofoto.jpg'>";
-                        }
-                        else
-                        {
-                            lista += "<img style='position:absolute;top:0;bottom:0;margin:auto;' src='" + urlDominio + "/noticias/img/" + value.IdNota + "/full.jpg'>";
-                        }
-                        lista += "<h2 style='font-size:.8em'>" + value.Titulo + "</h2>";	
-						fechaMayuscula = value.fecha_publicacion;
-						fechaMayuscula = fechaMayuscula[0].toUpperCase() + fechaMayuscula.slice(1);				
-						lista += "<p style='color:#666;'>" + fechaMayuscula  + "</p>";
-                        lista += "</li>";
+				var ultimoId = 0; // = datosRecibidos[0].IdNota;//Guarda el id mayor 
+				var cont = 0;
+                $.each( datosRecibidos, function( key, value ) {	
+					if(ultimoId < value.IdNota){
+						ultimoId = value.IdNota;//Guarda el id mayor 
+					}	
+					lista += "<li><a class='show-page-loading-msg' rel='external' data-textonly='false' data-textvisible='false' data-msgtext='' id='" + value.IdNota + "' onClick='guardaIdNota(this.id)' href='#PagaInfoNoticia'>";
+					
+						lista += "<img style='position:absolute;top:0;bottom:0;margin:auto;' src='" + urlDominio + "/noticias/img/" + value.IdNota + "/full.jpg'  onerror=\" this.src='img/nofoto.jpg' \">";
+					
+					lista += "<h2 style='font-size:.8em'>" + value.Titulo + "</h2>";	
+					fechaMayuscula = value.fecha_publicacion;
+					fechaMayuscula = fechaMayuscula[0].toUpperCase() + fechaMayuscula.slice(1);				
+					lista += "<p style='color:#666;'>" + fechaMayuscula  + "</p>";
+					lista += "</li>";
+					cont ++;
                 });
+				
+				checkForItems(cont, "DivMensajeNoticia");
+				
                 $("#DivListaNoticias").html(lista);
                 $("#DivListaNoticias").listview().listview('refresh');
 				$("#DivBtnRec_ListaNoticias").empty();//vacía div de boton cargar internet
@@ -783,6 +784,7 @@ function traerListaEventos()
 				var lista = "";
 				var DiaInicio;
 				var	ultimoId = 0;
+				var cont = 0;
                 $.each( datosRecibidos, function( key, value ) {	
 						if(ultimoId < value.IdEvento){
 							ultimoId = value.IdEvento;//Guarda el id mayor 
@@ -819,10 +821,13 @@ function traerListaEventos()
                         {
                              lista += "<p>Lugar: " + value.lugar + "</p>";
                         }
-						
-						
+			
                         lista += "</li>";
+						cont ++;
                 });
+				
+				checkForItems(cont, "DivMensajeEventos");
+				
                 $("#DivListaEventos").html(lista);
                 $("#DivListaEventos").listview().listview('refresh');
 				$("#DivBtnRec_ListaEventos").empty();//vacía div de boton cargar internet
@@ -908,9 +913,10 @@ function traerListaConvocatorias()
 				},
 				timeout: 15000,
             }).done(function (resultado) {						
-            	var datosRecibidos = JSON.parse(resultado);				
-				var lista = "";
-				var	ultimoId = 0;
+            	var datosRecibidos = JSON.parse(resultado);	
+				var lista = "";	
+				var	ultimoId = 0; 
+				var cont = 0;
                 $.each( datosRecibidos, function( key, value ) {
 						if(ultimoId < value.IdPublicacion){
 							ultimoId = value.IdPublicacion;//Guarda el id mayor 
@@ -919,7 +925,11 @@ function traerListaConvocatorias()
                         lista += "<h2>" + value.Encabezado + "</h2>";						
 						lista += "<p style='color:#666'>Publicado el " + value.FechaPublicacion + "";
                         lista += "</li>";
+						cont ++;
                 });
+				
+				checkForItems(cont, "DivMensajeConv");
+				
                 $("#DivListaConvocatoria").html(lista);
                 $("#DivListaConvocatoria").listview().listview('refresh');
 				$("#DivBtnRec_ListaConvocatoria").empty();//vacía div de boton cargar internet
@@ -1002,6 +1012,7 @@ function traerListaAvisos()
             	var datosRecibidos = JSON.parse(resultado);				
 				var lista = "";
 				var	ultimoId = 0;
+				var cont = 0;
                 $.each( datosRecibidos, function( key, value ) {
 						if(ultimoId < value.IdPublicacion){
 							ultimoId = value.IdPublicacion;//Guarda el id mayor 
@@ -1010,8 +1021,12 @@ function traerListaAvisos()
                         lista += "<h2>" + value.Encabezado + "</h2>";						
 						lista += "<p style='color:#666'>Publicado el " + value.FechaPublicacion + "";
                         lista += "</li>";
+						cont ++;
 						
                 });
+				
+				checkForItems(cont, "DivMensajeAvisos");
+				
                 $("#DivListaAvisos").html(lista);
                 $("#DivListaAvisos").listview().listview('refresh');
 				$("#DivBtnRec_ListaAvisos").empty();//vacía div de boton cargar internet
@@ -1219,4 +1234,31 @@ function repositionPopup(DivPopup){
 		}
 	});
 };
-//----
+//---------------------------------Función para mostrar mensaje si no hay publicaciones
+function checkForItems(cont, idDiv){
+	
+	if(cont == 0){
+	switch(idDiv) {
+    case "DivMensajeNoticia":
+        n = "noticias";
+        break;
+    case "DivMensajeEventos":
+        n = "eventos";
+        break;
+	case "DivMensajeConv":
+        n = "convocatorias ";
+        break;
+	case "DivMensajeAvisos":
+        n = "avisos ";
+        break;
+}
+	var mensaje = "<p>No hay " + n + " registradas por el momento.</p>";
+	$("#" + idDiv).html(mensaje);	
+	$("#" + idDiv).show();
+	
+	}else{
+		if ($("#" + idDiv).is(':visible')){
+			$("#" + idDiv).hide();
+		}
+	}
+};

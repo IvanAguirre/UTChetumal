@@ -26,12 +26,15 @@
 <script type="text/javascript"> 
 //El registro al servicio de google lo hacemos automáticamente
 	 app.initialize();
+function imgError()
+{
+alert('The image could not be loaded.');
+}
 </script>
 </head>
 <body> <!--onload="rotar_imagen();"-->
 
 <div data-role="page" id="pag_1">
-
 	<div data-role="header" data-theme="b" data-position="fixed">
 		<h1>UT Chetumal</h1>
 	</div>
@@ -313,11 +316,12 @@ function openImg() {
         <a href="#" data-rel="back" class="ui-btn ui-btn-left ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
 	</div><!-- /header -->
     
+    <div id="DivMensajeNoticia"></div>
     
-	    <div data-role="listview" data-inset="true">
-	    	<ul id="DivListaNoticias"></ul>
-	    </div>
-        <div id="DivBtnRec_ListaNoticias"></div>
+    <div data-role="listview" data-inset="true">
+        <ul id="DivListaNoticias"></ul>
+    </div>
+    <div id="DivBtnRec_ListaNoticias"></div>
         <!-- <div id="cargadorListaNoticia">
         	&nbsp;Cargando...
    		</div>-->
@@ -347,10 +351,12 @@ function openImg() {
         <a href="#" data-rel="back" class="ui-btn ui-btn-left ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
 	</div><!-- /header -->
     
-	    <div data-role="listview" data-inset="true">
-	    	<ul id="DivListaEventos"></ul>
-	    </div>
-        <div id="DivBtnRec_ListaEventos"></div>
+    <div id="DivMensajeEventos"></div>
+    
+    <div data-role="listview" data-inset="true">
+        <ul id="DivListaEventos"></ul>
+    </div>
+    <div id="DivBtnRec_ListaEventos"></div>
         <!-- <div id="cargadorListaEventos">
         	&nbsp;Cargando...
    		</div>-->
@@ -381,15 +387,16 @@ function openImg() {
         <a href="#" data-rel="back" class="ui-btn ui-btn-left ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
 	</div><!-- /header -->
     
-	    <div data-role="listview" data-inset="true">
-	    	<ul id="DivListaConvocatoria"></ul>
-	    </div>
-        <div id="DivBtnRec_ListaConvocatoria"></div>
+    <div id="DivMensajeConv"></div>
+    
+    <div data-role="listview" data-inset="true">
+        <ul id="DivListaConvocatoria"></ul>
+    </div>
+    
+    <div id="DivBtnRec_ListaConvocatoria"></div>
        <!--  <div id="cargadorListaConvocatoria">
         	&nbsp;Cargando...
    		</div>-->
-        <!--popup-->
-       <!--  <div data-role="popup" id="popupConvocatorias" class="ui-corner-all" data-overlay-theme="b" style="max-width:400px;" data-transition="pop"></div>-->
         
 </div><!-- /page fin -->
 <!------------------------------------------------------Info Convocatoria------------------------------------------------>
@@ -413,11 +420,12 @@ function openImg() {
 		<h1>Avisos</h1>
         <a href="#" data-rel="back" class="ui-btn ui-btn-left ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
 	</div><!-- /header -->
+    <div id="DivMensajeAvisos"></div>
     
-	    <div data-role="listview" data-inset="true">
-	    	<ul id="DivListaAvisos"></ul>
-	    </div>
-        <div id="DivBtnRec_ListaAvisos"></div>
+    <div data-role="listview" data-inset="true">
+        <ul id="DivListaAvisos"></ul>
+    </div>
+    <div id="DivBtnRec_ListaAvisos"></div>
        <!--  <div id="cargadorListaAvisos">
         	&nbsp;Cargando...
    		</div>-->
