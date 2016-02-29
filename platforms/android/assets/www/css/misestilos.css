@@ -3,6 +3,10 @@
 	text-align:center;
 	display:none;
 }
+.botonRec{
+	color:#999;
+	text-align:center;
+}
 .imgAjustable {
 height: auto;
 max-width: 100%;
@@ -50,3 +54,6 @@ max-width: 100%;
 #collapsibleset{
 	display:none;
 }
+
+/*-------------------------------------iscroll---------------------------*/
+

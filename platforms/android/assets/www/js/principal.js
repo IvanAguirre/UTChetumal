@@ -219,17 +219,14 @@ function traerItemsNoVistos(NumNoticiasNoVistas, NumAvisosNoVistos, NumEventosNo
                 //type: "POST",
                 url: urlDominio + "/apputchetumal/php/contRegistrosNuevos.php?idNota=" + NumNoticiasNoVistas + "&idAviso=" + NumAvisosNoVistos  + "&idEvento=" + NumEventosNoVistos + "&idConv=" + NumConvNoVistos + "", 
                 //data: $("#form").serialize(),
-				error:  function(){
-					//checkConnectionDelay('DivInfoDudas', 'cargadorInfoDudas', 'DivBtnRec_InfoDudas')
-					
+				error:  function(){					
 					var a = localStorage.getItem('NumNoticiasNoVistas') || '<empty>';//Extráe
 					var b = localStorage.getItem('NumAvisosNoVistos') || '<empty>';//Extráe
 					var c = localStorage.getItem('NumEventosNoVistos') || '<empty>';//Extráe
 					var d = localStorage.getItem('NumConvNoVistos') || '<empty>';//Extráe
 					fijarNumItemsNoVistos(a, b, c, d);
 					
-					navigator.notification.alert('Hay problemas de conexión', null,	'Sin conexión', 'OK');
-									
+					navigator.notification.alert('Hay problemas de conexión', null,	'Sin conexión', 'OK');			
 				},
 				timeout: 15000,
             }).done(function (resultado) {						
@@ -286,52 +283,6 @@ function fijarNumItemsNoVistos(a, b, c, d){
 		}    
 	
 }
-//-----------------------------------------------Identidad----------------------------------
-function traerIdentidad()
-{
-	//alert(t);
-	var nombrePag ="Identidad";
-	//checkConnection(nombre, idCargador);
-	
-    try
-    {
-        var strHtml = "";
-		$.ajax({
-				beforeSend: function() {$.mobile.loading( 'show'); }, //Show spinner
-	            complete: function() {  $.mobile.loading( 'hide'); }, //Hide spinner
-				global: false,
-				dataType: "html",
-				async: true,
-                //type: "POST",
-                url: urlDominio + "/apputchetumal/php/Consultar_pagina.php?identificador=" + nombrePag + "",
-                //data: $("#form").serialize(),
-				error:  function(){
-					//checkConnectionDelay()
-				},
-				timeout: 15000,
-            }).done(function (resultado) {						
-            	var datosRecibidos = JSON.parse(resultado);				
-				var lista = "";
-                $.each( datosRecibidos, function( key, value ) {
-						lista += "<div role='main' class='ui-content'>";					
-						lista += "" + value.contenido + "";							
-						lista += "</div>";
-                });
-					$("#DivIdentidad").html(lista);
-	                $("#DivIdentidad").listview().listview('refresh');  
-					//document.getElementById('cargadorIdentidad').style.display = 'none';
-					/*if ($('#DivIdentidad').is(':empty')){ 	
-					alert("vacio");		
-					} else{
-						alert(t);
-					}*/  
-        });
-    }
-    catch(ex)
-    {
-        alert("Error de datos!!");
-    }
-};
 //-------------------------------------------Oferta Academica (Info de la carrera)----------------------------------
 function traerInfoOferta(clicked_id)
 {
@@ -349,7 +300,7 @@ function traerInfoOferta(clicked_id)
                 url: urlDominio + "/apputchetumal/php/Consultar_pagina.php?identificador=" + clicked_id + "",
                 //data: $("#form").serialize(),
 				error:  function(){
-					checkConnectionDelay('DivInfoOferta', 'cargadorInfoOferta', 'DivBtnRec_InfoOfertAcadem')
+					checkConnectionDelay('DivInfoOferta', 'DivBtnRec_InfoOfertAcadem')
 				},
 				timeout: 15000,
             }).done(function (resultado) {		
@@ -410,7 +361,7 @@ function traerPlanEstudio(clicked_id)
 				url: urlDominio + "/apputchetumal/php/consultar_plan_estudio.php?identificador=" + clicked_id + "",
 				//data: $("#form").serialize(),
 				error:  function(){
-					checkConnectionDelay('subtituloPlanEst', 'cargadorPlanEstudio', 'DivBtnRec_PlanEstudio')
+					checkConnectionDelay('subtituloPlanEst', 'DivBtnRec_PlanEstudio')
 				},
 				timeout: 15000,
 			}).done(function (resultado) {	
@@ -511,7 +462,7 @@ function traerListaCuentas()
                 //type: "POST",
                 url: urlDominio + "/apputchetumal/php/consultar_cuentas.php",
 				error:  function(){
-					checkConnectionDelay('DivInfoCuentas', 'cargadorInfoCuentas', 'DivBtnRec_Cuentas')
+					checkConnectionDelay('DivInfoCuentas', 'DivBtnRec_Cuentas')
 				},
 				timeout: 15000,
                 //data: $("#form").serialize(),
@@ -552,7 +503,7 @@ function traerListaDirectorio()
                 url: urlDominio + "/apputchetumal/php/consultar_directorio.php",
                 //data: $("#form").serialize(),
 				error:  function(){
-					checkConnectionDelay('DivInfoDirectorio', 'cargadorInfoDirectorio', 'DivBtnRec_Directorio')
+					checkConnectionDelay('DivInfoDirectorio', 'DivBtnRec_Directorio')
 				},
 				timeout: 15000,
             }).done(function (resultado) {						
@@ -594,7 +545,7 @@ function traerListaDudas()
                 url: urlDominio + "/apputchetumal/php/consultar_dudas.php",
                 //data: $("#form").serialize(),
 				error:  function(){
-					checkConnectionDelay('DivListaDudas', 'cargadorListaDudas', 'DivBtnRec_ListaDudas')
+					checkConnectionDelay('DivListaDudas', 'DivBtnRec_ListaDudas')
 				},
 				timeout: 15000,
             }).done(function (resultado) {						
@@ -633,7 +584,7 @@ function traerInfoDudas(clicked_id)
                 url: urlDominio + "/apputchetumal/php/consultar_dudas_info.php?Id=" + clicked_id + "",
                 //data: $("#form").serialize(),
 				error:  function(){
-					checkConnectionDelay('DivInfoDudas', 'cargadorInfoDudas', 'DivBtnRec_InfoDudas')
+					checkConnectionDelay('DivInfoDudas', 'DivBtnRec_InfoDudas')
 				},
 				timeout: 15000,
             }).done(function (resultado) {						
@@ -647,6 +598,7 @@ function traerInfoDudas(clicked_id)
                 });
                 $("#DivInfoDudas").html(lista);
                 $("#DivInfoDudas").listview().listview('refresh');
+				$("#DivBtnRec_InfoDudas").empty();//vacía div de boton cargar internet
 				//document.getElementById('cargadorInfoDudas').style.display = 'none';
         });
     }
@@ -672,7 +624,7 @@ function traerListaNoticias()
                 url: urlDominio + "/apputchetumal/php/consultar_noticias.php",
                 //data: $("#form").serialize(),
 				error:  function(){
-					checkConnectionDelay('DivListaNoticias', 'cargadorListaNoticia', 'DivBtnRec_ListaNoticias')
+					checkConnectionDelay('DivListaNoticias', 'DivBtnRec_ListaNoticias')
 				},
 				timeout: 15000,
             }).done(function (resultado) {						
@@ -697,13 +649,16 @@ function traerListaNoticias()
 					cont ++;
                 });
 				
-				checkForItems(cont, "DivMensajeNoticia");
+				checkForItems(cont, "DivMensajeNoticia");//Checa si hay Noticias y si no, manda un mensaje "no hay"
 				
                 $("#DivListaNoticias").html(lista);
                 $("#DivListaNoticias").listview().listview('refresh');
 				$("#DivBtnRec_ListaNoticias").empty();//vacía div de boton cargar internet
 				
-				localStorage.setItem("ultimoIdNoticias", ultimoId);//Guarda ultimo id
+				var NumNoticiasNoVistas = localStorage.getItem('ultimoIdNoticias') || 0;//Extráe ultimo id guardado
+				if(NumNoticiasNoVistas < ultimoId){
+					localStorage.setItem("ultimoIdNoticias", ultimoId);//Guarda ultimo id
+				}
 				localStorage.setItem("NumNoticiasNoVistas", 0);//Items no vistos ahora es 0
 				$("#NumNoticiasNoVistas").remove();//Vacía Span
 				//document.getElementById('cargadorListaNoticia').style.display = 'none';
@@ -731,23 +686,43 @@ function traerInfoNoticias(clicked_id)
                 url: urlDominio + "/apputchetumal/php/consultar_noticias_info.php?Id=" + clicked_id + "",
                 //data: $("#form").serialize(),
 				error:  function(){
-					checkConnectionDelay('DivInfoNoticias', 'cargadorInfoNoticia', 'DivBtnRec_InfoNoticias')
+					checkConnectionDelay('DivInfoNoticias', 'DivBtnRec_InfoNoticias')
 				},
 				timeout: 15000,
             }).done(function (resultado) {						
             	var datosRecibidos = JSON.parse(resultado);				
 				var lista = "";
-				var fechaMayuscula;
+				var cont = 0;
+				var arrayImg = new Array()
                 $.each( datosRecibidos, function( key, value ) {
-						lista += "<div role='main' class='ui-content'>";							
+					if(typeof(value.archivo) != "undefined"){
+						arrayImg[cont] = value.archivo;	
+					}
+						
+					if(typeof(value.Titulo) != "undefined" || typeof(value.Contenido) != "undefined"){
+						lista += "<div role='main' class='ui-content'>";
 						lista += "<h2>" + value.Titulo + "</h2>";
-						fechaMayuscula = value.FechaPublicacion;
+						var fechaMayuscula = value.FechaPublicacion;
 						fechaMayuscula = fechaMayuscula[0].toUpperCase() + fechaMayuscula.slice(1);	
-						lista += "<p style='font-size: .8em;color:#666'>" + fechaMayuscula  + " </p>";					
-						lista += "" + value.Contenido + "";	
-												
+						lista += "<p style='font-size: .8em;color:#666'>" + fechaMayuscula  + " </p>";				
+						lista += "" + value.Contenido + "";													
 						lista += "</div>";
-                });
+						var idNota = value.IdNota;
+						
+						if (arrayImg.length > 0) {
+							//lista += "<div class='fotorama' data-width='700' data-ratio='' data-max-width='100%' align='center'>";
+							var lista2="";
+							for (x=0;x<arrayImg.length;x++){
+								
+								lista += "<img src='" + urlDominio + "/noticias/img/" + idNota + "/orig/" +arrayImg[x] + "'>";
+							}
+							//document.getElementById("fotorama").innerHTML += lista2;  // Agrego nueva linea antes
+							//$(".fotorama").append(lista2);
+							//lista += "</div>";
+						}
+					}
+					cont ++;
+               });
                 $("#DivInfoNoticias").html(lista);
                 $("#DivInfoNoticias").listview().listview('refresh');
 				$("#DivBtnRec_InfoNoticias").empty();//vacía div de boton cargar internet
@@ -776,7 +751,7 @@ function traerListaEventos()
                 url: urlDominio + "/apputchetumal/php/consultar_eventos.php",
                 //data: $("#form").serialize(),
 				error:  function(){
-					checkConnectionDelay('DivListaEventos', 'cargadorListaEventos', 'DivBtnRec_ListaEventos')
+					checkConnectionDelay('DivListaEventos', 'DivBtnRec_ListaEventos')
 				},
 				timeout: 15000,
             }).done(function (resultado) {						
@@ -826,13 +801,16 @@ function traerListaEventos()
 						cont ++;
                 });
 				
-				checkForItems(cont, "DivMensajeEventos");
+				checkForItems(cont, "DivMensajeEventos");//Checa si hay eventos y si no, manda un mensaje "no hay"
 				
                 $("#DivListaEventos").html(lista);
                 $("#DivListaEventos").listview().listview('refresh');
 				$("#DivBtnRec_ListaEventos").empty();//vacía div de boton cargar internet
 				
-				localStorage.setItem("ultimoIdEventos", ultimoId);//Guarda ultimo id
+				var NumEventosNoVistos = localStorage.getItem('ultimoIdEventos') || 0;//Extráe ultimo id guardado
+				if(NumEventosNoVistos < ultimoId){
+					localStorage.setItem("ultimoIdEventos", ultimoId);//Guarda ultimo id
+				}
 				localStorage.setItem("NumEventosNoVistos", 0);//Items no vistos ahora es 0
 				$("#NumEventosNoVistos").remove();//Vacía Span
 				//document.getElementById('cargadorListaEventos').style.display = 'none';
@@ -860,7 +838,7 @@ function traerInfoEventos(clicked_id)
                 url: urlDominio + "/apputchetumal/php/consultar_eventos_info.php?Id=" + clicked_id + "",
                 //data: $("#form").serialize(),
 				error:  function(){
-					checkConnectionDelay('DivInfoEventos', 'cargadorInfoEvento', 'DivBtnRec_InfoEventos')
+					checkConnectionDelay('DivInfoEventos', 'DivBtnRec_InfoEventos')
 				},
 				timeout: 15000,
             }).done(function (resultado) {						
@@ -909,7 +887,7 @@ function traerListaConvocatorias()
                 url: urlDominio + "/apputchetumal/php/consultar_convocatorias.php",
                 //data: $("#form").serialize(),
 				error:  function(){
-					checkConnectionDelay('DivListaConvocatoria', 'cargadorListaConvocatoria', 'DivBtnRec_ListaConvocatoria')
+					checkConnectionDelay('DivListaConvocatoria', 'DivBtnRec_ListaConvocatoria')
 				},
 				timeout: 15000,
             }).done(function (resultado) {						
@@ -918,23 +896,26 @@ function traerListaConvocatorias()
 				var	ultimoId = 0; 
 				var cont = 0;
                 $.each( datosRecibidos, function( key, value ) {
-						if(ultimoId < value.IdPublicacion){
-							ultimoId = value.IdPublicacion;//Guarda el id mayor 
-						}		
-						lista += "<li><a class='show-page-loading-msg' rel='external' data-textonly='false' data-textvisible='false' data-msgtext='' id='" + value.IdPublicacion + "' onClick='guardaIdConvocatoria(this.id)' href='#PagaInfoConvocatoria'>";	
-                        lista += "<h2>" + value.Encabezado + "</h2>";						
-						lista += "<p style='color:#666'>Publicado el " + value.FechaPublicacion + "";
-                        lista += "</li>";
-						cont ++;
+					if(ultimoId < value.IdPublicacion){
+						ultimoId = value.IdPublicacion;//Guarda el id mayor 
+					}		
+					lista += "<li><a class='show-page-loading-msg' rel='external' data-textonly='false' data-textvisible='false' data-msgtext='' id='" + value.IdPublicacion + "' onClick='guardaIdConvocatoria(this.id)' href='#PagaInfoConvocatoria'>";	
+					lista += "<h2>" + value.Encabezado + "</h2>";						
+					lista += "<p style='color:#666'>Publicado el " + value.FechaPublicacion + "";
+					lista += "</li>";
+					cont ++;
                 });
 				
-				checkForItems(cont, "DivMensajeConv");
+				checkForItems(cont, "DivMensajeConv");//Checa si hay Covocatorias y si no, manda un mensaje "no hay"
 				
                 $("#DivListaConvocatoria").html(lista);
                 $("#DivListaConvocatoria").listview().listview('refresh');
 				$("#DivBtnRec_ListaConvocatoria").empty();//vacía div de boton cargar internet
 				
-				localStorage.setItem("ultimoIdConv", ultimoId);//Guarda ultimo id
+				var NumConvNoVistos = localStorage.getItem('ultimoIdConv') || 0;//Extráe ultimo id guardado
+				if(NumConvNoVistos < ultimoId){
+					localStorage.setItem("ultimoIdConv", ultimoId);//Guarda ultimo id
+				}
 				localStorage.setItem("NumConvNoVistos", 0);//Items no vistos ahora es 0
 				$("#NumConvNoVistas").remove();//Vacía Span
 				//document.getElementById('cargadorListaConvocatoria').style.display = 'none';
@@ -962,7 +943,7 @@ function traerInfoConvocatorias(clicked_id)
                 url: urlDominio + "/apputchetumal/php/consultar_convocatoria_info.php?Id=" + clicked_id + "",
                 //data: $("#form").serialize(),
 				error:  function(){
-					checkConnectionDelay('DivInfoConvocatoria', 'cargadorInfoConvocatoria', 'DivBtnRec_InfoConvocatoria')
+					checkConnectionDelay('DivInfoConvocatoria', 'DivBtnRec_InfoConvocatoria')
 				},
 				timeout: 15000,
             }).done(function (resultado) {						
@@ -986,7 +967,7 @@ function traerInfoConvocatorias(clicked_id)
         alert("Error de datos!!");
     }
 };
-//-----------------------------------------------Avisos----------------------------------
+//-----------------------------------------------Lista Avisos----------------------------------
 function traerListaAvisos()
 {
     try
@@ -1001,7 +982,7 @@ function traerListaAvisos()
                 //type: "POST",
                 url: urlDominio + "/apputchetumal/php/consultar_avisos.php",
                 error:  function(){
-					checkConnectionDelay('DivListaAvisos', 'cargadorListaAvisos', 'DivBtnRec_ListaAvisos')
+					checkConnectionDelay('DivListaAvisos', 'DivBtnRec_ListaAvisos')
 				},
 				timeout: 15000,
 				success: function(){
@@ -1025,13 +1006,17 @@ function traerListaAvisos()
 						
                 });
 				
-				checkForItems(cont, "DivMensajeAvisos");
+				checkForItems(cont, "DivMensajeAvisos");//Checa si hay Avisos y si no, manda un mensaje "no hay"
 				
                 $("#DivListaAvisos").html(lista);
                 $("#DivListaAvisos").listview().listview('refresh');
 				$("#DivBtnRec_ListaAvisos").empty();//vacía div de boton cargar internet
 				
-				localStorage.setItem("ultimoIdAvisos", ultimoId);//Guarda ultimo id
+				//código para trbajar los items no vistos
+				var NumAvisosNoVistos = localStorage.getItem('ultimoIdAvisos') || 0;//Extráe ultimo id guardado
+				if(NumAvisosNoVistos < ultimoId){
+					localStorage.setItem("ultimoIdAvisos", ultimoId);//Guarda ultimo id
+				}	
 				localStorage.setItem("NumAvisosNoVistos", 0);//Items no vistos ahora es 0
 				$("#NumAvisosNoVistos").remove();//Vacía Span
 				//document.getElementById('cargadorListaAvisos').style.display = 'none';
@@ -1064,8 +1049,8 @@ function traerInfoAvisos(clicked_id)
                 //type: "POST",
                 url: urlDominio + "/apputchetumal/php/consultar_avisos_info.php?Id=" + clicked_id + "",
                 //data: $("#form").serialize(),
-				error:  function(){
-					checkConnectionDelay('DivListaAvisos', 'cargadorInfoAvisos', 'DivBtnRec_InfoAvisos')
+				error:  function(){							
+					checkConnectionDelay('DivInfoAvisos', 'DivBtnRec_InfoAvisos')
 				},
 				timeout: 15000,
             }).done(function (resultado) {						
@@ -1126,7 +1111,7 @@ function checkConnection(idDivElemeto, idCargador, DivBotonRecargar) {
 //--------------------------------Funcion para mandar mensaje de fallo en conexion-----------------
 
 							//DivListaAvisos', 'cargadorListaAvisos', 'DivBtnRec_ListaAvisos
-function checkConnectionDelay(idDivElemeto, idCargador, DivBotonRecargar){
+function checkConnectionDelay(idDivElemeto, DivBotonRecargar){
 	//alert("Hay problemas de conexión");
 	navigator.notification.alert(
 		'Hay problemas de conexión', // message
@@ -1140,7 +1125,7 @@ function checkConnectionDelay(idDivElemeto, idCargador, DivBotonRecargar){
 			//--->alert("vacio");	
 			var mensaje = "";
 			mensaje += "Hay problemas de conexión";
-			mensaje += "<br><a onClick='refreshPage(this.id)'  id='"+DivBotonRecargar+"' class='ui-btn ui-btn-b ui-btn-inline ui-icon-refresh ui-btn-icon-left'>Recargar</a>";
+			mensaje += "<br><a onClick='refreshPage(this.id)'  id='"+DivBotonRecargar+"' class='ui-btn ui-btn-c ui-btn-inline ui-icon-refresh ui-btn-icon-left'>Recargar</a>";
 			$("#"+DivBotonRecargar).html(mensaje);//interpolamos el mensaje en el div DivBtnRec_x
 		} else{
 			//alert("no vacio");
@@ -1149,9 +1134,9 @@ function checkConnectionDelay(idDivElemeto, idCargador, DivBotonRecargar){
 		//document.getElementById(idCargador).style.display = 'none';
 	//ConnectionDelay = setTimeout(function(){ alert("Esto está tardando mucho, posiblemente hay un problema de conexión."); }, 15000);
 };
-function stopConnectionDelay() {
+/*function stopConnectionDelay() {
     clearTimeout(ConnectionDelay);
-}
+}*/
 
 
 //-------------------------------Funcion para llamar funcion al cargar paguina------
@@ -1206,11 +1191,11 @@ function refreshPage(DivBotonRecargar)
 		var idEvento = localStorage.getItem('IdEvento') || '<empty>';
     	traerInfoEventos(idEvento);
 	}
-	else if(DivBotonRecargar== "DivBtnRec_ListaEventos")//Convocatorias
+	else if(DivBotonRecargar== "DivBtnRec_ListaConvocatoria")//Convocatorias
 	{
 		traerListaConvocatorias();
-	}
-	else if(DivBotonRecargar== "DivBtnRec_InfoEventos")
+	}									
+	else if(DivBotonRecargar== "DivBtnRec_InfoConvocatoria")
 	{
 		var idConvocatoria = localStorage.getItem('IdConvocatoria') || '<empty>';
 		traerInfoConvocatorias(idConvocatoria);
@@ -1218,7 +1203,7 @@ function refreshPage(DivBotonRecargar)
 	else if(DivBotonRecargar== "DivBtnRec_ListaAvisos")//Avisos
 	{
 		traerListaAvisos();
-	}
+	}							
 	else if(DivBotonRecargar== "DivBtnRec_InfoAvisos")
 	{
 		var idAviso = localStorage.getItem('IdAviso') || '<empty>';

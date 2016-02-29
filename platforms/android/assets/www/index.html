@@ -11,7 +11,8 @@
 <link rel="stylesheet" href="jquery-mobile/jquery.mobile.structure-1.4.5.css" />
 <script src="jquery-1.11.2.min.js" type="text/javascript"></script>
 <script src="jquery-mobile/jquery.mobile-1.4.5.min.js" type="text/javascript"></script>
-<link rel="stylesheet" href="css/misestilos.css" type="text/css">
+<link rel="stylesheet" href="css/misestilos.css" type="text/css">         
+         
 
 <!--<script type="text/javascript" src="cordova.js"></script>
 <script type="text/javascript">
@@ -102,20 +103,6 @@ function openImg() {
  </div>-->
 
 </div><!-- /page one -->
-<!--------------------------------------------------Identidad---------------------------------------------->
-<div data-role="page" id="PageIdentidad" data-theme="a">
-
-	<div data-role="header" data-theme="b" data-position="fixed">
-		<h1>Identidad</h1>
-        <a href="#" data-rel="back" class="ui-btn ui-btn-left ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
-	</div><!-- /header -->
-    <div id="DivIdentidad">
-    </div>
-    <!-- <div id="cargadorIdentidad">
-        <p>&nbsp;Cargando...</p>
-    </div>-->
-
-</div>
 <!--------------------------------------------------Oferta---------------------------------------------->
 <div data-role="page" id="PageOferta" data-theme="a">
 
@@ -167,7 +154,7 @@ function openImg() {
             <div id="DivInfoOferta">					                        				
             </div> 
 		</div>
-        <div id="DivBtnRec_InfoOfertAcadem">	
+        <div id="DivBtnRec_InfoOfertAcadem" class="botonRec">	
    		</div>
         <!-- <div id="cargadorInfoOferta">
             <p>&nbsp;Cargando...</p>
@@ -213,7 +200,7 @@ function openImg() {
                 <div id="DivCuat_6"></div>
             </div>                    					
         </div>
-        <div id="DivBtnRec_PlanEstudio">	
+        <div id="DivBtnRec_PlanEstudio" class="botonRec">	
    		</div>
         <!-- <div id="cargadorPlanEstudio">
         	<p>&nbsp;Cargando...</p>
@@ -242,7 +229,7 @@ function openImg() {
         <a href="#" data-rel="back" class="ui-btn ui-btn-left ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
 	</div><!-- /header -->
     <ul data-role="listview" id="DivInfoCuentas"></ul>
-    <div id="DivBtnRec_Cuentas">	
+    <div id="DivBtnRec_Cuentas" class="botonRec">	
     </div>
     <!-- <div id="cargadorInfoCuentas">
         <p>&nbsp;Cargando...</p>
@@ -268,7 +255,7 @@ function openImg() {
         <div style="margin-top: 10px; margin-bottom: 10px;">&nbsp;</div>
         
         <ul data-role="listview" data-filter="true" data-input="#filter-directorio" id="DivInfoDirectorio"></ul>	
-        <div id="DivBtnRec_Directorio">	
+        <div id="DivBtnRec_Directorio" class="botonRec">	
         </div>
         <!-- <div id="cargadorInfoDirectorio">
                 <p>&nbsp;Cargando...</p>
@@ -288,7 +275,7 @@ function openImg() {
 	    <div data-role="listview" data-inset="true">
 	    	<ul id="DivListaDudas"></ul>
 	    </div>
-        <div id="DivBtnRec_ListaDudas"></div>
+        <div id="DivBtnRec_ListaDudas" class="botonRec"></div>
         <!-- <div id="cargadorListaDudas">
         	&nbsp;Cargando...
    		</div>-->
@@ -302,7 +289,7 @@ function openImg() {
         <a href="#" data-rel="back" class="ui-btn ui-btn-left ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
 	</div><!-- /header -->
 		<div id="DivInfoDudas"></div>
-        <div id="DivBtnRec_InfoDudas"></div>
+        <div id="DivBtnRec_InfoDudas" class="botonRec"></div>
         <!-- <div id="cargadorInfoDudas">
         	<p>&nbsp;Cargando...</p>
    		</div>-->
@@ -321,23 +308,29 @@ function openImg() {
     <div data-role="listview" data-inset="true">
         <ul id="DivListaNoticias"></ul>
     </div>
-    <div id="DivBtnRec_ListaNoticias"></div>
-        <!-- <div id="cargadorListaNoticia">
-        	&nbsp;Cargando...
-   		</div>-->
-        <!--popup-->
-        <!-- <div data-role="popup" id="popupNoticias" class="ui-corner-all" data-overlay-theme="b" style="max-width:400px;" data-transition="pop"></div>-->
+    <div id="DivBtnRec_ListaNoticias" class="botonRec"></div>
     
 </div><!-- /page fin -->
 <!------------------------------------------------------Info Noticias------------------------------------------------>
-<div data-role="page" id="PagaInfoNoticia" data-theme="a">
+
+<div data-role="page" id="PagaInfoNoticia" data-theme="a" >
 
 	<div data-role="header" data-theme="b" data-position="fixed">
 		<h1>Noticias</h1>
         <a href="#" data-rel="back" class="ui-btn ui-btn-left ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
 	</div><!-- /header -->
 		<div id="DivInfoNoticias"></div>
-        <div id="DivBtnRec_InfoNoticias"></div>
+     
+        <!-- Fotorama -->
+        <div class="fotorama" id="fotorama" data-width="700" data-ratio="" data-max-width="100%" align="center">
+          <!--<img src="img/banner.jpg">
+          <img src="http://s.fotorama.io/okonechnikov/2-lo.jpg">
+          <img src="img/warhol.jpg">
+          <img src="http://s.fotorama.io/okonechnikov/6-lo.jpg">
+          <img src="http://s.fotorama.io/okonechnikov/5-lo.jpg">-->
+        </div>
+           
+        <div id="DivBtnRec_InfoNoticias" class="botonRec"></div>
         <!-- <div id="cargadorInfoNoticia">
         	<p>&nbsp;Cargando...</p>
    		</div>-->
@@ -356,7 +349,7 @@ function openImg() {
     <div data-role="listview" data-inset="true">
         <ul id="DivListaEventos"></ul>
     </div>
-    <div id="DivBtnRec_ListaEventos"></div>
+    <div id="DivBtnRec_ListaEventos" class="botonRec"></div>
         <!-- <div id="cargadorListaEventos">
         	&nbsp;Cargando...
    		</div>-->
@@ -373,7 +366,7 @@ function openImg() {
         <a href="#" data-rel="back" class="ui-btn ui-btn-left ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
 	</div><!-- /header -->
 		<div id="DivInfoEventos"></div>
-        <div id="DivBtnRec_InfoEventos"></div>
+        <div id="DivBtnRec_InfoEventos" class="botonRec"></div>
        <!--  <div id="cargadorInfoEvento">
         	<p>&nbsp;Cargando...</p>
    		</div>-->
@@ -393,7 +386,7 @@ function openImg() {
         <ul id="DivListaConvocatoria"></ul>
     </div>
     
-    <div id="DivBtnRec_ListaConvocatoria"></div>
+    <div id="DivBtnRec_ListaConvocatoria" class="botonRec"></div>
        <!--  <div id="cargadorListaConvocatoria">
         	&nbsp;Cargando...
    		</div>-->
@@ -407,7 +400,7 @@ function openImg() {
         <a href="#" data-rel="back" class="ui-btn ui-btn-left ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
 	</div><!-- /header -->
 		<div id="DivInfoConvocatoria"></div>
-        <div id="DivBtnRec_InfoConvocatoria"></div>
+        <div id="DivBtnRec_InfoConvocatoria" class="botonRec"></div>
         <!-- <div id="cargadorInfoConvocatoria">
         	<p>&nbsp;Cargando...</p>
    		</div>-->
@@ -425,7 +418,7 @@ function openImg() {
     <div data-role="listview" data-inset="true">
         <ul id="DivListaAvisos"></ul>
     </div>
-    <div id="DivBtnRec_ListaAvisos"></div>
+    <div id="DivBtnRec_ListaAvisos" class="botonRec"></div>
        <!--  <div id="cargadorListaAvisos">
         	&nbsp;Cargando...
    		</div>-->
@@ -442,40 +435,15 @@ function openImg() {
         <a href="#" data-rel="back" class="ui-btn ui-btn-left ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
 	</div><!-- /header -->
 		<div id="DivInfoAvisos"></div>
-        <div id="DivBtnRec_InfoAvisos"></div>
+        <div id="DivBtnRec_InfoAvisos" class="botonRec"></div>
        <!-- <div id="cargadorInfoAvisos">
         	<p>&nbsp;Cargando...</p>
    		</div>-->
 </div>
 
-
-<!-- Start of second page: #two -->
-<div data-role="page" id="pag_3" data-theme="a">
-
-	<div data-role="header" data-theme="b" data-position="fixed">
-		<h1>Galería</h1>
-	<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-btn-icon-left"><img src="jquery-mobile/images/icons-png/arrow-l-white.png"></a>
-	</div><!-- /header -->
-	<div role="main" class="ui-content"><!-- /contenido -->
-
-	</div><!-- /content -->
-
-</div><!-- /page two -->
+<!----------------------------------------------------------------------->
 
 
-<!-- Start of second page: #two -->
-<div data-role="page" id="noticias" data-theme="a">
-
-	<div data-role="header" data-theme="b" data-position="fixed">
-		<h1>Noticias</h1>
-        <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-btn-icon-left"><img src="jquery-mobile/images/icons-png/arrow-l-white.png"></a>Atrás</a>
-	</div><!-- /header -->
-	<div role="main" class="ui-content"><!-- /contenido -->
-    
-
-	</div><!-- /content -->
-
-</div><!-- /page two -->
 
 
 </body>
