@@ -1,3 +1,37 @@
+@media screen and ( max-width: 480px ) {
+	#banner{
+		height: 10em; 
+	}
+	.ui-block { 
+		width: 33%; 
+		float:left; 
+	}
+}
+@media screen and ( min-width: 481px ) and ( max-width: 768px ) {
+	#banner{
+		height: 15em;
+	}
+	.ui-block{ 
+		width: 24%; 
+		float:left; 
+	}
+}
+@media screen and ( min-width: 769px ) {
+	#banner{
+		height: 20em;
+	}
+}
+#banner{
+	background-image:url(../img/banner.jpg);
+	background-size:cover; 
+	background-position:top; 
+	width:100%; 
+	
+}
+
+.EventoDia, .EventoLugar{
+	color:#666;
+}
 #DivMensajeNoticia, #DivMensajeEventos, #DivMensajeConv, #DivMensajeAvisos{
 	color:#999;
 	text-align:center;

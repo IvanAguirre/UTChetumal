@@ -2,16 +2,16 @@
 <head>
 <!--<meta http-equiv= "Content-Type" content= "text/html; charset= ISO-8859-1"> -->
 <meta http-equiv= "Content-Type" content= "text/html; charset= UTF-8">
-  
-<!--<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-<script type="text/javascript" charset="UTF-8" src="'phonegap.js"></script>-->
+<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+<!--<script type="text/javascript" charset="UTF-8" src="'phonegap.js"></script>-->
 
 <link rel="stylesheet" href="jquery-mobile/UTChetumal.css" />
 <link rel="stylesheet" href="jquery-mobile/jquery.mobile.icons.min.css" />
 <link rel="stylesheet" href="jquery-mobile/jquery.mobile.structure-1.4.5.css" />
 <script src="jquery-1.11.2.min.js" type="text/javascript"></script>
 <script src="jquery-mobile/jquery.mobile-1.4.5.min.js" type="text/javascript"></script>
-<link rel="stylesheet" href="css/misestilos.css" type="text/css">         
+<link rel="stylesheet" href="css/misestilos.css" type="text/css">     
+  
          
 
 <!--<script type="text/javascript" src="cordova.js"></script>
@@ -27,10 +27,6 @@
 <script type="text/javascript"> 
 //El registro al servicio de google lo hacemos automáticamente
 	 app.initialize();
-function imgError()
-{
-alert('The image could not be loaded.');
-}
 </script>
 </head>
 <body> <!--onload="rotar_imagen();"-->
@@ -40,7 +36,7 @@ alert('The image could not be loaded.');
 		<h1>UT Chetumal</h1>
 	</div>
        
-       <div id="banner" align="center"> 
+       <div id="banner" align="center" onClick="openImg()" > 
 <script>
 /*	function rotar_imagen(){ 
 	var tiempo = 15000;//tiempo en milisegundos
@@ -57,17 +53,19 @@ alert('The image could not be loaded.');
 }*/
 
 function openImg() {
-	window.open( urlDominio + '/archivos/baners/banner.jpg', '_blank', 'location=no,toolbar=yes');
+	//window.open( urlDominio + '/archivos/baners/banner.jpg', '_blank', 'location=no,toolbar=yes');
+	window.open( urlDominio + '/archivos/baners/banner.jpg', '_blank', 'location=yes');
 }
+
 </script>
 
-  	<!--<a><img class="popphoto" id="rotativo"/></a><br/>-->
+  	<!--<a><img class="popphoto" id="rotativo"/></a><br/>
    
-    <a href="#" onClick="openImg()"><img src="img/banner.jpg" alt="Banner"></a> 
+    <a href="#" onClick="openImg()"><img src="img/banner.jpg" alt="Banner"></a> -->
    </div>  
    
       
-<div class="ui-grid-b" >
+<div class="ui-grid-b my-breakpoint" >
 
 	<div class="ui-block-a">
 		<a href="#PageListaNoticias" class="ui-btn ui-btn-a btnmenu"><img id="imgmenu" src="img/noticias.png"><br/>Noticias<span id="NumNoticiasNoVistas"></span></a>

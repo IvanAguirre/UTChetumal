@@ -1,7 +1,7 @@
-$( window ).load(function() {
-	//document.addEventListener('deviceready', ini, false);
-  ini();
-});
+//$( window ).load(function() {  ini(); });
+
+document.addEventListener('deviceready', ini, false);
+
 function ini()
 {	
 	//localStorage.clear();
@@ -644,7 +644,7 @@ function traerListaNoticias()
 					lista += "<h2 style='font-size:.8em'>" + value.Titulo + "</h2>";	
 					fechaMayuscula = value.fecha_publicacion;
 					fechaMayuscula = fechaMayuscula[0].toUpperCase() + fechaMayuscula.slice(1);				
-					lista += "<p style='color:#666;'>" + fechaMayuscula  + "</p>";
+					lista += "<p style='color:#999;'>" + fechaMayuscula  + "</p>";
 					lista += "</li>";
 					cont ++;
                 });
@@ -737,7 +737,6 @@ function traerInfoNoticias(clicked_id)
 //-----------------------------------------------lista Eventos------------------------------------
 function traerListaEventos()
 {
-	//checkConnection('DivListaEventos', 'cargadorListaEventos', 'DivBtnRec_ListaEventos');
     try
     {
         var strHtml = "";
@@ -769,6 +768,7 @@ function traerListaEventos()
 						
 						DiaInicio = value.DiaInicio;
 						DiaInicio = DiaInicio[0].toUpperCase() + DiaInicio.slice(1);		
+						DiaInicio = "<p class='EventoDia'>" + DiaInicio;
 						
 						if(value.DiaFin != "")
 						{
@@ -776,16 +776,18 @@ function traerListaEventos()
 							{
 								if(value.DiaInicio == value.DiaFin)//si los dias son iguales se cancela uno
 								{
-									lista += "<p>" + DiaInicio + value.MesInicio + "";
+									lista += DiaInicio + value.MesInicio + "";
 								}else{
-									lista += "<p>" + DiaInicio + " a " + value.DiaFin + value.MesInicio + "";
+									lista += DiaInicio + " a " + value.DiaFin + value.MesInicio + "";
 								}
 							} else {
-								lista += "<p>" + DiaInicio + value.MesInicio + " a " + value.DiaFin + value.MesFin + "";
+								lista += DiaInicio + value.MesInicio + " a " + value.DiaFin + value.MesFin + "";
 							}
 						} else {
-							lista += "<p>" + DiaInicio + value.MesInicio + "";
+							lista += DiaInicio + value.MesInicio + "";
 						}
+						//lista += "<p>" 
+						
 						
 						if(value.fecha_hora != 0)//si hay HORA la muestro
                         {
@@ -794,7 +796,7 @@ function traerListaEventos()
 						lista +="</p>";
 						if(value.lugar != "")// si hay LUGAR lo muestro
                         {
-                             lista += "<p>Lugar: " + value.lugar + "</p>";
+                             lista += "<p class='EventoLugar'>Lugar: " + value.lugar + "</p>";
                         }
 			
                         lista += "</li>";
@@ -870,7 +872,7 @@ function traerInfoEventos(clicked_id)
         alert("Error de datos!!");
     }
 };
-//-----------------------------------------------Convocatoria----------------------------------
+//-----------------------------------------------Lista Convocatoria----------------------------------
 function traerListaConvocatorias()
 {
 	//checkConnection('DivListaConvocatoria', 'cargadorListaConvocatoria', 'DivBtnRec_ListaConvocatoria');
@@ -901,7 +903,7 @@ function traerListaConvocatorias()
 					}		
 					lista += "<li><a class='show-page-loading-msg' rel='external' data-textonly='false' data-textvisible='false' data-msgtext='' id='" + value.IdPublicacion + "' onClick='guardaIdConvocatoria(this.id)' href='#PagaInfoConvocatoria'>";	
 					lista += "<h2>" + value.Encabezado + "</h2>";						
-					lista += "<p style='color:#666'>Publicado el " + value.FechaPublicacion + "";
+					lista += "<p style='color:#999'>Publicado el " + value.FechaPublicacion + "";
 					lista += "</li>";
 					cont ++;
                 });
@@ -1000,7 +1002,7 @@ function traerListaAvisos()
 						}
 						lista += "<li><a class='show-page-loading-msg' rel='external' data-textonly='false' data-textvisible='false' data-msgtext='' id='" + value.IdPublicacion + "' onClick='guardaIdAviso(this.id)' href='#PagaInfoAvisos'>";						
                         lista += "<h2>" + value.Encabezado + "</h2>";						
-						lista += "<p style='color:#666'>Publicado el " + value.FechaPublicacion + "";
+						lista += "<p style='color:#999'>Publicado el " + value.FechaPublicacion + "";
                         lista += "</li>";
 						cont ++;
 						
