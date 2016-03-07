@@ -35,6 +35,13 @@ module.exports = [
         "merges": [
             "navigator.notification"
         ]
+    },
+    {
+        "file": "plugins/cordova-plugin-statusbar/www/statusbar.js",
+        "id": "cordova-plugin-statusbar.statusbar",
+        "clobbers": [
+            "window.StatusBar"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -42,7 +49,8 @@ module.exports.metadata =
 {
     "org.apache.cordova.network-information": "0.2.15",
     "org.apache.cordova.inappbrowser": "0.6.0",
-    "cordova-plugin-dialogs": "1.2.0"
+    "cordova-plugin-dialogs": "1.2.0",
+    "cordova-plugin-statusbar": "2.1.1"
 }
 // BOTTOM OF METADATA
 });

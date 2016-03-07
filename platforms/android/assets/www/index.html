@@ -29,7 +29,7 @@
 	 app.initialize();
 </script>
 </head>
-<body> <!--onload="rotar_imagen();"-->
+<body onload='BarTinter.navigationcolor("#FFFF00")'> <!--onload="rotar_imagen();"-->
 
 <div data-role="page" id="pag_1">
 	<div data-role="header" data-theme="b" data-position="fixed">
@@ -64,9 +64,29 @@ function openImg() {
     <a href="#" onClick="openImg()"><img src="img/banner.jpg" alt="Banner"></a> -->
    </div>  
    
-      
-<div class="ui-grid-b my-breakpoint" >
-
+      <div class="container">
+		<div class="row">
+			<div class="large-3 small-4"><a href="#PageListaNoticias" class="ui-btn ui-btn-a btnmenu"><img id="imgmenu" src="img/noticias.png"><br/>Noticias<span id="NumNoticiasNoVistas"></span></a></div>
+            
+            <div class="large-3 small-4"><a href="#PageListaEventos" class="ui-btn ui-btn-a btnmenu"><img id="imgmenu" src="img/eventos.png"><br/>Eventos<span id="NumEventosNoVistos"></span></a></div>
+            
+            <div class="large-3 small-4"><a href="#PageListaConvocatorias" class="ui-btn ui-btn-a btnmenu" rel="external"><img id="imgmenu" src="img/convocatorias.png"><br/>Convocatorias<span id="NumConvNoVistas"></span></a></div>
+            
+            <div class="large-3 small-4"><a href="#PageListaAvisos" class="ui-btn ui-btn-a btnmenu"><img id="imgmenu" src="img/avisos.png"><br/>Avisos<span id="NumAvisosNoVistos"></span></a></div>
+            
+            <div class="large-3 small-4"><a href="#PageListaCuentas" class="ui-btn ui-btn-a btnmenu" rel="external"><img id="imgmenu" src="img/cuentas.png"><br/>Cuentas</a></div>
+            
+            <div class="large-3 small-4"><a href="#PageListaDirectorio" class="ui-btn ui-btn-a btnmenu" rel="external"><img id="imgmenu" src="img/directorio.png"><br/>Directorio</a></div>
+            
+            <div class="large-3 small-4"><a href="#PageListaDudas" class="ui-btn ui-btn-a btnmenu" rel="external"><img id="imgmenu" src="img/dudas.png"><br/>Preguntas frecuentes</a></div>
+            
+            <div class="large-3 small-4"><a href="#PageOferta" class="ui-btn ui-btn-a btnmenu" rel="external"><img id="imgmenu" src="img/ofertaAcademica.png"><br/>Oferta acad&eacute;mica</a></div>
+            
+		</div>
+	</div>
+    
+    
+<!--<div class="ui-grid-b" >
 	<div class="ui-block-a">
 		<a href="#PageListaNoticias" class="ui-btn ui-btn-a btnmenu"><img id="imgmenu" src="img/noticias.png"><br/>Noticias<span id="NumNoticiasNoVistas"></span></a>
 	</div>
@@ -92,7 +112,7 @@ function openImg() {
 		<a href="#PageOferta" class="ui-btn ui-btn-a btnmenu" rel="external"><img id="imgmenu" src="img/ofertaAcademica.png"><br/>Oferta acad&eacute;mica</a>
 	</div>
    
- </div>
+ </div>-->
  		<!--popup-->
         <!-- <div data-role="popup" id="popupIndex" class="ui-corner-all" data-overlay-theme="b" style="max-width:400px;" data-transition="pop"></div>-->
  <!--<br><div style="text-align:center;">
@@ -108,34 +128,23 @@ function openImg() {
 		<h1>Oferta Académica</h1>
         <a href="#" data-rel="back" class="ui-btn ui-btn-left ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
 	</div><!-- /header -->
+        
+	<ul data-role="listview" data-divider-theme="a">        
+        <li data-role="list-divider"><h2>Técnico Superior Universitario</h2></li>
+        
+        <li><a class='show-page-loading-msg' rel='external' data-textonly='false' data-textvisible='false' data-msgtext='' id="tsu_dns" onClick='guardaIdOferta(this.id)' href='#PageInfoOferta'>TSU en Desarrollo de Negocios</a></li>
+        <li><a class='show-page-loading-msg' rel='external' data-textonly='false' data-textvisible='false' data-msgtext='' id="tsu_tics" onClick='guardaIdOferta(this.id)' href='#PageInfoOferta'>TSU en Tecnologías de la Información y Comunicación</a></li>
+        <li><a class='show-page-loading-msg' rel='external' data-textonly='false' data-textvisible='false' data-msgtext='' id="tsu_mecatronica" onClick='guardaIdOferta(this.id)' href='#PageInfoOferta'>TSU en Mecatrónica</a></li>
+        <li><a class='show-page-loading-msg' rel='external' data-textonly='false' data-textvisible='false' data-msgtext='' id="tsu_gastronomia" onClick='guardaIdOferta(this.id)' href='#PageInfoOferta'>TSU en Gastronomía</a></li>
     
-		<div data-demo-html="true">
-				<ul data-role="listview" data-divider-theme="a">
-               
-                <li data-role="list-divider"><h2>Técnico Superior Universitario</h2></li>
-                <li><a class='show-page-loading-msg' rel='external' data-textonly='false' data-textvisible='false' data-msgtext='' id="tsu_dns" onClick='guardaIdOferta(this.id)' href='#PageInfoOferta'>TSU en Desarrollo de Negocios</a></li>
-                <li><a class='show-page-loading-msg' rel='external' data-textonly='false' data-textvisible='false' data-msgtext='' id="tsu_tics" onClick='guardaIdOferta(this.id)' href='#PageInfoOferta'>TSU en Tecnologías de la Información y Comunicación</a></li>
-                <li><a class='show-page-loading-msg' rel='external' data-textonly='false' data-textvisible='false' data-msgtext='' id="tsu_mecatronica" onClick='guardaIdOferta(this.id)' href='#PageInfoOferta'>TSU en Mecatrónica</a></li>
-                <li><a class='show-page-loading-msg' rel='external' data-textonly='false' data-textvisible='false' data-msgtext='' id="tsu_gastronomia" onClick='guardaIdOferta(this.id)' href='#PageInfoOferta'>TSU en Gastronomía</a></li>
-                
-					<!--<li><a href="http://sergiosolis.com/bacalar/apputchetumal/paginas/oferta/tsu_negocios.html" rel="external">TSU en Desarrollo de Negocios</a></li>
-					<li><a href="http://sergiosolis.com/bacalar/apputchetumal/paginas/oferta/tsu_tics.html">TSU en Tecnologías de la Información y Comunicación</a></li>
-                    <li><a href="http://sergiosolis.com/bacalar/apputchetumal/paginas/oferta/tsu_mecatronica.html">TSU en Mecatrónica</a></li>
-					<li><a href="http://sergiosolis.com/bacalar/apputchetumal/paginas/oferta/tsu_gastronomia.html">TSU en Gastronomía</a></li>-->
-					<li data-role="list-divider"><h2>Ingenierías y Licenciaturas</h2></li>
+        <li data-role="list-divider"><h2>Ingenierías y Licenciaturas</h2></li>
+        
+        <li><a class='show-page-loading-msg' rel='external' data-textonly='false' data-textvisible='false' data-msgtext='' id="ing_die" onClick='guardaIdOferta(this.id)' href='#PageInfoOferta'>Ingeniería en Desarrollo e Innovación Empresarial</a></li>
+        <li><a class='show-page-loading-msg' rel='external' data-textonly='false' data-textvisible='false' data-msgtext='' id="ing_tics" onClick='guardaIdOferta(this.id)' href='#PageInfoOferta'>Ingeniería en Tecnologías de la Información y Comunicación</a></li>
+        <li><a class='show-page-loading-msg' rel='external' data-textonly='false' data-textvisible='false' data-msgtext='' id="ing_mecatronica" onClick='guardaIdOferta(this.id)' href='#PageInfoOferta'>Ingeniería en Mecatrónica</a></li>
+        <li><a class='show-page-loading-msg' rel='external' data-textonly='false' data-textvisible='false' data-msgtext='' id="lic_gastronomia" onClick='guardaIdOferta(this.id)' href='#PageInfoOferta'>Licenciatura en Gastronomía</a></li>
                     
-                    <li><a class='show-page-loading-msg' rel='external' data-textonly='false' data-textvisible='false' data-msgtext='' id="ing_die" onClick='guardaIdOferta(this.id)' href='#PageInfoOferta'>Ingeniería en Desarrollo e Innovación Empresarial</a></li>
-                    <li><a class='show-page-loading-msg' rel='external' data-textonly='false' data-textvisible='false' data-msgtext='' id="ing_tics" onClick='guardaIdOferta(this.id)' href='#PageInfoOferta'>Ingeniería en Tecnologías de la Información y Comunicación</a></li>
-                    <li><a class='show-page-loading-msg' rel='external' data-textonly='false' data-textvisible='false' data-msgtext='' id="ing_mecatronica" onClick='guardaIdOferta(this.id)' href='#PageInfoOferta'>Ingeniería en Mecatrónica</a></li>
-                    <li><a class='show-page-loading-msg' rel='external' data-textonly='false' data-textvisible='false' data-msgtext='' id="lic_gastronomia" onClick='guardaIdOferta(this.id)' href='#PageInfoOferta'>Licenciatura en Gastronomía</a></li>
-                    
-					<!--<li><a href="http://sergiosolis.com/bacalar/apputchetumal/paginas/oferta/ing_negocios.html">Ingeniería en Desarrollo e Innovación Empresarial </a></li>
-					<li><a href="http://sergiosolis.com/bacalar/apputchetumal/paginas/oferta/ing_tics.html">Ingeniería en Tecnologías de la Información y Comunicación</a></li>
-                    <li><a href="http://sergiosolis.com/bacalar/apputchetumal/paginas/oferta/ing_mecatronica.html">Ingeniería en Mecatrónica</a></li>
-					<li><a href="http://sergiosolis.com/bacalar/apputchetumal/paginas/oferta/lic_gastronomia.html">Licenciatura en Gastronomía</a></li>
-				</ul>-->
-			</div>
-
+	</ul>
 </div>
 <!----------------------------------Info Oferta Academica (Info de la carrera)----------------------------------------->
 <div data-role="page" id="PageInfoOferta" data-theme="a">

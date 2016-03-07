@@ -3,7 +3,7 @@
 document.addEventListener('deviceready', ini, false);
 
 function ini()
-{	
+{
 	//localStorage.clear();
 	
 	var NumNoticiasNoVistas = localStorage.getItem('ultimoIdNoticias') || 0;//Extráe ultimo id guardado
@@ -216,9 +216,9 @@ function traerItemsNoVistos(NumNoticiasNoVistas, NumAvisosNoVistos, NumEventosNo
 				global: false,
 				dataType: "html",
 				async: true,
-                //type: "POST",
-                url: urlDominio + "/apputchetumal/php/contRegistrosNuevos.php?idNota=" + NumNoticiasNoVistas + "&idAviso=" + NumAvisosNoVistos  + "&idEvento=" + NumEventosNoVistos + "&idConv=" + NumConvNoVistos + "", 
-                //data: $("#form").serialize(),
+                type: "GET",
+                url: urlDominio + "/apputchetumal/php/contRegistrosNuevos.php", 
+                data : { idNota : NumNoticiasNoVistas, idAviso : NumAvisosNoVistos, idEvento : NumEventosNoVistos, idConv : NumConvNoVistos },
 				error:  function(){					
 					var a = localStorage.getItem('NumNoticiasNoVistas') || '<empty>';//Extráe
 					var b = localStorage.getItem('NumAvisosNoVistos') || '<empty>';//Extráe
@@ -247,7 +247,7 @@ function traerItemsNoVistos(NumNoticiasNoVistas, NumAvisosNoVistos, NumEventosNo
     }
 	
 };
-//-----------------------------------fijar numero items no vistos a la etiqueta SPAN----------------
+//----------------------fijar numero items no vistos a la etiqueta SPAN (a la derecha del titulo del boton)----------------
 function fijarNumItemsNoVistos(a, b, c, d){
 		if(a > 0){
 			if(a > 9){
@@ -296,9 +296,9 @@ function traerInfoOferta(clicked_id)
 				global: false,
 				dataType: "html",
 				async: true,
-                //type: "POST",
-                url: urlDominio + "/apputchetumal/php/Consultar_pagina.php?identificador=" + clicked_id + "",
-                //data: $("#form").serialize(),
+                type: "GET",
+                url: urlDominio + "/apputchetumal/php/Consultar_pagina.php",
+                data : { identificador : clicked_id },
 				error:  function(){
 					checkConnectionDelay('DivInfoOferta', 'DivBtnRec_InfoOfertAcadem')
 				},
@@ -357,9 +357,9 @@ function traerPlanEstudio(clicked_id)
 				global: false,
 				dataType: "html",
 				async: true,
-				//type: "POST",
-				url: urlDominio + "/apputchetumal/php/consultar_plan_estudio.php?identificador=" + clicked_id + "",
-				//data: $("#form").serialize(),
+				type: "GET",
+				url: urlDominio + "/apputchetumal/php/consultar_plan_estudio.php",
+				data : { identificador : clicked_id },
 				error:  function(){
 					checkConnectionDelay('subtituloPlanEst', 'DivBtnRec_PlanEstudio')
 				},
@@ -458,9 +458,9 @@ function traerListaCuentas()
 	            complete: function() {  $.mobile.loading( 'hide'); }, //Hide spinner
 				global: false,
 				dataType: "html",
-				async: true,
-                //type: "POST",
+				async: true,				
                 url: urlDominio + "/apputchetumal/php/consultar_cuentas.php",
+				type : 'GET',
 				error:  function(){
 					checkConnectionDelay('DivInfoCuentas', 'DivBtnRec_Cuentas')
 				},
@@ -499,7 +499,7 @@ function traerListaDirectorio()
 				global: false,
 				dataType: "html",
 				async: true,
-                //type: "POST",
+                type : 'GET',
                 url: urlDominio + "/apputchetumal/php/consultar_directorio.php",
                 //data: $("#form").serialize(),
 				error:  function(){
@@ -541,7 +541,7 @@ function traerListaDudas()
 				global: false,
 				dataType: "html",
 				async: true,
-                //type: "POST",
+                type : 'GET',
                 url: urlDominio + "/apputchetumal/php/consultar_dudas.php",
                 //data: $("#form").serialize(),
 				error:  function(){
@@ -580,8 +580,9 @@ function traerInfoDudas(clicked_id)
 				global: false,
 				dataType: "html",
 				async: true,
-                //type: "POST",
-                url: urlDominio + "/apputchetumal/php/consultar_dudas_info.php?Id=" + clicked_id + "",
+                type : 'GET',
+                url: urlDominio + "/apputchetumal/php/consultar_dudas_info.php",
+				data : { Id : clicked_id },
                 //data: $("#form").serialize(),
 				error:  function(){
 					checkConnectionDelay('DivInfoDudas', 'DivBtnRec_InfoDudas')
@@ -620,7 +621,7 @@ function traerListaNoticias()
 				global: false,
 				dataType: "html",
 				async: true,
-                //type: "POST",
+                type: "GET",
                 url: urlDominio + "/apputchetumal/php/consultar_noticias.php",
                 //data: $("#form").serialize(),
 				error:  function(){
@@ -682,9 +683,10 @@ function traerInfoNoticias(clicked_id)
 				global: false,
 				dataType: "html",
 				async: true,
-                //type: "POST",
-                url: urlDominio + "/apputchetumal/php/consultar_noticias_info.php?Id=" + clicked_id + "",
-                //data: $("#form").serialize(),
+                type: "GET",
+				//url: urlDominio + "/apputchetumal/php/consultar_noticias_info.php?Id=" + clicked_id + "",
+                url: urlDominio + "/apputchetumal/php/consultar_noticias_info.php",
+				data : { Id : clicked_id },
 				error:  function(){
 					checkConnectionDelay('DivInfoNoticias', 'DivBtnRec_InfoNoticias')
 				},
@@ -836,8 +838,9 @@ function traerInfoEventos(clicked_id)
 				global: false,
 				dataType: "html",
 				async: true,
-                //type: "POST",
-                url: urlDominio + "/apputchetumal/php/consultar_eventos_info.php?Id=" + clicked_id + "",
+                type: "GET",
+                url: urlDominio + "/apputchetumal/php/consultar_eventos_info.php",
+				data : { Id : clicked_id },
                 //data: $("#form").serialize(),
 				error:  function(){
 					checkConnectionDelay('DivInfoEventos', 'DivBtnRec_InfoEventos')
@@ -941,9 +944,9 @@ function traerInfoConvocatorias(clicked_id)
 				global: false,
 				dataType: "html",
 				async: true,
-                //type: "POST",
-                url: urlDominio + "/apputchetumal/php/consultar_convocatoria_info.php?Id=" + clicked_id + "",
-                //data: $("#form").serialize(),
+                type: "GET",
+                url: urlDominio + "/apputchetumal/php/consultar_convocatoria_info.php",
+				data : { Id : clicked_id },
 				error:  function(){
 					checkConnectionDelay('DivInfoConvocatoria', 'DivBtnRec_InfoConvocatoria')
 				},
@@ -1048,9 +1051,9 @@ function traerInfoAvisos(clicked_id)
 				global: false,
 				dataType: "html",
 				async: true,
-                //type: "POST",
-                url: urlDominio + "/apputchetumal/php/consultar_avisos_info.php?Id=" + clicked_id + "",
-                //data: $("#form").serialize(),
+                type: "GET",
+                url: urlDominio + "/apputchetumal/php/consultar_avisos_info.php",
+                data : { Id : clicked_id },
 				error:  function(){							
 					checkConnectionDelay('DivInfoAvisos', 'DivBtnRec_InfoAvisos')
 				},
