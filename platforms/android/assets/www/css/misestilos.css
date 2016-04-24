@@ -51,11 +51,19 @@ h2 {
 #identidad {
 	background-color:#fff;
 }
+.imgNoticias{
+	height:150px;
+	margin:3px;
+}
 #imgmenu {
 	width:60%;
 	max-width:150px;
 }
-img {
+#PageInfoOferta img,
+#PageInfoDudas img,
+#PagaInfoEvento img,
+#PagaInfoConvocatoria img,
+#PagaInfoAvisos img{
 height: auto;
 max-width: 100%;
 }
@@ -88,7 +96,16 @@ max-width: 100%;
 #collapsibleset{
 	display:none;
 }
-
+/*-------------Carrusel imagenes noticias-----*/
+.scroll
+{
+	width:100%;
+	overflow: auto;
+}
+.imgNoticias
+{
+	height:130px;
+}
 /*-------------------------------------grid---------------------------*/
 
 *:after,

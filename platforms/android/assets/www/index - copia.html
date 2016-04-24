@@ -1,0 +1,456 @@
+<!DOCTYPE html><html>
+<head>
+<!--<meta http-equiv= "Content-Type" content= "text/html; charset= ISO-8859-1"> -->
+<meta http-equiv= "Content-Type" content= "text/html; charset= UTF-8">
+<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+<!--<script type="text/javascript" charset="UTF-8" src="'phonegap.js"></script>-->
+
+<link rel="stylesheet" href="jquery-mobile/UTChetumal.css" />
+<link rel="stylesheet" href="jquery-mobile/jquery.mobile.icons.min.css" />
+<link rel="stylesheet" href="jquery-mobile/jquery.mobile.structure-1.4.5.css" />
+<script src="jquery-1.11.2.min.js" type="text/javascript"></script>
+<script src="jquery-mobile/jquery.mobile-1.4.5.min.js" type="text/javascript"></script>
+<link rel="stylesheet" href="css/misestilos.css" type="text/css">      
+         
+
+<!--<script type="text/javascript">
+//document.addEventListener("offline", function(){ alert("You're offline") }, false);
+//document.addEventListener("online", function(){ alert("You're online") }, false);
+</script>-->
+
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript" charset="utf-8" src="PushNotification.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript"> 
+//El registro al servicio de google lo hacemos automáticamente
+	 app.initialize();
+</script>
+
+<!-------------------------------------------------------------->
+<link rel="stylesheet" href="css/css-photoswipe/style.css">
+<link rel="stylesheet" href="css/css-photoswipe/photoswipe.css">
+<link rel="stylesheet" href="css/css-photoswipe/default-skin.css">
+
+<script src="js/js-photoswipe/photoswipe.min.js"></script>
+<script src="js/js-photoswipe/photoswipe-ui-default.min.js"></script>
+<script src="js/js-photoswipe/jquery.min.js"></script>
+<!-------------------------------------------------------------->
+
+</head>
+<body> <!--onload="rotar_imagen();"-->
+
+<!----------------------------------INICIO-------------------------------------->
+<div data-role="page" id="pag_1">
+	<div data-role="header" data-theme="b" data-position="fixed">
+		<h1>UT Chetumal</h1>
+	</div>
+    
+    
+    <div class="picture">
+
+
+  <figure >
+      <a href="img/borrar/office-2.jpg" itemprop="contentUrl" data-size="1000x667">
+          <img src="img/borrar/office-2-thumb.jpg" height="400" width="600" alt="no hay img">
+      </a>
+  </figure>
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="pswp__bg"></div>
+    <div class="pswp__scroll-wrap">
+ 
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+ 
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+    
+     
+    <div id="banner" align="center" onClick="openImg()" > 
+	<script>
+    function openImg() {
+        //window.open( urlDominio + '/archivos/baners/banner.jpg', '_blank', 'location=no,toolbar=yes');
+        window.open( urlDominio + '/archivos/baners/banner.jpg', '_blank', 'location=yes');
+    }
+    </script>
+	</div>  
+   
+	<div class="container">
+    	<div class="row">
+			<div class="large-3 small-4"><a href="#PageListaNoticias" class="ui-btn ui-btn-a btnmenu"><img id="imgmenu" src="img/noticias.png"><br/>Noticias<span id="NumNoticiasNoVistas"></span></a></div>
+            
+            <div class="large-3 small-4"><a href="#PageListaEventos" class="ui-btn ui-btn-a btnmenu"><img id="imgmenu" src="img/eventos.png"><br/>Eventos<span id="NumEventosNoVistos"></span></a></div>
+            
+            <div class="large-3 small-4"><a href="#PageListaConvocatorias" class="ui-btn ui-btn-a btnmenu" rel="external"><img id="imgmenu" src="img/convocatorias.png"><br/>Convocatorias<span id="NumConvNoVistas"></span></a></div>
+            
+            <div class="large-3 small-4"><a href="#PageListaAvisos" class="ui-btn ui-btn-a btnmenu"><img id="imgmenu" src="img/avisos.png"><br/>Avisos<span id="NumAvisosNoVistos"></span></a></div>
+            
+            <div class="large-3 small-4"><a href="#PageListaCuentas" class="ui-btn ui-btn-a btnmenu" rel="external"><img id="imgmenu" src="img/cuentas.png"><br/>Cuentas</a></div>
+            
+            <div class="large-3 small-4"><a href="#PageListaDirectorio" class="ui-btn ui-btn-a btnmenu" rel="external"><img id="imgmenu" src="img/directorio.png"><br/>Directorio</a></div>
+            
+            <div class="large-3 small-4"><a href="#PageListaDudas" class="ui-btn ui-btn-a btnmenu" rel="external"><img id="imgmenu" src="img/dudas.png"><br/>Preguntas frecuentes</a></div>
+            
+            <div class="large-3 small-4"><a href="#PageOferta" class="ui-btn ui-btn-a btnmenu" rel="external"><img id="imgmenu" src="img/ofertaAcademica.png"><br/>Oferta acad&eacute;mica</a></div>
+            
+		</div>
+	</div>
+
+</div><!-- /page one -->
+<!--------------------------------------------------Oferta---------------------------------------------->
+<div data-role="page" id="PageOferta" data-theme="a">
+
+	<div data-role="header" data-theme="b" data-position="fixed">
+		<h1>Oferta Académica</h1>
+        <a href="#" data-rel="back" class="ui-btn ui-btn-left ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+	</div><!-- /header -->
+        
+	<ul data-role="listview" data-divider-theme="a">        
+        <li data-role="list-divider"><h2>Técnico Superior Universitario</h2></li>
+        
+        <li><a class='show-page-loading-msg' rel='external' data-textonly='false' data-textvisible='false' data-msgtext='' id="tsu_dns" onClick='guardaIdOferta(this.id)' href='#PageInfoOferta'>TSU en Desarrollo de Negocios</a></li>
+        <li><a class='show-page-loading-msg' rel='external' data-textonly='false' data-textvisible='false' data-msgtext='' id="tsu_tics" onClick='guardaIdOferta(this.id)' href='#PageInfoOferta'>TSU en Tecnologías de la Información y Comunicación</a></li>
+        <li><a class='show-page-loading-msg' rel='external' data-textonly='false' data-textvisible='false' data-msgtext='' id="tsu_mecatronica" onClick='guardaIdOferta(this.id)' href='#PageInfoOferta'>TSU en Mecatrónica</a></li>
+        <li><a class='show-page-loading-msg' rel='external' data-textonly='false' data-textvisible='false' data-msgtext='' id="tsu_gastronomia" onClick='guardaIdOferta(this.id)' href='#PageInfoOferta'>TSU en Gastronomía</a></li>
+    
+        <li data-role="list-divider"><h2>Ingenierías y Licenciaturas</h2></li>
+        
+        <li><a class='show-page-loading-msg' rel='external' data-textonly='false' data-textvisible='false' data-msgtext='' id="ing_die" onClick='guardaIdOferta(this.id)' href='#PageInfoOferta'>Ingeniería en Desarrollo e Innovación Empresarial</a></li>
+        <li><a class='show-page-loading-msg' rel='external' data-textonly='false' data-textvisible='false' data-msgtext='' id="ing_tics" onClick='guardaIdOferta(this.id)' href='#PageInfoOferta'>Ingeniería en Tecnologías de la Información y Comunicación</a></li>
+        <li><a class='show-page-loading-msg' rel='external' data-textonly='false' data-textvisible='false' data-msgtext='' id="ing_mecatronica" onClick='guardaIdOferta(this.id)' href='#PageInfoOferta'>Ingeniería en Mecatrónica</a></li>
+        <li><a class='show-page-loading-msg' rel='external' data-textonly='false' data-textvisible='false' data-msgtext='' id="lic_gastronomia" onClick='guardaIdOferta(this.id)' href='#PageInfoOferta'>Licenciatura en Gastronomía</a></li>
+                    
+	</ul>
+</div>
+<!----------------------------------Info Oferta Academica (Info de la carrera)----------------------------------------->
+<div data-role="page" id="PageInfoOferta" data-theme="a">
+
+	<div data-role="header" data-theme="b" data-position="fixed">
+		<h1>Oferta Académica</h1>
+        <a href="#" data-rel="back" class="ui-btn ui-btn-left ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+	</div><!-- /header -->
+    	
+        <div id="DivContentInfoOferta">
+            <div data-role="header" data-theme="a" >
+                <h1 id="subtitulo"></h1>
+            </div>
+            <div id="DivInfoOferta">					                        				
+            </div> 
+		</div>
+        <div id="DivBtnRec_InfoOfertAcadem" class="botonRec">	
+   		</div>
+        <!-- <div id="cargadorInfoOferta">
+            <p>&nbsp;Cargando...</p>
+        </div>-->
+       
+</div>
+<!---------------------------------Plan de estudio (lista de las materias)------------------------------------->
+<div data-role="page" id="PagePlanEstudio" data-theme="a">
+
+	<div data-role="header" data-theme="b" data-position="fixed">
+		<h1>Plan de estudio</h1>
+        <a href="#" data-rel="back" class="ui-btn ui-btn-left ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+	</div><!-- /header -->
+
+        <div data-role="header" data-theme="a" >
+			<h1 id="subtituloPlanEst"></h1>
+		</div>
+	
+        <div id="collapsibleset" data-role="collapsibleset" data-theme="a" data-content-theme="a" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d">
+            <div data-role="collapsible">
+                <h3><div id="h3_1"></div></h3>
+                <div id="DivCuat_1"></div>					
+            </div>
+            <div data-role="collapsible">
+                <h3><div id="h3_2"></div></h3>
+                <div id="DivCuat_2"></div>
+            </div>
+            <div data-role="collapsible">
+                <h3><div id="h3_3"></div></h3>
+                <div id="DivCuat_3"></div>
+            </div>
+            <div data-role="collapsible">
+                <h3><div id="h3_4"></div></h3>
+                <div id="DivCuat_4"></div>
+            </div>
+            <div data-role="collapsible">
+                <h3><div id="h3_5"></div></h3>
+                <div id="DivCuat_5"></div>
+            </div> 
+            <div id="divSextoCuat" data-role="collapsible">
+                <h3><div id="h3_6"></div></h3>
+                <div id="DivCuat_6"></div>
+            </div>                    					
+        </div>
+        <div id="DivBtnRec_PlanEstudio" class="botonRec">	
+   		</div>
+        <!-- <div id="cargadorPlanEstudio">
+        	<p>&nbsp;Cargando...</p>
+   		</div>-->
+</div>
+<!--------------------------------------------------lista Carreras---------------------------------------------->
+<div data-role="page" id="PageCarrera" data-theme="a">
+
+	<div data-role="header" data-theme="b" data-position="fixed">
+		<h1>Oferta Académica</h1>
+        <a href="#" data-rel="back" class="ui-btn ui-btn-left ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+	</div><!-- /header -->
+    
+    <div id="DivIdentidad">
+    </div>
+    <!-- <div id="cargadorIdentidad">
+        <p>&nbsp;Cargando...</p>
+    </div>-->
+
+</div>
+<!------------------------------------------------------Cuentas Bancarias------------------------------------------------>
+<div data-role="page" id="PageListaCuentas" data-theme="a">
+
+	<div data-role="header" data-theme="b" data-position="fixed">
+		<h1>Cuentas bancarias</h1>
+        <a href="#" data-rel="back" class="ui-btn ui-btn-left ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+	</div><!-- /header -->
+    <ul data-role="listview" id="DivInfoCuentas"></ul>
+    <div id="DivBtnRec_Cuentas" class="botonRec">	
+    </div>
+    <!-- <div id="cargadorInfoCuentas">
+        <p>&nbsp;Cargando...</p>
+    </div>     -->
+</div>
+<!------------------------------------------------------Directorio------------------------------------------------>
+<div data-role="page" id="PageListaDirectorio" data-theme="a">
+	<div data-role="header" data-theme="b" data-position="fixed">
+		<h1>Directorio</h1>
+        <a href="#" data-rel="back" class="ui-btn ui-btn-left ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+	</div><!-- /header -->
+    
+    <div role="main" class="ui-content"><!-- /contenido -->
+        <!--<table data-role="table" id="temp-table" data-mode="reflow" class="ui-responsive table-stroke" data-filter="true" data-input="#filterTable-input">
+            <tbody id="">
+                <ul data-role="listview"></ul>
+            </tbody>
+        </table>-->
+    
+        <form class="ui-filterable">
+            <input id="filter-directorio" data-type="search">
+        </form>
+        <div style="margin-top: 10px; margin-bottom: 10px;">&nbsp;</div>
+        
+        <ul data-role="listview" data-filter="true" data-input="#filter-directorio" id="DivInfoDirectorio"></ul>	
+        <div id="DivBtnRec_Directorio" class="botonRec">	
+        </div>
+        <!-- <div id="cargadorInfoDirectorio">
+                <p>&nbsp;Cargando...</p>
+        </div>-->
+        
+	</div><!-- /content -->
+        
+</div>
+<!-----------------------------------------dudas (preguntas frecuentes)------------------------------------->
+<div data-role="page" id="PageListaDudas" data-theme="a">
+
+	<div data-role="header" data-theme="b" data-position="fixed">
+		<h1>Preguntas frecuentes</h1>
+        <a href="#" data-rel="back" class="ui-btn ui-btn-left ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+	</div><!-- /header -->
+    
+	    <div data-role="listview" data-inset="true">
+	    	<ul id="DivListaDudas"></ul>
+	    </div>
+        <div id="DivBtnRec_ListaDudas" class="botonRec"></div>
+        <!-- <div id="cargadorListaDudas">
+        	&nbsp;Cargando...
+   		</div>-->
+        
+</div><!-- /page fin -->
+<!------------------------------------------------------Info Dudas------------------------------------------------>
+<div data-role="page" id="PageInfoDudas" data-theme="a">
+
+	<div data-role="header" data-theme="b" data-position="fixed">
+		<h1>Preguntas frecuentes</h1>
+        <a href="#" data-rel="back" class="ui-btn ui-btn-left ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+	</div><!-- /header -->
+		<div id="DivInfoDudas"></div>
+        <div id="DivBtnRec_InfoDudas" class="botonRec"></div>
+        <!-- <div id="cargadorInfoDudas">
+        	<p>&nbsp;Cargando...</p>
+   		</div>-->
+</div>
+<!------------------------------------------------------Noticias------------------------------------------------>
+
+<div data-role="page" id="PageListaNoticias" data-theme="a">
+
+	<div data-role="header" data-theme="b" data-position="fixed">
+		<h1>Noticias</h1>
+        <a href="#" data-rel="back" class="ui-btn ui-btn-left ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+	</div><!-- /header -->
+    
+    <div id="DivMensajeNoticia"></div>
+    
+    <div data-role="listview" data-inset="true">
+        <ul id="DivListaNoticias"></ul>
+    </div>
+    <div id="DivBtnRec_ListaNoticias" class="botonRec"></div>
+    
+</div><!-- /page fin -->
+<!------------------------------------------------------Info Noticias------------------------------------------------>
+
+<div data-role="page" id="PagaInfoNoticia" data-theme="a" >
+
+	<div data-role="header" data-theme="b" data-position="fixed">
+		<h1>Noticias</h1>
+        <a href="#" data-rel="back" class="ui-btn ui-btn-left ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+	</div><!-- /header -->
+		<div id="DivInfoNoticias"></div>
+        
+        <div id="DivBtnRec_InfoNoticias" class="botonRec"></div>
+        <!-- <div id="cargadorInfoNoticia">
+        	<p>&nbsp;Cargando...</p>
+   		</div>-->
+</div>
+<!------------------------------------------------------Lista Eventos------------------------------------------------>
+
+<div data-role="page" id="PageListaEventos" data-theme="a">
+
+	<div data-role="header" data-theme="b" data-position="fixed">
+		<h1>Eventos</h1>
+        <a href="#" data-rel="back" class="ui-btn ui-btn-left ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+	</div><!-- /header -->
+    
+    <div id="DivMensajeEventos"></div>
+    
+    <div data-role="listview" data-inset="true">
+        <ul id="DivListaEventos"></ul>
+    </div>
+    <div id="DivBtnRec_ListaEventos" class="botonRec"></div>
+        <!-- <div id="cargadorListaEventos">
+        	&nbsp;Cargando...
+   		</div>-->
+        
+        <!--popup-->
+        <!-- <div data-role="popup" id="popupEventos" class="ui-corner-all" data-overlay-theme="b" style="max-width:400px;" data-transition="pop"></div>-->
+        
+</div><!-- /page fin -->
+<!------------------------------------------------------Info Eventos------------------------------------------------>
+<div data-role="page" id="PagaInfoEvento" data-theme="a">
+
+	<div data-role="header" data-theme="b" data-position="fixed">
+		<h1>Eventos</h1>
+        <a href="#" data-rel="back" class="ui-btn ui-btn-left ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+	</div><!-- /header -->
+		<div id="DivInfoEventos"></div>
+        <div id="DivBtnRec_InfoEventos" class="botonRec"></div>
+       <!--  <div id="cargadorInfoEvento">
+        	<p>&nbsp;Cargando...</p>
+   		</div>-->
+</div>
+<!------------------------------------------------------Lista Convocatorias------------------------------------------------>
+
+<div data-role="page" id="PageListaConvocatorias" data-theme="a">
+
+	<div data-role="header" data-theme="b" data-position="fixed">
+		<h1>Convocatorias</h1>
+        <a href="#" data-rel="back" class="ui-btn ui-btn-left ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+	</div><!-- /header -->
+    
+    <div id="DivMensajeConv"></div>
+    
+    <div data-role="listview" data-inset="true">
+        <ul id="DivListaConvocatoria"></ul>
+    </div>
+    
+    <div id="DivBtnRec_ListaConvocatoria" class="botonRec"></div>
+       <!--  <div id="cargadorListaConvocatoria">
+        	&nbsp;Cargando...
+   		</div>-->
+        
+</div><!-- /page fin -->
+<!------------------------------------------------------Info Convocatoria------------------------------------------------>
+<div data-role="page" id="PagaInfoConvocatoria" data-theme="a">
+
+	<div data-role="header" data-theme="b" data-position="fixed">
+		<h1>Convocatorias</h1>
+        <a href="#" data-rel="back" class="ui-btn ui-btn-left ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+	</div><!-- /header -->
+		<div id="DivInfoConvocatoria"></div>
+        <div id="DivBtnRec_InfoConvocatoria" class="botonRec"></div>
+        <!-- <div id="cargadorInfoConvocatoria">
+        	<p>&nbsp;Cargando...</p>
+   		</div>-->
+</div>
+<!------------------------------------------------------Avisos------------------------------------------------>
+
+<div data-role="page" id="PageListaAvisos" data-theme="a">
+
+	<div data-role="header" data-theme="b" data-position="fixed">
+		<h1>Avisos</h1>
+        <a href="#" data-rel="back" class="ui-btn ui-btn-left ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+	</div><!-- /header -->
+    <div id="DivMensajeAvisos"></div>
+    
+    <div data-role="listview" data-inset="true">
+        <ul id="DivListaAvisos"></ul>
+    </div>
+    <div id="DivBtnRec_ListaAvisos" class="botonRec"></div>
+       <!--  <div id="cargadorListaAvisos">
+        	&nbsp;Cargando...
+   		</div>-->
+        
+        <!--popup-->
+        <!-- <div data-role="popup" id="popupAvisos" class="ui-corner-all" data-overlay-theme="b" style="max-width:400px;" data-transition="pop"></div>-->
+        
+</div><!-- /page fin -->
+<!------------------------------------------------------Info Avisos------------------------------------------------>
+<div data-role="page" id="PagaInfoAvisos" data-theme="a">
+
+	<div data-role="header" data-theme="b" data-position="fixed">
+		<h1>Avisos</h1>
+        <a href="#" data-rel="back" class="ui-btn ui-btn-left ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+	</div><!-- /header -->
+		<div id="DivInfoAvisos"></div>
+        <div id="DivBtnRec_InfoAvisos" class="botonRec"></div>
+       <!-- <div id="cargadorInfoAvisos">
+        	<p>&nbsp;Cargando...</p>
+   		</div>-->
+</div>
+
+<!----------------------------------------------------------------------->
+
+
+
+<script src="js/js-photoswipe/script-min.js"></script><!--photoswipe-->
+</body>
+</html>
+<script src="js/principal.js" type="text/javascript"></script>

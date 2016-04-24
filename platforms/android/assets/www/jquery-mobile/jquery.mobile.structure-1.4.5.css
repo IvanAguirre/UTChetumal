@@ -387,7 +387,7 @@ button.ui-btn,
 	box-sizing: border-box;
 	-webkit-appearance: none;
 	-moz-appearance: none;
-	width: 100%;
+	/*width: 100%;*/
 }
 button.ui-btn-inline,
 .ui-header button.ui-btn,

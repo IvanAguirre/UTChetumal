@@ -42,6 +42,13 @@ module.exports = [
         "clobbers": [
             "window.StatusBar"
         ]
+    },
+    {
+        "file": "plugins/cordova-plugin-device/www/device.js",
+        "id": "cordova-plugin-device.device",
+        "clobbers": [
+            "device"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -50,7 +57,8 @@ module.exports.metadata =
     "org.apache.cordova.network-information": "0.2.15",
     "org.apache.cordova.inappbrowser": "0.6.0",
     "cordova-plugin-dialogs": "1.2.0",
-    "cordova-plugin-statusbar": "2.1.1"
+    "cordova-plugin-statusbar": "2.1.1",
+    "cordova-plugin-device": "1.1.3-dev"
 }
 // BOTTOM OF METADATA
 });

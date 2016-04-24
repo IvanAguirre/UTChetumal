@@ -69,7 +69,7 @@ var app = {
     onNotificationGCM: function(e) {
         switch( e.event )
         {
-            case 'registered':
+            case 'registered':				
                 if ( e.regid.length > 0 )
                 {
                     console.log("Regid " + e.regid);
@@ -78,7 +78,8 @@ var app = {
                     //document.getElementById('regId').value = e.regid;
 					//registrar();
 					//llamarAjax(e.regid);
-					enviarDatos(e.regid);
+					var deviceID = device.uuid; //identificador unico del teléfono
+					enviarDatos(e.regid, deviceID);
                 }
             break;
  
@@ -179,7 +180,7 @@ var app = {
     }
 };
 
-function enviarDatos(id_registro)
+function enviarDatos(id_registro, deviceID)
 {
     /*opcion dos*/
      //$('#formulario').submit();
@@ -200,8 +201,8 @@ if(window.XMLHttpRequest)
 	}
 } */
 // Pedimos el archivo "registro.php" 
-ajax.open("POST","http://www.agendasonidocaracol.mx/apputchetumal/admin/PhonegapPushNotifications/registro.php",true)
+ajax.open("POST", urlDominio + "/admin/PhonegapPushNotifications/registro.php",true)
 ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded")
-ajax.send("&regId=" + id_registro)
+ajax.send("&regId=" + id_registro + "&deviceId=" + deviceID)
 
 }

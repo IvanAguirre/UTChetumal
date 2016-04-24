@@ -27,7 +27,7 @@
     <preference name="android-minSdkVersion" value="7" />
     <preference name="EnableViewportScale" value="true" />
     <preference name="android-installLocation" value="auto" />
-	<preference name="StatusBarBackgroundColor" value="#006A57" />
+    <preference name="StatusBarBackgroundColor" value="#006A57" />
     <gap:plugin name="org.apache.cordova.battery-status" />
     <gap:plugin name="org.apache.cordova.camera" />
     <gap:plugin name="org.apache.cordova.media-capture" />
@@ -96,5 +96,8 @@
     <feature name="StatusBar">
         <param name="android-package" value="org.apache.cordova.statusbar.StatusBar" />
         <param name="onload" value="true" />
+    </feature>
+    <feature name="Device">
+        <param name="android-package" value="org.apache.cordova.device.Device" />
     </feature>
 </widget>

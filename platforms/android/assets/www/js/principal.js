@@ -10,8 +10,7 @@ function ini()
 	var NumAvisosNoVistos = localStorage.getItem('ultimoIdAvisos') || 0;//Extráe ultimo id guardado
 	var NumEventosNoVistos = localStorage.getItem('ultimoIdEventos') || 0;//Extráe ultimo id guardado
 	var NumConvNoVistos = localStorage.getItem('ultimoIdConv') || 0;//Extráe ultimo id guardado
-	traerItemsNoVistos(NumNoticiasNoVistas, NumAvisosNoVistos, NumEventosNoVistos, NumConvNoVistos);		
-				
+	traerItemsNoVistos(NumNoticiasNoVistas, NumAvisosNoVistos, NumEventosNoVistos, NumConvNoVistos);			
 }
 
 //------------variables globales---------
@@ -39,27 +38,22 @@ $('#PageListaDirectorio').on('pageshow', function() {
 //------------------lista noticias------------
 $('#PageListaNoticias').on('pageshow', function() {
 	traerListaNoticias();
-	repositionPopup('popupNoticias');
 });
 //------------------lista Eventos------------
 $('#PageListaEventos').on('pageshow', function() {
 	traerListaEventos();
-	repositionPopup('popupEventos');
 });
 //------------------lista Convocatorias------------
 $('#PageListaConvocatorias').on('pageshow', function() {
 	traerListaConvocatorias();
-	repositionPopup('popupConvocatorias');
 });
 //------------------lista Avisos------------
 $('#PageListaAvisos').on('pageshow', function() {
 	traerListaAvisos();
-	repositionPopup('popupAvisos');
 });
 //------------------Inicio------------
-$('#pag_1').on('pageshow', function() {
-	repositionPopup('popupIndex');
-});
+/*$('#pag_1').on('pageshow', function() {
+});*/
 //------------------Info Oferta (informacion de la carrera)------------
 
 $('#PageInfoOferta').on('pageshow', function() {
@@ -710,17 +704,12 @@ function traerInfoNoticias(clicked_id)
 						lista += "" + value.Contenido + "";													
 						lista += "</div>";
 						var idNota = value.IdNota;
-						
-						if (arrayImg.length > 0) {
-							//lista += "<div class='fotorama' data-width='700' data-ratio='' data-max-width='100%' align='center'>";
-							var lista2="";
+						if (arrayImg.length > 0) {//si hay imagenes entro aponerlas
+							lista+="<div class='scroll'><table><tr>";
 							for (x=0;x<arrayImg.length;x++){
-								
-								lista += "<img src='" + urlDominio + "/noticias/img/" + idNota + "/orig/" +arrayImg[x] + "'>";
+								lista += "<td><img class='imgNoticias' src='" + urlDominio + "/noticias/img/" + idNota + "/orig/" +arrayImg[x] + "'></td>";
 							}
-							//document.getElementById("fotorama").innerHTML += lista2;  // Agrego nueva linea antes
-							//$(".fotorama").append(lista2);
-							//lista += "</div>";
+							lista+="</tr></table></div>";
 						}
 					}
 					cont ++;
@@ -1217,13 +1206,13 @@ function refreshPage(DivBotonRecargar)
 		
 }
 //--------------------------------Función para reposicionar Popup
-function repositionPopup(DivPopup){
+/*function repositionPopup(DivPopup){
 	$('#' + DivPopup).popup({
 		afteropen: function (event, ui){
 			$('#' + DivPopup).popup('reposition', 'positionTo: window');
 		}
 	});
-};
+};*/
 //---------------------------------Función para mostrar mensaje si no hay publicaciones
 function checkForItems(cont, idDiv){
 	
