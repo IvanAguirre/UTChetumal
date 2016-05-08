@@ -4,6 +4,7 @@ document.addEventListener('deviceready', ini, false);
 
 function ini()
 {
+	//$("#pag_1").load(greet();); 
 	//localStorage.clear();
 	
 	var NumNoticiasNoVistas = localStorage.getItem('ultimoIdNoticias') || 0;//Extráe ultimo id guardado
@@ -452,6 +453,7 @@ function traerListaCuentas()
 	            complete: function() {  $.mobile.loading( 'hide'); }, //Hide spinner
 				global: false,
 				dataType: "html",
+				cache: true,
 				async: true,				
                 url: urlDominio + "/apputchetumal/php/consultar_cuentas.php",
 				type : 'GET',
@@ -634,7 +636,7 @@ function traerListaNoticias()
 					}	
 					lista += "<li><a class='show-page-loading-msg' rel='external' data-textonly='false' data-textvisible='false' data-msgtext='' id='" + value.IdNota + "' onClick='guardaIdNota(this.id)' href='#PagaInfoNoticia'>";
 					
-						lista += "<img style='position:absolute;top:0;bottom:0;margin:auto;' src='" + urlDominio + "/noticias/img/" + value.IdNota + "/full.jpg'  onerror=\" this.src='img/nofoto.jpg' \">";
+					lista += "<img style='position:absolute;top:0;bottom:0;margin:auto;' src='" + urlDominio + "/noticias/img/" + value.IdNota + "/full.jpg'  onerror=\" this.src='img/nofoto.jpg' \">";
 					
 					lista += "<h2 style='font-size:.8em'>" + value.Titulo + "</h2>";	
 					fechaMayuscula = value.fecha_publicacion;
@@ -696,21 +698,36 @@ function traerInfoNoticias(clicked_id)
 					}
 						
 					if(typeof(value.Titulo) != "undefined" || typeof(value.Contenido) != "undefined"){
-						lista += "<div role='main' class='ui-content'>";
+						lista += "<div role='main' class='ui-content' style='padding:0 1em'>";
 						lista += "<h2>" + value.Titulo + "</h2>";
 						var fechaMayuscula = value.FechaPublicacion;
 						fechaMayuscula = fechaMayuscula[0].toUpperCase() + fechaMayuscula.slice(1);	
-						lista += "<p style='font-size: .8em;color:#666'>" + fechaMayuscula  + " </p>";				
-						lista += "" + value.Contenido + "";													
+						lista += "<p style='font-size: .8em;color:#666'>" + fechaMayuscula  + " </p>";	
 						lista += "</div>";
+						
 						var idNota = value.IdNota;
 						if (arrayImg.length > 0) {//si hay imagenes entro aponerlas
 							lista+="<div class='scroll'><table><tr>";
-							for (x=0;x<arrayImg.length;x++){
-								lista += "<td><img class='imgNoticias' src='" + urlDominio + "/noticias/img/" + idNota + "/orig/" +arrayImg[x] + "'></td>";
+							/*for (x=0;x<arrayImg.length;x++){
+							lista += "<td><img class='imgNoticias' src='" + urlDominio + "/noticias/img/" + idNota + "/orig/" +arrayImg[x] + "'></td>";
+							}*/							
+							for (x=0;x<arrayImg.length;x++){								
+								var origen = urlDominio + "/noticias/img/" + idNota + "/full/" +arrayImg[x];	
+								putDimencionesImg(origen, x, arrayImg.length);
+								var imagen=new Image();
+								imagen.src=origen												
+								//var ancho1 = imagen.width;
+								//var alto1 = imagen.height;
+								//alert("Alto: " + alto1 + " Ancho: " + ancho1);								
+								lista += "<td><div class='picture'><figure style='float:left;'><a id='imgNota_"+x+"' href='" + urlDominio + "/noticias/img/" + idNota + "/full/" +arrayImg[x] + "' itemprop='contentUrl' data-size='0x0'><img  src='" + urlDominio + "/noticias/img/" + idNota + "/orig/" +arrayImg[x] + "'  height='200' width='auto' alt='no hay img'  onerror=\" this.src='img/nofoto.jpg' \"></a></figure></div></td>";								
 							}
-							lista+="</tr></table></div>";
+							lista+="</div></td></tr></table></div>";
 						}
+						
+						lista += "<div class='ui-content' style='padding:0 1em'>";			
+						lista += "" + value.Contenido + "";													
+						lista += "</div>";
+						
 					}
 					cont ++;
                });
@@ -718,13 +735,29 @@ function traerInfoNoticias(clicked_id)
                 $("#DivInfoNoticias").listview().listview('refresh');
 				$("#DivBtnRec_InfoNoticias").empty();//vacía div de boton cargar internet
 				//document.getElementById('cargadorInfoNoticia').style.display = 'none';
+				
         });
     }
     catch(ex)
     {
         alert("Error de datos!!");
     }
+	
 };
+function putDimencionesImg(url, id, totImgs) {
+    var img=new Image();
+    img.src=url;
+    img.onload= function(){
+		//ancho alto
+		var dimenciones = img.width + "x" + img.height;
+		//return dimenciones;
+		$('#imgNota_'+id).attr("data-size", dimenciones);
+		if(id+1 == totImgs){
+			photoSwipe();}
+		
+    };
+};
+
 //-----------------------------------------------lista Eventos------------------------------------
 function traerListaEventos()
 {

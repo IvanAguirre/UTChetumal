@@ -1,4 +1,5 @@
-(function($) {
+function photoSwipe(){
+//(function($) {
     var $pswp = $('.pswp')[0];
     var image = [];
 
@@ -44,5 +45,7 @@
             lightBox.init();
         });
     });
-})(jQuery);
+//})(jQuery);
 
+
+};

@@ -26,19 +26,57 @@
 	 app.initialize();
 </script>
 
-<!-------------------------------------------------------------->
+<!--PHOTOSWIPE-->
 <link rel="stylesheet" href="css/css-photoswipe/style.css">
 <link rel="stylesheet" href="css/css-photoswipe/photoswipe.css">
 <link rel="stylesheet" href="css/css-photoswipe/default-skin.css">
 
 <script src="js/js-photoswipe/photoswipe.min.js"></script>
 <script src="js/js-photoswipe/photoswipe-ui-default.min.js"></script>
-
-<!-------------------------------------------------------------->
+<script src="js/js-photoswipe/script-min.js"></script><!--photoswipe-->
+<!---->
 
 </head>
 <body> <!--onload="rotar_imagen();"-->
 
+    <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="pswp__bg"></div>
+        <div class="pswp__scroll-wrap">
+     
+            <div class="pswp__container">
+                <div class="pswp__item"></div>
+                <div class="pswp__item"></div>
+                <div class="pswp__item"></div>
+            </div>
+     
+            <div class="pswp__ui pswp__ui--hidden">
+                <div class="pswp__top-bar">
+                    <div class="pswp__counter"></div>
+                    <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                    <!--<button class="pswp__button pswp__button--share" title="Share"></button>
+                    <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>-->
+                    <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                    <div class="pswp__preloader">
+                        <div class="pswp__preloader__icn">
+                          <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                    <div class="pswp__share-tooltip"></div> 
+                </div>
+                <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+                </button>
+                <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+                </button>
+                <div class="pswp__caption">
+                    <div class="pswp__caption__center"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 <!----------------------------------INICIO-------------------------------------->
 <div data-role="page" id="pag_1">
 	<div data-role="header" data-theme="b" data-position="fixed">
@@ -46,63 +84,17 @@
 	</div>
     
     <div class="picture">
-
-
-  <figure >
-      <a href="http://www.agendasonidocaracol.mx/apputchetumal/archivos/baners/banner.jpg" itemprop="contentUrl" data-size="1000x500">
-      	<div id="banner" align="center" >    </div>
-      </a>
-  </figure>
- 
-  
-  </div>
-<div ></div>
-
-<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="pswp__bg"></div>
-    <div class="pswp__scroll-wrap">
- 
-        <div class="pswp__container">
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-        </div>
- 
-        <div class="pswp__ui pswp__ui--hidden">
-            <div class="pswp__top-bar">
-                <div class="pswp__counter"></div>
-                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-                <!--<button class="pswp__button pswp__button--share" title="Share"></button>
-                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>-->
-                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-                <div class="pswp__preloader">
-                    <div class="pswp__preloader__icn">
-                      <div class="pswp__preloader__cut">
-                        <div class="pswp__preloader__donut"></div>
-                      </div>
-                    </div>
-                </div>
-            </div>
-            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-                <div class="pswp__share-tooltip"></div> 
-            </div>
-            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
-            </button>
-            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
-            </button>
-            <div class="pswp__caption">
-                <div class="pswp__caption__center"></div>
-            </div>
-        </div>
-    </div>
-</div>
-    
-    <script src="js/js-photoswipe/script-min.js"></script><!--photoswipe-->
-     
-    
-    
-    
-     
+        <figure >
+          <a href="http://www.agendasonidocaracol.mx/apputchetumal/archivos/baners/banner.jpg" itemprop="contentUrl" data-size="1000x500">
+            <div id="banner" align="center" >    </div>
+          </a>
+        </figure>
+       <!-- <figure >
+            <a href=""  itemprop="contentUrl" data-size="1000x500">
+              <img src=""  height="50px" width="600" alt="no hay img">
+            </a>
+        </figure>-->
+	</div>
     <!--<div id="e" align="center" onClick="openImg()" >
 	<script>
     function openImg() {
@@ -134,7 +126,7 @@
 	</div>
 
 </div><!-- /page one -->
-<!--------------------------------------------------Oferta---------------------------------------------->
+<!-----------------------------------------------------Oferta---------------------------------------------->
 <div data-role="page" id="PageOferta" data-theme="a">
 
 	<div data-role="header" data-theme="b" data-position="fixed">
@@ -159,7 +151,7 @@
                     
 	</ul>
 </div>
-<!----------------------------------Info Oferta Academica (Info de la carrera)----------------------------------------->
+<!-------------------------------------Info Oferta Academica (Info de la carrera)----------------------------------------->
 <div data-role="page" id="PageInfoOferta" data-theme="a">
 
 	<div data-role="header" data-theme="b" data-position="fixed">
@@ -181,7 +173,7 @@
         </div>-->
        
 </div>
-<!---------------------------------Plan de estudio (lista de las materias)------------------------------------->
+<!---------------------------------------Plan de estudio (lista de las materias)------------------------------------->
 <div data-role="page" id="PagePlanEstudio" data-theme="a">
 
 	<div data-role="header" data-theme="b" data-position="fixed">
@@ -240,7 +232,7 @@
     </div>-->
 
 </div>
-<!------------------------------------------------------Cuentas Bancarias------------------------------------------------>
+<!------------------------------------------------Cuentas Bancarias------------------------------------------------>
 <div data-role="page" id="PageListaCuentas" data-theme="a">
 
 	<div data-role="header" data-theme="b" data-position="fixed">
@@ -254,7 +246,7 @@
         <p>&nbsp;Cargando...</p>
     </div>     -->
 </div>
-<!------------------------------------------------------Directorio------------------------------------------------>
+<!---------------------------------------------------Directorio------------------------------------------------>
 <div data-role="page" id="PageListaDirectorio" data-theme="a">
 	<div data-role="header" data-theme="b" data-position="fixed">
 		<h1>Directorio</h1>
@@ -283,7 +275,7 @@
 	</div><!-- /content -->
         
 </div>
-<!-----------------------------------------dudas (preguntas frecuentes)------------------------------------->
+<!------------------------------------------dudas (preguntas frecuentes)------------------------------------->
 <div data-role="page" id="PageListaDudas" data-theme="a">
 
 	<div data-role="header" data-theme="b" data-position="fixed">
@@ -300,7 +292,7 @@
    		</div>-->
         
 </div><!-- /page fin -->
-<!------------------------------------------------------Info Dudas------------------------------------------------>
+<!----------------------------------------------------Info Dudas------------------------------------------------>
 <div data-role="page" id="PageInfoDudas" data-theme="a">
 
 	<div data-role="header" data-theme="b" data-position="fixed">
@@ -313,7 +305,7 @@
         	<p>&nbsp;Cargando...</p>
    		</div>-->
 </div>
-<!------------------------------------------------------Noticias------------------------------------------------>
+<!----------------------------------------------------Noticias------------------------------------------------>
 
 <div data-role="page" id="PageListaNoticias" data-theme="a">
 
@@ -330,7 +322,7 @@
     <div id="DivBtnRec_ListaNoticias" class="botonRec"></div>
     
 </div><!-- /page fin -->
-<!------------------------------------------------------Info Noticias------------------------------------------------>
+<!--------------------------------------------------Info Noticias------------------------------------------------>
 
 <div data-role="page" id="PagaInfoNoticia" data-theme="a" >
 
@@ -344,9 +336,9 @@
         <!-- <div id="cargadorInfoNoticia">
         	<p>&nbsp;Cargando...</p>
    		</div>-->
+    
 </div>
 <!------------------------------------------------------Lista Eventos------------------------------------------------>
-
 <div data-role="page" id="PageListaEventos" data-theme="a">
 
 	<div data-role="header" data-theme="b" data-position="fixed">
@@ -382,7 +374,6 @@
    		</div>-->
 </div>
 <!------------------------------------------------------Lista Convocatorias------------------------------------------------>
-
 <div data-role="page" id="PageListaConvocatorias" data-theme="a">
 
 	<div data-role="header" data-theme="b" data-position="fixed">
@@ -416,7 +407,6 @@
    		</div>-->
 </div>
 <!------------------------------------------------------Avisos------------------------------------------------>
-
 <div data-role="page" id="PageListaAvisos" data-theme="a">
 
 	<div data-role="header" data-theme="b" data-position="fixed">
@@ -450,11 +440,13 @@
         	<p>&nbsp;Cargando...</p>
    		</div>-->
 </div>
+<!--------------------------------------------------codigo necesario para PhotosWipe--------------------->
 
-<!----------------------------------------------------------------------->
-
-
-
+<script>photoSwipe();</script>
+<!----------------------------------------------------------------------------------------------------------->
 </body>
 </html>
+
 <script src="js/principal.js" type="text/javascript"></script>
+
+    
